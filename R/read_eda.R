@@ -1,4 +1,4 @@
-read_eda <- function(path,header =T,skip = 0,sep = ","){
+read_eda <- function(path,header =T,sep = ",",skip = 0){
   require(tools)
   require(readr)
   require(data.table)
@@ -35,4 +35,3 @@ read_eda <- function(path,header =T,skip = 0,sep = ","){
   file_info <- list("file_info" = data.frame("file name"=name,"file ext" = ext,"file encoding" = encod,"file size" = paste(size,"bytes",sep = " "),"number of rows"= rows,"number of columns"= cols,"last modified"= mod_time),"data" = data)
   return(file_info)
 }
-

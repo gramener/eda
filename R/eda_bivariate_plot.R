@@ -155,6 +155,11 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
   }
   else if(is.null(data) & !is.null(file_info$data)){
     data <- file_info$data
+    x = 1
+    y = 1
+    z = 1
+    num_var <- varlist(data,"numeric")
+    cat_var <- varlist(data,"character")
     if(!is.null(path)){
       wbb <- paste(path,wb,sep="/")
     }

@@ -117,20 +117,23 @@ eda_metadata <- function(data = NULL,file_info = NULL){
           }
         }
       }
+      else if(is.logical(data[,i])){
+            a2 <- "boolean"
+      }
       a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
       a4 <- NA
       a5 <- sum(is.na(data[,i]))
-      a16 <- a5/nrow(data)
+      a16 <- paste(round((a5*100/nrow(data)),1),"%")
       a6 <- length(unique(data[,i]))
       a7 <- top_levels(data[,i])
       if(a2 %in% c("continuous","discrete")){
         a8 <- min(data[,i])
         a9 <- quantile(data[,i],0.25,na.rm=T)
-        a10 <- mean(data[,i],na.rm=T)
+        a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
         a11 <- median(data[,i],na.rm=T)
         a12 <- quantile(data[,i],0.75,na.rm=T)
         a13 <- max(data[,i])
-        a14 <- sd(data[,i],na.rm=T)
+        a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
       }
       else{
         a8 <- NA
@@ -197,20 +200,23 @@ eda_metadata <- function(data = NULL,file_info = NULL){
           }
         }
       }
+      else if(is.logical(data[,i])){
+        a2 <- "boolean"
+      }
       a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
       a4 <- NA
       a5 <- sum(is.na(data[,i]))
-      a16 <- a5/nrow(data)
+      a16 <- paste(round((a5*100/nrow(data)),1),"%")
       a6 <- length(unique(data[,i]))
       a7 <- top_levels(data[,i])
       if(a2 %in% c("continuous","discrete")){
         a8 <- min(data[,i])
         a9 <- quantile(data[,i],0.25,na.rm=T)
-        a10 <- mean(data[,i],na.rm=T)
+        a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
         a11 <- median(data[,i],na.rm=T)
         a12 <- quantile(data[,i],0.75,na.rm=T)
         a13 <- max(data[,i])
-        a14 <- sd(data[,i],na.rm=T)
+        a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
       }
       else{
         a8 <- NA

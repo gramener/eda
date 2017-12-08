@@ -1,9 +1,11 @@
 eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL,path = NULL){
   require(xlsx)
+  wb <- paste(wb,"xlsx",sep = ".")
   start <- Sys.time()
   j <- 1
   k <- 1
   l <- 1
+  q <- 1
   bar_one <- function(column){
     df1 <- as.data.frame(table(column))
     df <- as.data.frame(sort(table(column),decreasing = T))
@@ -37,54 +39,16 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     }
     if(file.exists(wbb)){
       wb1<-loadWorkbook(wbb)
+      if(!identical(num_var, character(0))){
       sheet_hist = createSheet(wb1,"Histogram Plots")
-      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
-      sheet_bar = createSheet(wb1,"Bar Plots")
       sheet_box = createSheet(wb1,"Box Plots")
-      for(i in 1:ncol(dataset)){
-        if(names(data)[i] %in% num_var){
-          png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
-          boxplot(dataset[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
-          dev.off()
-          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
-          res<-file.remove("boxplot.png")
-          if(is.null(breaks)){
-            breaks <- nclass.FD(data[,i])
-          }
-          png("histogram.png", height=1200, width=2000, res=250, pointsize=8)
-          hist(data[,i],breaks = breaks,col = "blue",main = paste("Histogram of ",names(data)[i]),xlab = names(data)[i])
-          dev.off()
-          addPicture("histogram.png", sheet_hist, scale = 1, startRow = 4,startColumn = j)
-          res<-file.remove("histogram.png")
-          j <- j + 15
         }
-        else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
-          png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
-          rankfreq(data[,i])
-          title(paste("Rank Frequency plot of",names(data)[i]))
-          dev.off()
-          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
-          res<-file.remove("rankfreq.png")
-          k <- k + 15
+      if(!identical(cat_var, character(0))){
+      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
         }
-        else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
-          png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
-          df <- bar_one(data[,i])
-          barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
-          dev.off()
-          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
-          res<-file.remove("barplot.png")
-          l <- l + 15
-        }
+      if(!identical(ord_var, character(0))){
+      sheet_bar = createSheet(wb1,"Bar Plots")
       }
-      saveWorkbook(wb1, wb)
-    }
-    else{
-      wb1<-createWorkbook(type="xlsx")
-      sheet_hist = createSheet(wb1,"Histogram")
-      sheet_rank = createSheet(wb1,"Rank Frequency")
-      sheet_bar = createSheet(wb1,"Bar Plot")
-      sheet_box = createSheet(wb1,"Box Plot")
       for(i in 1:ncol(data)){
         if(names(data)[i] %in% num_var){
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
@@ -98,9 +62,10 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("histogram.png", height=1200, width=2000, res=250, pointsize=8)
           hist(data[,i],breaks = breaks,col = "blue",main = paste("Histogram of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("histogram.png", sheet_hist, scale = 1, startRow = 4,startColumn = j)
+          addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
           j <- j + 15
+          q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
           png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
@@ -121,7 +86,58 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           l <- l + 15
         }
       }
-      saveWorkbook(wb1, wb)
+      saveWorkbook(wb1, wbb)
+    }
+    else{
+      wb1<-createWorkbook(type="xlsx")
+      if(!identical(num_var, character(0))){
+      sheet_hist = createSheet(wb1,"Histogram Plots")
+      sheet_box = createSheet(wb1,"Box Plots")
+        }
+      if(!identical(cat_var, character(0))){
+      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
+        }
+      if(!identical(ord_var, character(0))){
+      sheet_bar = createSheet(wb1,"Bar Plots")
+      }
+      for(i in 1:ncol(data)){
+        if(names(data)[i] %in% num_var){
+          png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
+          boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
+          dev.off()
+          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
+          res<-file.remove("boxplot.png")
+          if(is.null(breaks)){
+            breaks <- nclass.FD(data[,i])
+          }
+          png("histogram.png", height=1200, width=2000, res=250, pointsize=8)
+          hist(data[,i],breaks = breaks,col = "blue",main = paste("Histogram of ",names(data)[i]),xlab = names(data)[i])
+          dev.off()
+          addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
+          res<-file.remove("histogram.png")
+          j <- j + 15
+          q <- q + 27
+        }
+        else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
+          png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
+          rankfreq(data[,i])
+          title(paste("Rank Frequency plot of",names(data)[i]))
+          dev.off()
+          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
+          res<-file.remove("rankfreq.png")
+          k <- k + 15
+        }
+        else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
+          png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
+          df <- bar_one(data[,i])
+          barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
+          dev.off()
+          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
+          res<-file.remove("barplot.png")
+          l <- l + 15
+        }
+      }
+      saveWorkbook(wb1, wbb)
     }
   }
   else if(is.null(data) & !is.null(file_info$data)){
@@ -134,10 +150,16 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     }
     if(file.exists(wbb)){
       wb1<-loadWorkbook(wbb)
+      if(!identical(num_var, character(0))){
       sheet_hist = createSheet(wb1,"Histogram Plots")
-      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
-      sheet_bar = createSheet(wb1,"Bar Plots")
       sheet_box = createSheet(wb1,"Box Plots")
+        }
+      if(!identical(cat_var, character(0))){
+      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
+        }
+      if(!identical(ord_var, character(0))){
+      sheet_bar = createSheet(wb1,"Bar Plots")
+      }
       for(i in 1:ncol(data)){
         if(names(data)[i] %in% num_var){
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
@@ -151,9 +173,10 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("histogram.png", height=1200, width=2000, res=250, pointsize=8)
           hist(data[,i],breaks = breaks,col = "blue",main = paste("Histogram of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("histogram.png", sheet_hist, scale = 1, startRow = 4,startColumn = j)
+          addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
           j <- j + 15
+          q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
           png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
@@ -174,14 +197,20 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           l <- l + 15
         }
       }
-      saveWorkbook(wb1, wb)
+      saveWorkbook(wb1, wbb)
     }
     else{
       wb1<-createWorkbook(type="xlsx")
-      sheet_hist = createSheet(wb1,"Histogram")
-      sheet_rank = createSheet(wb1,"Rank Frequency")
-      sheet_bar = createSheet(wb1,"Bar Plot")
-      sheet_box = createSheet(wb1,"Box Plot")
+      if(!identical(num_var, character(0))){
+      sheet_hist = createSheet(wb1,"Histogram Plots")
+      sheet_box = createSheet(wb1,"Box Plots")
+        }
+      if(!identical(cat_var, character(0))){
+      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
+        }
+      if(!identical(ord_var, character(0))){
+      sheet_bar = createSheet(wb1,"Bar Plots")
+      }
       for(i in 1:ncol(data)){
         if(names(data)[i] %in% num_var){
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
@@ -195,9 +224,10 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("histogram.png", height=1200, width=2000, res=250, pointsize=8)
           hist(data[,i],breaks = breaks,col = "blue",main = paste("Histogram of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("histogram.png", sheet_hist, scale = 1, startRow = 4,startColumn = j)
+          addPicture("histogram.png", sheet_hist, scale = 1,startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
           j <- j + 15
+          q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
           png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
@@ -218,7 +248,7 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           l <- l + 15
         }
       }
-      saveWorkbook(wb1, wb)
+      saveWorkbook(wb1, wbb)
     }
   }
   end <- Sys.time()

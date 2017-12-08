@@ -13,7 +13,7 @@ read_eda <- function(path,header =T,sep = ",",skip = 0){
   }
   b <- file.info(path)
   if(ext == "csv"){
-    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = T ))
+    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = F ))
     row.names(data) <- NULL
     rows<-nrow(data)
     cols <- ncol(data)
@@ -25,7 +25,7 @@ read_eda <- function(path,header =T,sep = ",",skip = 0){
     cols <- ncol(data)
   }
   if(ext == "txt"){
-    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = T ))
+    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = F ))
     row.names(data) <- NULL
     rows<-nrow(data)
     cols <- ncol(data)

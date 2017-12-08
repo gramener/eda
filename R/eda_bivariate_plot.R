@@ -48,7 +48,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Mean of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("meanplot.png")
@@ -57,7 +57,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("sumplot.png")
@@ -66,7 +66,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("minplot.png")
@@ -75,7 +75,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("maxplot.png")
@@ -105,7 +105,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Mean of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("meanplot.png")
@@ -114,7 +114,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("sumplot.png")
@@ -123,7 +123,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("minplot.png")
@@ -132,7 +132,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("maxplot.png")
@@ -172,7 +172,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Mean of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("meanplot.png")
@@ -181,7 +181,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("sumplot.png")
@@ -190,7 +190,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("minplot.png")
@@ -199,7 +199,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("maxplot.png")
@@ -229,7 +229,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Mean of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("meanplot.png")
@@ -238,7 +238,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("sumplot.png")
@@ -247,7 +247,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("minplot.png")
@@ -256,7 +256,7 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
           abc <- as.data.frame(abc)
           names(abc)[1] <- cat_var[i]
           png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum of",num_var[j],sep=" ")))
+          print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
           dev.off()
           addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
           res<-file.remove("maxplot.png")

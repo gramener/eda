@@ -28,7 +28,7 @@
     return("")
   }
 }
-.date <- function(var){
+.date_eda <- function(var){
   require(lubridate)
   x <- c('February 20th 1973',
          "february  14, 2004",

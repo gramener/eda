@@ -35,7 +35,7 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     for(i in 1:length(metadata$columns)){
       metadata$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
       a1 <- names(data)[i]
-      if(date(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
+      if(date_eda(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
         a2 <- "date"
       }
       else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){
@@ -121,7 +121,7 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     for(i in 1:length(metadata$columns)){
       metadata$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
       a1 <- names(data)[i]
-      if(date(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
+      if(date_eda(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
         a2 <- "date"
       }
       else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){

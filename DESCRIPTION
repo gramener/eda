@@ -1,11 +1,14 @@
 Package: eda
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Automated Exploratory Data Analysis
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Nolan Cardozo
+Maintainer: The package maintainer <nolancardozo@gmail.com>
+Description: 
+EDA is critical to every Data Analytics engagement. 
+The intent is to:
+- Establish a consistent and aspiringly exhaustive structure to the EDA process
+- This package explores data - through univariate, bivariate and multivariate analysis with respect to a list of tables and charts - easily exportable to excel
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

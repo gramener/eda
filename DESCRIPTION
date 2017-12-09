@@ -3,7 +3,7 @@ Type: Package
 Title: Automated Exploratory Data Analysis
 Version: 0.1.0
 Author: Nolan Cardozo
-Maintainer: nolancardozo@gmail.com
+Maintainer: <nolancardozo@gmail.com>
 Description: EDA is critical to every Data Analytics engagement.This package explores data through univariate, bivariate and multivariate analysis with respect to a list of tables and charts easily exportable to excel.
 Encoding: UTF-8
 LazyData: true

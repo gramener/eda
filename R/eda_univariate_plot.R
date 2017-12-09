@@ -1,5 +1,22 @@
 eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL,path = NULL,columns = NULL){
   require(xlsx)
+  bar_one <- function(column){
+    df1 <- as.data.frame(table(column))
+    df <- as.data.frame(sort(table(column),decreasing = T))
+    df$Rank <- seq(length(df$Freq))
+    df$Colour[df$Rank <= 3] <- "blue"
+    df$Colour[df$Rank > 3] <- "black"
+    df2 <- merge(df,df1,by.x = "column",by.y = "column")
+    return(df2)
+  }
+  rankfreq <- function(column){
+    df <- as.data.frame(sort(table(column),decreasing = T))
+    df$Rank <- seq(length(df$Freq))
+    df$Colour[df$Rank <= 10] <- "blue"
+    df$Colour[df$Rank > 10] <- "black"
+    plot(df$Rank,df$Freq,log='xy',type='b',col = df$Colour,xlab = "Rank",ylab = "Frequency",xaxt = 'n',cex.lab=0.75)
+    axis(1, at=1:length(levels(df$column)),labels=levels(df$column))
+  }
   wb <- paste(wb,"xlsx",sep = ".")
   start <- Sys.time()
   j <- 1

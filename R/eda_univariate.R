@@ -1,5 +1,25 @@
 eda_univariate <- function(data = NULL,file_info = NULL,columns =NULL,k = 3){
   start <- Sys.time()
+  varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+    vars <- character(0)
+    if (any(type %in% "numeric")) {
+      vars <- c(vars,names(df)[sapply(df,is.numeric)])
+    }
+    if (any(type %in% "factor")) {
+      vars <- c(vars,names(df)[sapply(df,is.factor)])
+    }
+    if (any(type %in% "character")) {
+      vars <- c(vars,names(df)[sapply(df,is.character)])
+    }
+    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
+  }
+  dist <- function(var){
+    a<-cumsum(as.numeric(var))
+    b<- a/sum(as.numeric(var))
+    c<- length(which(b<=0.8))
+    d<- c/length(var)
+    return(d)
+  }
   if(!is.null(data)){
     if(!is.null(columns)){
       data <- data[,columns]

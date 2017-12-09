@@ -1,6 +1,19 @@
 eda_bivariate <- function(data = NULL,file_info = NULL,columns = NULL){
   require(dplyr)
   require(data.table)
+  varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+    vars <- character(0)
+    if (any(type %in% "numeric")) {
+      vars <- c(vars,names(df)[sapply(df,is.numeric)])
+    }
+    if (any(type %in% "factor")) {
+      vars <- c(vars,names(df)[sapply(df,is.factor)])
+    }
+    if (any(type %in% "character")) {
+      vars <- c(vars,names(df)[sapply(df,is.character)])
+    }
+    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
+  }
   if(!is.null(data)){
     if(!is.null(columns)){
       data <- data[,columns]

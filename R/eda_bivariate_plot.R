@@ -3,6 +3,19 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
   require(dplyr)
   require(ggplot2)
   require(corrplot)
+  varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+    vars <- character(0)
+    if (any(type %in% "numeric")) {
+      vars <- c(vars,names(df)[sapply(df,is.numeric)])
+    }
+    if (any(type %in% "factor")) {
+      vars <- c(vars,names(df)[sapply(df,is.factor)])
+    }
+    if (any(type %in% "character")) {
+      vars <- c(vars,names(df)[sapply(df,is.character)])
+    }
+    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
+  }
   wb <- paste(wb,"xlsx",sep = ".")
   if(!is.null(data)){
     if(!is.null(columns)){

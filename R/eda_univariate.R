@@ -1,23 +1,9 @@
-eda_univariate <- function(data = NULL,file_info = NULL,k = 3){
+eda_univariate <- function(data = NULL,file_info = NULL,columns =NULL,k = 3){
   start <- Sys.time()
-  dist <- function(var){
-    a<-cumsum(as.numeric(var))
-    b<- a/sum(as.numeric(var))
-    c<- length(which(b<=0.8))
-    d<- c/length(var)
-    return(d)
-  }
-  varlist <- function (df=NULL,type=c("numeric","character"), pattern="", exclude=NULL) {
-    vars <- character(0)
-    if (any(type %in% "numeric")) {
-      vars <- c(vars,names(df)[sapply(df,is.numeric)])
-    }
-    if (any(type %in% "character")) {
-      vars <- c(vars,names(df)[sapply(df,is.character)])
-    }
-    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
-  }
   if(!is.null(data)){
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     mylist.names <- "columns"
     uni <- vector("list", length(mylist.names))
     names(uni) <- mylist.names
@@ -55,6 +41,9 @@ eda_univariate <- function(data = NULL,file_info = NULL,k = 3){
   }
   else if(is.null(data) & !is.null(file_info$data)){
     data <- file_info$data
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     mylist.names <- "columns"
     uni <- vector("list", length(mylist.names))
     names(uni) <- mylist.names

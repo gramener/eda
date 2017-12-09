@@ -1,17 +1,10 @@
-eda_bivariate <- function(data = NULL,file_info = NULL){
+eda_bivariate <- function(data = NULL,file_info = NULL,columns = NULL){
   require(dplyr)
   require(data.table)
-  varlist <- function (df=NULL,type=c("numeric","character"), pattern="", exclude=NULL) {
-    vars <- character(0)
-    if (any(type %in% "numeric")) {
-      vars <- c(vars,names(df)[sapply(df,is.numeric)])
-    }
-    if (any(type %in% "character")) {
-      vars <- c(vars,names(df)[sapply(df,is.character)])
-    }
-    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
-  }
   if(!is.null(data)){
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
   mylist.names <- c("cat_VS_cat","cat_VS_num")
   bivar <- vector("list", length(mylist.names))
   names(bivar) <- mylist.names
@@ -56,6 +49,9 @@ for(i in 1:(length(cat_var))){
   }
   else if(is.null(data) & !is.null(file_info$data)){
     data <- file_info$data
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     mylist.names <- c("cat_VS_cat","cat_VS_num")
     bivar <- vector("list", length(mylist.names))
     names(bivar) <- mylist.names

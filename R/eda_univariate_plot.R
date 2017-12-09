@@ -1,4 +1,4 @@
-eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL,path = NULL){
+eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL,path = NULL,columns = NULL){
   require(xlsx)
   wb <- paste(wb,"xlsx",sep = ".")
   start <- Sys.time()
@@ -6,23 +6,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
   k <- 1
   l <- 1
   q <- 1
-  bar_one <- function(column){
-    df1 <- as.data.frame(table(column))
-    df <- as.data.frame(sort(table(column),decreasing = T))
-    df$Rank <- seq(length(df$Freq))
-    df$Colour[df$Rank <= 3] <- "blue"
-    df$Colour[df$Rank > 3] <- "black"
-    df2 <- merge(df,df1,by.x = "column",by.y = "column")
-    return(df2)
-  }
-  rankfreq <- function(column){
-    df <- as.data.frame(sort(table(column),decreasing = T))
-    df$Rank <- seq(length(df$Freq))
-    df$Colour[df$Rank <= 10] <- "blue"
-    df$Colour[df$Rank > 10] <- "black"
-    plot(df$Rank,df$Freq,log='xy',type='b',col = df$Colour,xlab = "Rank",ylab = "Frequency",xaxt = 'n',cex.lab=0.75)
-    axis(1, at=1:length(levels(df$column)),labels=levels(df$column))
-  }
   metadata1 <- NULL
   for(i in 1:length(meta_data$columns)){
     metadata1 <- rbind(metadata1,meta_data$columns[[i]])
@@ -31,6 +14,9 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
   ord_var <- as.character(metadata1[which(tolower(metadata1$Type) == "ordered"),"Column_Names"])
   cat_var <- as.character(metadata1[which(tolower(metadata1$Type) == "character"),"Column_Names"])
   if(!is.null(data)){
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     if(!is.null(path)){
       wbb <- paste(path,wb,sep="/")
     }
@@ -142,6 +128,9 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
   }
   else if(is.null(data) & !is.null(file_info$data)){
     data <- file_info$data
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     if(!is.null(path)){
       wbb <- paste(path,wb,sep="/")
     }

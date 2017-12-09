@@ -1,21 +1,13 @@
-eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,method= c("pearson","spearman")){
+eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,method= c("pearson","spearman"),columns = NULL){
   require(xlsx)
   require(dplyr)
   require(ggplot2)
   require(corrplot)
   wb <- paste(wb,"xlsx",sep = ".")
-  varlist <- function (df=NULL,type=c("numeric","character"), pattern="", exclude=NULL) {
-    vars <- character(0)
-    if (any(type %in% "numeric")) {
-      vars <- c(vars,names(df)[sapply(df,is.numeric)])
-    }
-    if (any(type %in% "character")) {
-      vars <- c(vars,names(df)[sapply(df,is.character)])
-    }
-    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
-  }
-
   if(!is.null(data)){
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     x = 1
     y = 1
     z = 1
@@ -155,6 +147,9 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
   }
   else if(is.null(data) & !is.null(file_info$data)){
     data <- file_info$data
+    if(!is.null(columns)){
+      data <- data[,columns]
+    }
     x = 1
     y = 1
     z = 1

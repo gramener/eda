@@ -19,7 +19,7 @@ read_eda <- function(path,header =T,sep = ",",skip = 0){
     cols <- ncol(data)
   }
   else if(ext == "xlsx"){
-    data <- as.data.frame(read.xlsx(path,1,))
+    data <- as.data.frame(read.xlsx(path,1))
     row.names(data) <- NULL
     rows<-nrow(data)
     cols <- ncol(data)

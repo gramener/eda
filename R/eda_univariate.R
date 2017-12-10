@@ -1,5 +1,4 @@
 eda_univariate <- function(data = NULL,file_info = NULL,columns =NULL,k = 3){
-  start <- Sys.time()
   varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
     vars <- character(0)
     if (any(type %in% "numeric")) {
@@ -102,8 +101,5 @@ eda_univariate <- function(data = NULL,file_info = NULL,columns =NULL,k = 3){
   else{
     return()
   }
-  end <- Sys.time()
-  time <- end-start
-  print(paste("Took",time,"minutes"))
 }
 

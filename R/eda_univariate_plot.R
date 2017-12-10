@@ -43,14 +43,14 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     if(file.exists(wbb)){
       wb1<-loadWorkbook(wbb)
       if(!identical(num_var, character(0))){
-      sheet_hist = createSheet(wb1,"Histogram Plots")
+      sheet_hist = createSheet(wb1,"Univariate-Histogram")
       sheet_box = createSheet(wb1,"Box Plots")
         }
       if(!identical(cat_var, character(0))){
-      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
+      sheet_rank = createSheet(wb1,"Univariate-Rank Frequency")
         }
       if(!identical(ord_var, character(0))){
-      sheet_bar = createSheet(wb1,"Bar Plots")
+      sheet_bar = createSheet(wb1,"Univariate-Bar")
       }
       for(i in 1:ncol(data)){
         if(names(data)[i] %in% num_var){
@@ -94,14 +94,14 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     else{
       wb1<-createWorkbook(type="xlsx")
       if(!identical(num_var, character(0))){
-      sheet_hist = createSheet(wb1,"Histogram Plots")
-      sheet_box = createSheet(wb1,"Box Plots")
-        }
+        sheet_hist = createSheet(wb1,"Univariate-Histogram")
+        sheet_box = createSheet(wb1,"Box Plots")
+      }
       if(!identical(cat_var, character(0))){
-      sheet_rank = createSheet(wb1,"Rank Frequency Plots")
-        }
+        sheet_rank = createSheet(wb1,"Univariate-Rank Frequency")
+      }
       if(!identical(ord_var, character(0))){
-      sheet_bar = createSheet(wb1,"Bar Plots")
+        sheet_bar = createSheet(wb1,"Univariate-Bar")
       }
       for(i in 1:ncol(data)){
         if(names(data)[i] %in% num_var){

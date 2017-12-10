@@ -1,5 +1,4 @@
 univariate_to_excel <- function(uni_data,wb ,sheet= "Univariate",path = NULL){
-  start <- Sys.time()
   require(xlsx)
   wb <- paste(wb,"xlsx",sep = ".")
   unidata1 <- NULL
@@ -30,7 +29,4 @@ univariate_to_excel <- function(uni_data,wb ,sheet= "Univariate",path = NULL){
     setColumnWidth(sheet, colIndex=1:ncol(uni_data$data), colWidth=20)
     saveWorkbook(wb1,wbb)
   }
-  end <- Sys.time()
-  time <- end-start
-  print(paste("Took",time,"minutes"))
 }

@@ -1,7 +1,6 @@
 meta_to_excel <- function(meta_data,wb ,sheet= "Metadata",path = NULL){
   require(xlsx)
   wb <- paste(wb,"xlsx",sep = ".")
-  start <- Sys.time()
   metadata1 <- NULL
   for(i in 1:length(meta_data$columns)){
     metadata1 <- rbind(metadata1,meta_data$columns[[i]])
@@ -31,7 +30,4 @@ meta_to_excel <- function(meta_data,wb ,sheet= "Metadata",path = NULL){
     setColumnWidth(sheet, colIndex=1:ncol(meta_data$metadata), colWidth=20)
     saveWorkbook(wb1, wbb)
   }
-  end <- Sys.time()
-  time <- end-start
-  print(paste("Took",time,"minutes"))
 }

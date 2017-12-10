@@ -1,6 +1,5 @@
-bivariate_to_excel <- function(bivar_data,wb,path = NULL){
+system.time(bivariate_to_excel <- function(bivar_data,wb,path = NULL){
   require(xlsx)
-  start <- Sys.time()
   wb <- paste(wb,"xlsx",sep=".")
   if(!is.null(path)){
     wbb <- paste(path,wb,sep="/")
@@ -10,8 +9,8 @@ bivariate_to_excel <- function(bivar_data,wb,path = NULL){
   }
   if(!file.exists(wbb)){
     wb1 = createWorkbook()
-    sheet_cat_cat = createSheet(wb1,"Character Vs Character")
-    sheet_cat_num = createSheet(wb1,"Character Vs Numerical")
+    sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
+    sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
     csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
     q <- 2
     for(i in 1:length(bivar_data$cat_VS_cat)){
@@ -31,8 +30,8 @@ bivariate_to_excel <- function(bivar_data,wb,path = NULL){
   }
   else{
     wb1<-loadWorkbook(wbb)
-    sheet_cat_cat = createSheet(wb1,"Character Vs Character")
-    sheet_cat_num = createSheet(wb1,"Character Vs Numerical")
+    sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
+    sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
     csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
     q <- 2
     for(i in 1:length(bivar_data$cat_VS_cat)){
@@ -50,8 +49,5 @@ bivariate_to_excel <- function(bivar_data,wb,path = NULL){
       }
     saveWorkbook(wb1, wb)
   }
-  end <- Sys.time()
-  time <- end-start
-  print(paste("Took",time,"minutes"))
 }
-
+)

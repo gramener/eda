@@ -34,8 +34,8 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
     }
     if(!file.exists(wbb)){
       wb1<-createWorkbook(type = "xlsx")
-      sheet_num_num = createSheet(wb1,"Correlation & Scatter Plot")
-      sheet_cat_num = createSheet(wb1,"Bar Plots")
+      sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
+      sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
       for(i in 1:(length(num_var)-1)){
         for( j in 1+i:(length(num_var)-1)){
           corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
@@ -96,8 +96,8 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
     }
     else{
       wb1<-loadWorkbook(wbb)
-      sheet_num_num = createSheet(wb1,"Correlation & Scatter Plot")
-      sheet_cat_num = createSheet(wb1,"Bar Plot")
+      sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
+      sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
       for(i in 1:(length(num_var)-1)){
         for( j in 1+i:(length(num_var)-1)){
           corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
@@ -176,8 +176,8 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
     }
     if(!file.exists(wbb)){
       wb1<-createWorkbook(type = "xlsx")
-      sheet_num_num = createSheet(wb1,"Correlation & Scatter Plot")
-      sheet_cat_num = createSheet(wb1,"Bar Plot")
+      sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
+      sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
       for(i in 1:(length(num_var)-1)){
         for( j in 1+i:(length(num_var)-1)){
           corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
@@ -238,8 +238,8 @@ eda_bivariate_plot <- function(data = NULL,file_info = NULL,wb,path = NULL,metho
     }
     else{
       wb1<-loadWorkbook(wbb)
-      sheet_num_num = createSheet(wb1,"Correlation & Scatter Plot")
-      sheet_cat_num = createSheet(wb1,"Bar Plot")
+      sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
+      sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
       for(i in 1:(length(num_var)-1)){
         for( j in 1+i:(length(num_var)-1)){
           corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)

@@ -14,7 +14,7 @@
   g.  Notes - [Column to be left blank - to be filled by User on any quick observations/annotations] \cr
 }
 \usage{
-eda_univariate(data = NULL, file_info = NULL, k = 3)
+eda_univariate(data = NULL, file_info = NULL, columns = NULL, k = 3)
 }
 \arguments{
   \item{data}{
@@ -22,6 +22,9 @@ eda_univariate(data = NULL, file_info = NULL, k = 3)
 }
   \item{file_info}{
        If data was imported using read_eda function,pass this to the file_info argument without specifying the data argument.
+}
+  \item{columns}{
+     Specify the columns of interest as either column names or column index.
 }
   \item{k}{
        The "k" in the outlier detection technique(mean +/- k* stardard deviation). By default k = 3.

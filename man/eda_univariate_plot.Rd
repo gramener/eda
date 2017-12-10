@@ -11,7 +11,7 @@
   d. Column Name - Box Plot Chart for Numeric(Integer & Float) Variables \cr
 }
 \usage{
-eda_univariate_plot(data = NULL, file_info, meta_data, wb, breaks = NULL)
+eda_univariate_plot(data = NULL, file_info, meta_data, wb, breaks = NULL, columns = NULL)
 }
 \arguments{
   \item{data}{
@@ -31,6 +31,9 @@ eda_univariate_plot(data = NULL, file_info, meta_data, wb, breaks = NULL)
 }
   \item{path}{
        The path of the existing workbook where the univariate analysis needs to be exported.By default the path is the current working directory.
+}
+  \item{columns}{
+     Specify the columns of interest as either column names or column index.
 }
 }
 

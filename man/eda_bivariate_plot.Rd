@@ -10,7 +10,7 @@ Bivariate Plots for: \cr
     2. Numeric - Numeric : Correlation Plot \cr
 }
 \usage{
-eda_bivariate_plot(dataset = NULL, file_info = NULL, wb, path = NULL,method = c("pearson","spearman"))
+eda_bivariate_plot(dataset = NULL, file_info = NULL, wb, path = NULL,method = c("pearson","spearman"), columns = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,5 +28,8 @@ eda_bivariate_plot(dataset = NULL, file_info = NULL, wb, path = NULL,method = c(
 }
   \item{method}{
        "pearson" or "spearman" - The method used to construct the correlation plot.
+}
+  \item{columns}{
+     Specify the columns of interest as either column names or column index.
 }
 }

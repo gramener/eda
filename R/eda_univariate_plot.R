@@ -18,7 +18,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     axis(1, at=1:length(levels(df$column)),labels=levels(df$column))
   }
   wb <- paste(wb,"xlsx",sep = ".")
-  start <- Sys.time()
   j <- 1
   k <- 1
   l <- 1
@@ -257,7 +256,4 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
       saveWorkbook(wb1, wbb)
     }
   }
-  end <- Sys.time()
-  time <- end-start
-  print(paste("Took",time,"minutes"))
 }

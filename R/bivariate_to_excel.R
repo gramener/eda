@@ -1,4 +1,4 @@
-system.time(bivariate_to_excel <- function(bivar_data,wb,path = NULL){
+bivariate_to_excel <- function(bivar_data,wb,path = NULL){
   require(xlsx)
   wb <- paste(wb,"xlsx",sep=".")
   if(!is.null(path)){
@@ -50,4 +50,3 @@ system.time(bivariate_to_excel <- function(bivar_data,wb,path = NULL){
     saveWorkbook(wb1, wb)
   }
 }
-)

@@ -22,7 +22,7 @@
   15. Top 5 Values \cr
 }
 \usage{
-eda_metadata(data = NULL, file_info = NULL)
+eda_metadata(data = NULL, file_info = NULL, columns = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,5 +31,8 @@ eda_metadata(data = NULL, file_info = NULL)
 }
   \item{file_info}{
      If data was imported using read_eda function,pass this to the file_info argument without specifying the data argument.
+}
+  \item{columns}{
+     Specify the columns of interest as either column names or column index.
 }
 }

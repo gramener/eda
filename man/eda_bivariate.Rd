@@ -9,7 +9,7 @@ Provides Bivariate Analysis in a Tabular format
     2. Numeric - Categorical Variable : Sum, Average, Min, Max of Records \cr
 }
 \usage{
-eda_bivariate(data = NULL, file_info = NULL)
+eda_bivariate(data = NULL, file_info = NULL, columns = NULL)
 }
 \arguments{
   \item{data}{
@@ -17,5 +17,8 @@ eda_bivariate(data = NULL, file_info = NULL)
 }
   \item{file_info}{
      If data was imported using read_eda function,pass tis to the file_info argument without specifying the data argument.
+}
+  \item{columns}{
+     Specify the columns of interest as either column names or column index.
 }
 }

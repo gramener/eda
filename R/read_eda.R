@@ -2,7 +2,7 @@ read_eda <- function(path,header =T,sep = ",",skip = 0){
   require(tools)
   require(readr)
   require(data.table)
-  require(xlsx)
+  require(openxlsx)
   name <- basename(path)
   ext<-file_ext(path)
   a <- guess_encoding(path, n_max = 1000)

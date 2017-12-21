@@ -18,7 +18,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
     axis(1, at=1:length(levels(df$column)),labels=levels(df$column))
   }
   wb <- paste(wb,"xlsx",sep = ".")
-  j <- 1
   k <- 1
   l <- 1
   q <- 1
@@ -56,7 +55,7 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
           boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
+          addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("boxplot.png")
           if(is.null(breaks)){
             breaks <- nclass.FD(data[,i])
@@ -66,7 +65,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           dev.off()
           addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
-          j <- j + 15
           q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
@@ -74,18 +72,18 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           rankfreq(data[,i])
           title(paste("Rank Frequency plot of",names(data)[i]))
           dev.off()
-          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
+          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = k,startColumn = 5)
           res<-file.remove("rankfreq.png")
-          k <- k + 15
+          k <- k + 27
         }
         else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
           png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
           df <- bar_one(data[,i])
           barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
+          addPicture("barplot.png", sheet_bar, scale = 1, startRow = l,startColumn = 5)
           res<-file.remove("barplot.png")
-          l <- l + 15
+          l <- l + 27
         }
       }
       saveWorkbook(wb1, wbb)
@@ -107,7 +105,7 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
           boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
+          addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("boxplot.png")
           if(is.null(breaks)){
             breaks <- nclass.FD(data[,i])
@@ -117,7 +115,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           dev.off()
           addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
-          j <- j + 15
           q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
@@ -125,18 +122,18 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           rankfreq(data[,i])
           title(paste("Rank Frequency plot of",names(data)[i]))
           dev.off()
-          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
+          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = k,startColumn = 5)
           res<-file.remove("rankfreq.png")
-          k <- k + 15
+          k <- k + 27
         }
         else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
           png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
           df <- bar_one(data[,i])
           barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
+          addPicture("barplot.png", sheet_bar, scale = 1, startRow = l,startColumn = 5)
           res<-file.remove("barplot.png")
-          l <- l + 15
+          l <- l + 27
         }
       }
       saveWorkbook(wb1, wbb)
@@ -170,7 +167,7 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
           boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
+          addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("boxplot.png")
           if(is.null(breaks)){
             breaks <- nclass.FD(data[,i])
@@ -180,7 +177,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           dev.off()
           addPicture("histogram.png", sheet_hist, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
-          j <- j + 15
           q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
@@ -188,18 +184,18 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           rankfreq(data[,i])
           title(paste("Rank Frequency plot of",names(data)[i]))
           dev.off()
-          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
+          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = k,startColumn = 5)
           res<-file.remove("rankfreq.png")
-          k <- k + 15
+          k <- k + 27
         }
         else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
           png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
           df <- bar_one(data[,i])
           barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
+          addPicture("barplot.png", sheet_bar, scale = 1, startRow = l,startColumn = 5)
           res<-file.remove("barplot.png")
-          l <- l + 15
+          l <- l + 27
         }
       }
       saveWorkbook(wb1, wbb)
@@ -221,7 +217,7 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
           boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("boxplot.png", sheet_box, scale = 1, startRow = 4,startColumn = j)
+          addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
           res<-file.remove("boxplot.png")
           if(is.null(breaks)){
             breaks <- nclass.FD(data[,i])
@@ -231,7 +227,6 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           dev.off()
           addPicture("histogram.png", sheet_hist, scale = 1,startRow = q,startColumn = 5)
           res<-file.remove("histogram.png")
-          j <- j + 15
           q <- q + 27
         }
         else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
@@ -239,18 +234,18 @@ eda_univariate_plot <- function(data = NULL,file_info,meta_data,wb,breaks = NULL
           rankfreq(data[,i])
           title(paste("Rank Frequency plot of",names(data)[i]))
           dev.off()
-          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = 4,startColumn = k)
+          addPicture("rankfreq.png", sheet_rank, scale = 1, startRow = k,startColumn = 5)
           res<-file.remove("rankfreq.png")
-          k <- k + 15
+          k <- k + 27
         }
         else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
           png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
           df <- bar_one(data[,i])
           barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
           dev.off()
-          addPicture("barplot.png", sheet_bar, scale = 1, startRow = 4,startColumn = l)
+          addPicture("barplot.png", sheet_bar, scale = 1, startRow = l,startColumn = 5)
           res<-file.remove("barplot.png")
-          l <- l + 15
+          l <- l + 27
         }
       }
       saveWorkbook(wb1, wbb)

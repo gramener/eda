@@ -11,7 +11,7 @@
   d. Column Name - Box Plot Chart for Numeric(Integer & Float) Variables \cr
 }
 \usage{
-eda_univariate_plot(data = NULL, file_info, meta_data, wb, breaks = NULL, columns = NULL)
+eda_univariate_plot(data = NULL, file_info, meta_data, wb, breaks = NULL,path = NULL, columns = NULL)
 }
 \arguments{
   \item{data}{

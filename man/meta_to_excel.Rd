@@ -7,7 +7,7 @@
   Exports the metadata computed by the eda_metadata function to an excel file.
 }
 \usage{
-meta_to_excel(meta_data, wb, sheet = "Metadata")
+meta_to_excel(meta_data, wb, sheet = "Metadata", path = NULL)
 }
 \arguments{
   \item{meta_data}{

@@ -4,9 +4,6 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     if (any(type %in% "numeric")) {
       vars <- c(vars,names(df)[sapply(df,is.numeric)])
     }
-    if (any(type %in% "factor")) {
-      vars <- c(vars,names(df)[sapply(df,is.factor)])
-    }
     if (any(type %in% "character")) {
       vars <- c(vars,names(df)[sapply(df,is.character)])
     }

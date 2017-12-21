@@ -10,7 +10,7 @@ read_eda <- function(path,header =T,sep = ",",skip = 0){
     encod <- ""
   }
   else{
-    encod<- a$encoding
+    encod<- a$encoding[1]
   }
   b <- file.info(path)
   if(ext == "csv"){

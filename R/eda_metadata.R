@@ -1,8 +1,15 @@
-eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
+eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
+  require(tools)
+  require(readr)
+  require(data.table)
+  require(openxlsx)
   varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
     vars <- character(0)
     if (any(type %in% "numeric")) {
       vars <- c(vars,names(df)[sapply(df,is.numeric)])
+    }
+    if (any(type %in% "factor")) {
+      vars <- c(vars,names(df)[sapply(df,is.factor)])
     }
     if (any(type %in% "character")) {
       vars <- c(vars,names(df)[sapply(df,is.character)])
@@ -64,97 +71,142 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     abc<-guess_formats(x,c("mdY", "BdY", "Bdy", "bdY", "bdy","d/m/Y","d/m/y","y-m-d","Y-m-d","d-m-Y","d-m-Y"))
     return(!all(is.na(as.Date(as.character(var),format=abc))))
   }
-  if(!is.null(data)){
-    if(!is.null(columns)){
-      data <- data[,columns]
+  if(!is.null(path)){
+  name <- basename(path)
+  ext<-file_ext(path)
+  a <- guess_encoding(path, n_max = 1000)
+  if(identical(a$encoding, character(0))){
+    encod <- ""
+  }
+  else{
+    encod<- a$encoding[1]
+  }
+  b <- file.info(path)
+  if(ext == "csv"){
+    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = F ))
+    row.names(data) <- NULL
+    rows<-nrow(data)
+    cols <- ncol(data)
+  }
+  else if(ext == "xlsx"){
+    data <- as.data.frame(read.xlsx(path,1))
+    row.names(data) <- NULL
+    rows<-nrow(data)
+    cols <- ncol(data)
+  }
+  if(ext == "txt"){
+    data <- as.data.frame(fread(path,header = header,skip=skip,sep = sep,stringsAsFactors = F ))
+    row.names(data) <- NULL
+    rows<-nrow(data)
+    cols <- ncol(data)
+  }
+  size <- b$size
+  mod_time <- b$mtime
+  file_info <- list("file_info" = data.frame("file name"=name,"file ext" = ext,"file encoding" = encod,"file size" = paste(size,"bytes",sep = " "),"number of rows"= rows,"number of columns"= cols,"last modified"= mod_time),"data" = data)
+  data <- as.data.frame(file_info$data)
+  row.names(data) <- NULL
+  mylist.names <- c("File_name","Description","Source","Format","File_size","Encoding","Row_count","Column_count","Row_description","Sampling_method","Prepared_on","Modified_on","Prepared_by","columns","data","save")
+  metadata <- vector("list", length(mylist.names))
+  names(metadata) <- mylist.names
+  metadata$columns <- vector("list", length(names(data)))
+  names(metadata$columns) <- names(data)
+  mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
+  metadata$Description <- ""
+  metadata$Source <- ""
+  metadata$Row_description <- ""
+  metadata$Sampling_method <- ""
+  metadata$Prepared_by <- ""
+  metadata$Prepared_on <- as.character(Sys.Date())
+  metadata$Format <- as.character(file_info$file_info$file.ext)
+  metadata$File_name <- as.character(file_info$file_info$file.name)
+  metadata$File_size <- as.character(file_info$file_info$file.size)
+  metadata$Encoding <- as.character(file_info$file_info$file.encoding)
+  metadata$Row_count <- file_info$file_info$number.of.rows
+  metadata$Column_count <- file_info$file_info$number.of.columns
+  metadata$Modified_on <- as.character(file_info$file_info$last.modified)
+  metadata$data <- data
+  metadata$save <- function(path ,sheet= "Metadata"){
+    require(xlsx)
+    metadata1 <- NULL
+    meta_data <- metadata
+    for(i in 1:length(meta_data$columns)){
+      metadata1 <- rbind(metadata1,meta_data$columns[[i]])
     }
-    mylist.names <- c("File_name","Description","Source","Format","File_size","Encoding","Number_of_rows","Number_of_columns","Each_row_is","Sampling_method","Prepared_On","Modified_On","columns")
-    metadata <- vector("list", length(mylist.names))
-    names(metadata) <- mylist.names
-    metadata$columns <- vector("list", length(names(data)))
-    names(metadata$columns) <- names(data)
-    mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_Percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
-    metadata$Description <- ""
-    metadata$Source <- ""
-    metadata$Each_row_is <- ""
-    metadata$Sampling_method <- ""
-    metadata$Prepared_On <- as.character(Sys.Date())
-    if(is.null(file_info)){
-      metadata$Format <- ""
-      metadata$File_name <- ""
-      metadata$Encoding <- ""
-      metadata$File_size <- ""
-      metadata$Number_of_rows <- nrow(data)
-      metadata$Number_of_columns <- ncol(data)
-      metadata$Modified_On <- ""
+    names(metadata1) <- gsub("_"," ",names(metadata1))
+    names(meta_data) <- gsub("_"," ",names(meta_data))
+    meta_data$metadata <- metadata1
+    if(!file.exists(path)){
+      wb1 = createWorkbook()
+      sheet = createSheet(wb1,sheet)
+      csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+      addDataFrame(meta_data$metadata, sheet=sheet,startRow=(length(meta_data)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+      addDataFrame(data.frame(names(meta_data)[1:(length(meta_data)-4)],as.character(meta_data[1:(length(meta_data)-4)])), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
+      setColumnWidth(sheet, colIndex=1:ncol(meta_data$metadata), colWidth=20)
+      saveWorkbook(wb1, path)
     }
     else{
-      metadata$Format <- as.character(file_info$file_info$file.ext)
-      metadata$File_name <- as.character(file_info$file_info$file.name)
-      metadata$File_size <- as.character(file_info$file_info$file.size)
-      metadata$Encoding <- as.character(file_info$file_info$file.encoding)
-      metadata$Number_of_rows <- file_info$file_info$number.of.rows
-      metadata$Number_of_columns <- file_info$file_info$number.of.columns
-      metadata$Modified_On <- as.character(file_info$file_info$last.modified)
+      wb1<-loadWorkbook(path)
+      sheet = createSheet(wb1,sheet)
+      csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+      addDataFrame(meta_data$metadata, sheet=sheet,startRow=(length(meta_data)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+      addDataFrame(data.frame(names(meta_data)[1:(length(meta_data)-4)],as.character(meta_data[1:(length(meta_data)-4)])), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
+      setColumnWidth(sheet, colIndex=1:ncol(meta_data$metadata), colWidth=20)
+      saveWorkbook(wb1, path)
     }
-    for(i in 1:length(metadata$columns)){
-      metadata$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
-      a1 <- names(data)[i]
-      if(date_eda(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
-        a2 <- "date"
-      }
-      else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){
-        a2 <- "character"
-      }
-      else if(names(data)[i] %in% varlist(data,"numeric")){
-        for(j in 1:100){
-          if(grepl("\\.",data[j,i])){
-            a2 <- "continuous"
-          }
-          else{
-            a2<- "discrete"
-          }
+  }
+  for(i in 1:length(metadata$columns)){
+    metadata$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
+    a1 <- names(data)[i]
+    if(date_eda(data[,i]) & (names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character"))){
+      a2 <- "date"
+    }
+    else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){
+      a2 <- "character"
+    }
+    else if(names(data)[i] %in% varlist(data,"numeric")){
+      for(j in 1:100){
+        if(grepl("\\.",data[j,i])){
+          a2 <- "continuous"
+        }
+        else{
+          a2<- "discrete"
         }
       }
-      else if(is.logical(data[,i])){
-            a2 <- "boolean"
-      }
-      a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
-      a4 <- NA
-      a5 <- sum(is.na(data[,i]))
-      a16 <- paste(round((a5*100/nrow(data)),1),"%")
-      a6 <- length(unique(data[,i]))
-      a7 <- top_levels(data[,i])
-      if(a2 %in% c("continuous","discrete")){
-        a8 <- min(data[,i])
-        a9 <- quantile(data[,i],0.25,na.rm=T)
-        a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
-        a11 <- median(data[,i],na.rm=T)
-        a12 <- quantile(data[,i],0.75,na.rm=T)
-        a13 <- max(data[,i])
-        a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
-      }
-      else{
-        a8 <- NA
-        a9 <- NA
-        a10 <- NA
-        a11 <- NA
-        a12 <- NA
-        a13 <- NA
-        a14 <- NA
-      }
-      metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
-      row.names(metadata$columns[[i]]) <- NULL
     }
-    return(metadata)
+    else if(is.logical(data[,i])){
+      a2 <- "boolean"
+    }
+    a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
+    a4 <- NA
+    a5 <- sum(is.na(data[,i]))
+    a16 <- paste(round((a5*100/nrow(data)),1),"%")
+    a6 <- length(unique(data[,i]))
+    a7 <- top_levels(data[,i])
+    if(a2 %in% c("continuous","discrete")){
+      a8 <- min(data[,i])
+      a9 <- quantile(data[,i],0.25,na.rm=T)
+      a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
+      a11 <- median(data[,i],na.rm=T)
+      a12 <- quantile(data[,i],0.75,na.rm=T)
+      a13 <- max(data[,i])
+      a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
+    }
+    else{
+      a8 <- NA
+      a9 <- NA
+      a10 <- NA
+      a11 <- NA
+      a12 <- NA
+      a13 <- NA
+      a14 <- NA
+    }
+    metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
+    row.names(metadata$columns[[i]]) <- NULL
   }
-  else if(is.null(data) & !is.null(file_info$data)){
-    data <- as.data.frame(file_info$data)
-    if(!is.null(columns)){
-      data <- data[,columns]
-    }
-    row.names(data) <- NULL
-    mylist.names <- c("File_name","Description","Source","Format","File_size","Encoding","Number_of_rows","Number_of_columns","Each_row_is","Sampling_method","Prepared_On","Modified_On","columns")
+  return(metadata)
+  }
+  else if(is.null(path) & !is.null(data)){
+    mylist.names <- c("File_name","Description","Source","Format","File_size","Encoding","Row_count","Column_count","Row_description","Sampling_method","Prepared_on","Modified_on","Prepared_by","columns","data","save")
     metadata <- vector("list", length(mylist.names))
     names(metadata) <- mylist.names
     metadata$columns <- vector("list", length(names(data)))
@@ -162,26 +214,46 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
     metadata$Description <- ""
     metadata$Source <- ""
-    metadata$Each_row_is <- ""
+    metadata$Row_description <- ""
     metadata$Sampling_method <- ""
-    metadata$Prepared_On <- as.character(Sys.Date())
-    if(is.null(file_info)){
-      metadata$Format <- ""
-      metadata$File_name <- ""
-      metadata$Encoding <- ""
-      metadata$File_size <- ""
-      metadata$Number_of_rows <- nrow(data)
-      metadata$Number_of_columns <- ncol(data)
-      metadata$Modified_On <- ""
-    }
-    else{
-      metadata$Format <- as.character(file_info$file_info$file.ext)
-      metadata$File_name <- as.character(file_info$file_info$file.name)
-      metadata$File_size <- as.character(file_info$file_info$file.size)
-      metadata$Encoding <- as.character(file_info$file_info$file.encoding)
-      metadata$Number_of_rows <- file_info$file_info$number.of.rows
-      metadata$Number_of_columns <- file_info$file_info$number.of.columns
-      metadata$Modified_On <- as.character(file_info$file_info$last.modified)
+    metadata$Prepared_by <- ""
+    metadata$Prepared_on <- as.character(Sys.Date())
+    metadata$Format <- ""
+    metadata$File_name <- ""
+    metadata$File_size <- ""
+    metadata$Encoding <- ""
+    metadata$Row_count <- nrow(data)
+    metadata$Column_count <- ncol(data)
+    metadata$Modified_on <- ""
+    metadata$data <- data
+    metadata$save <- function(path ,sheet= "Metadata"){
+      require(xlsx)
+      metadata1 <- NULL
+      meta_data <- metadata
+      for(i in 1:length(meta_data$columns)){
+        metadata1 <- rbind(metadata1,meta_data$columns[[i]])
+      }
+      names(metadata1) <- gsub("_"," ",names(metadata1))
+      names(meta_data) <- gsub("_"," ",names(meta_data))
+      meta_data$metadata <- metadata1
+      if(!file.exists(path)){
+        wb1 = createWorkbook()
+        sheet = createSheet(wb1,sheet)
+        csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+        addDataFrame(meta_data$metadata, sheet=sheet,startRow=(length(meta_data)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(data.frame(names(meta_data)[1:(length(meta_data)-4)],as.character(meta_data[1:(length(meta_data)-4)])), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
+        setColumnWidth(sheet, colIndex=1:ncol(meta_data$metadata), colWidth=20)
+        saveWorkbook(wb1, path)
+      }
+      else{
+        wb1<-loadWorkbook(path)
+        sheet = createSheet(wb1,sheet)
+        csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+        addDataFrame(meta_data$metadata, sheet=sheet,startRow=(length(meta_data)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(data.frame(names(meta_data)[1:(length(meta_data)-4)],as.character(meta_data[1:(length(meta_data)-4)])), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
+        setColumnWidth(sheet, colIndex=1:ncol(meta_data$metadata), colWidth=20)
+        saveWorkbook(wb1, path)
+      }
     }
     for(i in 1:length(metadata$columns)){
       metadata$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
@@ -234,5 +306,4 @@ eda_metadata <- function(data = NULL,file_info = NULL,columns = NULL){
     }
     return(metadata)
   }
-  else{return()}
 }

@@ -7,7 +7,7 @@ Maintainer: <nolancardozo@gmail.com>
 Description: EDA is critical to every Data Analytics engagement.This package explores data through univariate, bivariate and multivariate analysis with respect to a list of tables and charts easily exportable to excel.
 Encoding: UTF-8
 LazyData: true
-Imports:  tools,
+Imports: tools,
           readr,
           data.table,
           xlsx,
@@ -16,3 +16,4 @@ Imports:  tools,
           dplyr,
           ggplot2,
           openxlsx
+Suggests: testthat

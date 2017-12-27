@@ -24,10 +24,11 @@ eda_bivariate <- function(metadata){
       sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
       csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
       q <- 2
-      for(i in 1:length(bivar_data$cat_VS_cat)){
+      for(i in 1:length(bivar_data$cat_VS_cat$count)){
         name <- as.data.frame(names(bivar_data$cat_VS_cat)[[i]])
         addDataFrame(name, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]]) +5), row.names=FALSE,colnamesStyle=csTableColNames)
         q <- q + 5 + nrow(bivar_data$cat_VS_cat[[i]])
       }
       v <- 2
@@ -48,7 +49,8 @@ eda_bivariate <- function(metadata){
       for(i in 1:length(bivar_data$cat_VS_cat)){
         name <- as.data.frame(names(bivar_data$cat_VS_cat)[[i]])
         addDataFrame(name, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat[[i]], sheet=sheet_cat_cat,startRow= q  ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn= (ncol(bivar_data$cat_VS_cat$count[[i]]) +5), row.names=FALSE,colnamesStyle=csTableColNames)
         q <- q + 5 + nrow(bivar_data$cat_VS_cat[[i]])
       }
       v <- 2
@@ -72,14 +74,14 @@ eda_bivariate <- function(metadata){
       num_var <- varlist(data,"numeric")
       cat_var <- varlist(data,"character")
       if(!file.exists(path)){
-        wb1<-createWorkbook(type = "xlsx")
+        wb1<-createWorkbook()
         sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
         sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
         for(i in 1:(length(num_var)-1)){
           for( j in 1+i:(length(num_var)-1)){
             corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
             png("correlation.png", height=1200, width=2000, res=250, pointsize=8)
-            corrplot(corr_mat)
+            corrplot(corr_mat,addCoef.col = "black")
             dev.off()
             addPicture("correlation.png", sheet_num_num, scale = 1, startRow = 4,startColumn = x)
             res<-file.remove("correlation.png")
@@ -97,7 +99,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("meanplot.png")
@@ -106,7 +108,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("sumplot.png")
@@ -115,7 +117,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("minplot.png")
@@ -124,7 +126,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("maxplot.png")
@@ -141,7 +143,7 @@ eda_bivariate <- function(metadata){
           for( j in 1+i:(length(num_var)-1)){
             corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
             png("correlation.png", height=1200, width=2000, res=250, pointsize=8)
-            corrplot(corr_mat)
+            corrplot(corr_mat,addCoef.col = "black")
             dev.off()
             addPicture("correlation.png", sheet_num_num, scale = 1, startRow = 4,startColumn = x)
             res<-file.remove("correlation.png")
@@ -159,7 +161,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 460, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("meanplot.png")
@@ -168,7 +170,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("sumplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Sum of",num_var[j],sep=" "),title = paste("Sum of",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("sumplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("sumplot.png")
@@ -177,7 +179,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("minplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Minimum",num_var[j],sep=" "),title = paste("Minimum",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("minplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("minplot.png")
@@ -186,7 +188,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("maxplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Maximum",num_var[j],sep=" "),title = paste("Maximum",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("maxplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("maxplot.png")
@@ -211,8 +213,12 @@ for(i in 1:(length(cat_var))){
     my_cat_num <- c(my_cat_num,paste(cat_var[i],num_var[j],sep = "_VS_"))
   }
 }
-bivar$cat_VS_cat <- vector("list", length(my_cat_cat))
-names(bivar$cat_VS_cat) <- my_cat_cat
+bivar$cat_VS_cat <- vector("list", 2)
+names(bivar$cat_VS_cat) <- c("count","proportion")
+bivar$cat_VS_cat$count <- vector("list", length(my_cat_cat))
+names(bivar$cat_VS_cat$count) <- my_cat_cat
+bivar$cat_VS_cat$proportion <- vector("list", length(my_cat_cat))
+names(bivar$cat_VS_cat$proportion) <- my_cat_cat
 bivar$cat_VS_num <- vector("list", length(my_cat_num))
 names(bivar$cat_VS_num) <- my_cat_num
 k <- 0
@@ -223,7 +229,11 @@ for(i in 1:(length(cat_var)-1)){
     abc <- as.data.frame.matrix(table(data[,cat_var[i]],data[,cat_var[j]]))
     abc <- setDT(abc, keep.rownames = TRUE)[]
     names(abc)[1] <- ""
-    bivar$cat_VS_cat[[k]] <- abc
+    bivar$cat_VS_cat$count[[k]] <- abc
+    abc <- as.data.frame.matrix(prop.table(table(data[,cat_var[i]],data[,cat_var[j]])))
+    abc <- setDT(abc, keep.rownames = TRUE)[]
+    names(abc)[1] <- ""
+    bivar$cat_VS_cat$proportion[[k]] <- abc
   }
 }
 for(i in 1:(length(cat_var))){

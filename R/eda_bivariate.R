@@ -25,18 +25,20 @@ eda_bivariate <- function(metadata){
       csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
       q <- 2
       for(i in 1:length(bivar_data$cat_VS_cat$count)){
-        name <- as.data.frame(names(bivar_data$cat_VS_cat)[[i]])
-        addDataFrame(name, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+        name1 <- as.data.frame(paste("count of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
+        name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
+        addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
         addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]]) +5), row.names=FALSE,colnamesStyle=csTableColNames)
-        q <- q + 5 + nrow(bivar_data$cat_VS_cat[[i]])
+        addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
+        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
+        q <- q + 10 + nrow(bivar_data$cat_VS_cat$count[[i]])
       }
       v <- 2
       for(j in 1:length(bivar_data$cat_VS_num)){
         name <- as.data.frame(names(bivar_data$cat_VS_num)[[j]])
         addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
         addDataFrame(bivar_data$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        v <- v + 5 + nrow(bivar_data$cat_VS_num[[j]])
+        v <- v + 10 + nrow(bivar_data$cat_VS_num[[j]])
       }
       saveWorkbook(wb1, path)
     }
@@ -46,19 +48,21 @@ eda_bivariate <- function(metadata){
       sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
       csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
       q <- 2
-      for(i in 1:length(bivar_data$cat_VS_cat)){
-        name <- as.data.frame(names(bivar_data$cat_VS_cat)[[i]])
-        addDataFrame(name, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+      for(i in 1:length(bivar_data$cat_VS_cat$count)){
+        name1 <- as.data.frame(paste("count of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
+        name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
+        addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
         addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn= (ncol(bivar_data$cat_VS_cat$count[[i]]) +5), row.names=FALSE,colnamesStyle=csTableColNames)
-        q <- q + 5 + nrow(bivar_data$cat_VS_cat[[i]])
+        addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
+        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
+        q <- q + 10 + nrow(bivar_data$cat_VS_cat$count[[i]])
       }
       v <- 2
       for(j in 1:length(bivar_data$cat_VS_num)){
         name <- as.data.frame(names(bivar_data$cat_VS_num)[[j]])
         addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
         addDataFrame(bivar_data$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        v <- v + 5 + nrow(bivar_data$cat_VS_num[[j]])
+        v <- v + 10 + nrow(bivar_data$cat_VS_num[[j]])
       }
       saveWorkbook(wb1, path)
     }
@@ -230,7 +234,7 @@ for(i in 1:(length(cat_var)-1)){
     abc <- setDT(abc, keep.rownames = TRUE)[]
     names(abc)[1] <- ""
     bivar$cat_VS_cat$count[[k]] <- abc
-    abc <- as.data.frame.matrix(prop.table(table(data[,cat_var[i]],data[,cat_var[j]])))
+    abc <- as.data.frame.matrix(round(prop.table(table(data[,cat_var[i]],data[,cat_var[j]])),4))*100
     abc <- setDT(abc, keep.rownames = TRUE)[]
     names(abc)[1] <- ""
     bivar$cat_VS_cat$proportion[[k]] <- abc

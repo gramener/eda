@@ -165,7 +165,7 @@ eda_bivariate <- function(metadata){
             abc <- as.data.frame(abc)
             names(abc)[1] <- cat_var[i]
             png("meanplot.png", height=1200, width=2000, res=250, pointsize=8)
-            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 460, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
+            print(ggplot(abc,aes(x=abc[,1],y=abc[,2])) + geom_bar(stat = "identity",fill="#75AADB") + labs(x=names(abc)[1],y = paste("Average",num_var[j],sep=" "),title = paste("Average",num_var[j],"per",cat_var[i])) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + geom_text(aes(label=abc[,2]), vjust=1.6, color="black", size=3.5))
             dev.off()
             addPicture("meanplot.png", sheet_cat_num, scale = 1, startRow = y,startColumn = z)
             res<-file.remove("meanplot.png")

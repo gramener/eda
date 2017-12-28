@@ -112,7 +112,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
   names(metadata$columns) <- names(data)
   mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
   metadata$Description <- ""
-  metadata$Source <- ""
+  metadata$Source <- path
   metadata$Row_description <- ""
   metadata$Sampling_method <- ""
   metadata$Prepared_by <- ""

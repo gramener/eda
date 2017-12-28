@@ -1,4 +1,5 @@
 eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
+  options(scipen = 999)
   require(tools)
   require(readr)
   require(data.table)

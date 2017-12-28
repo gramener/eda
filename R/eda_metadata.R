@@ -110,7 +110,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
   names(metadata) <- mylist.names
   metadata$columns <- vector("list", length(names(data)))
   names(metadata$columns) <- names(data)
-  mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
+  mydataframe <- c("Column_Name","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
   metadata$Description <- ""
   metadata$Source <- path
   metadata$Row_description <- ""
@@ -200,7 +200,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
       a13 <- NA
       a14 <- NA
     }
-    metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
+    metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Name"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
     row.names(metadata$columns[[i]]) <- NULL
   }
   return(metadata)
@@ -211,7 +211,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
     names(metadata) <- mylist.names
     metadata$columns <- vector("list", length(names(data)))
     names(metadata$columns) <- names(data)
-    mydataframe <- c("Column_Names","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
+    mydataframe <- c("Column_Name","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
     metadata$Description <- ""
     metadata$Source <- ""
     metadata$Row_description <- ""
@@ -301,7 +301,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
         a13 <- NA
         a14 <- NA
       }
-      metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
+      metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Name"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
       row.names(metadata$columns[[i]]) <- NULL
     }
     return(metadata)

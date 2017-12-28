@@ -177,7 +177,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
       a2 <- "boolean"
     }
     a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
-    a4 <- NA
+    a4 <- ""
     a5 <- sum(is.na(data[,i]))
     a16 <- paste(round((a5*100/nrow(data)),1),"%")
     a6 <- length(unique(data[,i]))
@@ -278,7 +278,7 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
         a2 <- "boolean"
       }
       a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
-      a4 <- NA
+      a4 <- ""
       a5 <- sum(is.na(data[,i]))
       a16 <- paste(round((a5*100/nrow(data)),1),"%")
       a6 <- length(unique(data[,i]))

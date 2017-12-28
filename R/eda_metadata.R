@@ -192,13 +192,13 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
       a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
     }
     else{
-      a8 <- NA
-      a9 <- NA
-      a10 <- NA
-      a11 <- NA
-      a12 <- NA
-      a13 <- NA
-      a14 <- NA
+      a8 <- ""
+      a9 <- ""
+      a10 <- ""
+      a11 <- ""
+      a12 <- ""
+      a13 <- ""
+      a14 <- ""
     }
     metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
     row.names(metadata$columns[[i]]) <- NULL
@@ -293,13 +293,13 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
         a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
       }
       else{
-        a8 <- NA
-        a9 <- NA
-        a10 <- NA
-        a11 <- NA
-        a12 <- NA
-        a13 <- NA
-        a14 <- NA
+        a8 <- ""
+        a9 <- ""
+        a10 <- ""
+        a11 <- ""
+        a12 <- ""
+        a13 <- ""
+        a14 <- ""
       }
       metadata$columns[[i]] <- rbind(metadata$columns[[i]],data.frame("Column_Names"=a1,"Type"=a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14))
       row.names(metadata$columns[[i]]) <- NULL

@@ -184,13 +184,13 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
     a6 <- length(unique(data[,i]))
     a7 <- top_levels(data[,i])
     if(a2 %in% c("continuous","discrete")){
-      a8 <- min(data[,i],na.rm = T)
-      a9 <- quantile(data[,i],0.25,na.rm=T)
-      a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
-      a11 <- median(data[,i],na.rm=T)
-      a12 <- quantile(data[,i],0.75,na.rm=T)
-      a13 <- max(data[,i],na.rm = T)
-      a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
+      a8 <- as.double(min(data[,i],na.rm = T))
+      a9 <- as.double(quantile(data[,i],0.25,na.rm=T))
+      a10 <- ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T))))
+      a11 <- as.double(median(data[,i],na.rm=T))
+      a12 <- as.double(quantile(data[,i],0.75,na.rm=T))
+      a13 <- as.double(max(data[,i],na.rm = T))
+      a14 <- ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T))))
     }
     else{
       a8 <- NA
@@ -285,13 +285,13 @@ eda_metadata <- function(path = NULL,data = NULL,header =T,sep = ",",skip = 0){
       a6 <- length(unique(data[,i]))
       a7 <- top_levels(data[,i])
       if(a2 %in% c("continuous","discrete")){
-        a8 <- min(data[,i],na.rm = T)
-        a9 <- quantile(data[,i],0.25,na.rm=T)
-        a10 <- ifelse(mean(data[,i],na.rm=T) < 1,round(mean(data[,i],na.rm=T),2),round(mean(data[,i],na.rm=T)))
-        a11 <- median(data[,i],na.rm=T)
-        a12 <- quantile(data[,i],0.75,na.rm=T)
-        a13 <- max(data[,i],na.rm = T)
-        a14 <- ifelse(sd(data[,i],na.rm=T) < 1,round(sd(data[,i],na.rm=T),2),round(sd(data[,i],na.rm=T)))
+        a8 <- as.double(min(data[,i],na.rm = T))
+        a9 <- as.double(quantile(data[,i],0.25,na.rm=T))
+        a10 <- ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T))))
+        a11 <- as.double(median(data[,i],na.rm=T))
+        a12 <- as.double(quantile(data[,i],0.75,na.rm=T))
+        a13 <- as.double(max(data[,i],na.rm = T))
+        a14 <- ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T))))
       }
       else{
         a8 <- NA

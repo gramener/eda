@@ -1,3 +1,4 @@
+library(R6)
 eda_metadata <- R6Class(
   "Eda Metadata",
   public = list(

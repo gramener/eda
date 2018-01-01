@@ -15,5 +15,6 @@ Imports: tools,
           corrplot,
           dplyr,
           ggplot2,
-          openxlsx
+          openxlsx,
+          R6
 Suggests: testthat

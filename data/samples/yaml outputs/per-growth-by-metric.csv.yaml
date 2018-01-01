@@ -1,0 +1,94 @@
+Description: ''
+Source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/per-growth-by-metric.csv
+Row_description: ''
+Sampling_method: ''
+Prepared_by: ''
+Prepared_on: '2018-01-01'
+Format: csv
+File_name: per-growth-by-metric.csv
+File_size: 4757 bytes
+Encoding: ASCII
+Row_count: 131
+Column_count: 5
+Modified_on: 2017-09-04 12:18:08
+columns:
+  Country:
+    Column_Name: Country
+    Type: character
+    Key: 'yes'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 131
+    Top: ' Albania:1 , Algeria:1 , Argentina:1 , Armenia:1 , Australia:1'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  Per Growth in Tech Avl:
+    Column_Name: Per Growth in Tech Avl
+    Type: continuous
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 104
+    Top: ' -0.015:4 , -0.073:3 , -0.068:3 , -0.001:3 , -0.153:2'
+    Min: -0.267
+    Q1: -0.073
+    Mean: -0.04
+    Median: -0.036
+    Q3: 0.0045
+    Max: 0.152
+    Std: 0.07
+  Per Mob Phone Growth:
+    Column_Name: Per Mob Phone Growth
+    Type: continuous
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 119
+    Top: ' 0.043:3 , -0.12:2 , -0.055:2 , -0.001:2 , 0.006:2'
+    Min: -0.277
+    Q1: 0.0085
+    Mean: 0.26
+    Median: 0.158
+    Q3: 0.366
+    Max: 2.824
+    Std: 0.43
+  Per Growth in Int Usage:
+    Column_Name: Per Growth in Int Usage
+    Type: continuous
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 102
+    Top: ' 0.083:4 , 0.022:3 , 0.025:3 , 0.043:3 , 0.059:3'
+    Min: -0.061
+    Q1: 0.051
+    Mean: 0.1
+    Median: 0.09
+    Q3: 0.138
+    Max: 0.437
+    Std: 0.08
+  Per Growth in Infra:
+    Column_Name: Per Growth in Infra
+    Type: continuous
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 113
+    Top: ' -0.041:4 , -0.036:2 , -0.008:2 , 0.014:2 , 0.015:2'
+    Min: -0.519
+    Q1: -0.043
+    Mean: 0.02
+    Median: 0.024
+    Q3: 0.1065
+    Max: 0.402
+    Std: 0.15

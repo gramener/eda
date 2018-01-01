@@ -1,0 +1,286 @@
+Description: ''
+Source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/bank.csv
+Row_description: ''
+Sampling_method: ''
+Prepared_by: ''
+Prepared_on: '2018-01-01'
+Format: csv
+File_name: bank.csv
+File_size: 4655558 bytes
+Encoding: ASCII
+Row_count: 45211
+Column_count: 17
+Modified_on: 2017-10-12 17:21:32
+columns:
+  age:
+    Column_Name: age
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 77
+    Top: ' 32:2085 , 31:1996 , 33:1972 , 34:1930 , 35:1894'
+    Min: 18.0
+    Q1: 33.0
+    Mean: 41.0
+    Median: 39.0
+    Q3: 48.0
+    Max: 95.0
+    Std: 11.0
+  job:
+    Column_Name: job
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 12
+    Top: ' blue-collar:9732 , management:9458 , technician:7597 , admin.:5171 , services:4154'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  marital:
+    Column_Name: marital
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 3
+    Top: ' married:27214 , single:12790 , divorced:5207'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  education:
+    Column_Name: education
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 4
+    Top: ' secondary:23202 , tertiary:13301 , primary:6851 , unknown:1857'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  default:
+    Column_Name: default
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 2
+    Top: ' no:44396 , yes:815'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  balance:
+    Column_Name: balance
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 7168
+    Top: ' 0:3514 , 1:195 , 2:156 , 4:139 , 3:134'
+    Min: -8019.0
+    Q1: 72.0
+    Mean: 1362.0
+    Median: 448.0
+    Q3: 1428.0
+    Max: 102127.0
+    Std: 3045.0
+  housing:
+    Column_Name: housing
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 2
+    Top: ' yes:25130 , no:20081'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  loan:
+    Column_Name: loan
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 2
+    Top: ' no:37967 , yes:7244'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  contact:
+    Column_Name: contact
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 3
+    Top: ' cellular:29285 , unknown:13020 , telephone:2906'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  day:
+    Column_Name: day
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 31
+    Top: ' 20:2752 , 18:2308 , 21:2026 , 17:1939 , 6:1932'
+    Min: 1.0
+    Q1: 8.0
+    Mean: 16.0
+    Median: 16.0
+    Q3: 21.0
+    Max: 31.0
+    Std: 8.0
+  month:
+    Column_Name: month
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 12
+    Top: ' may:13766 , jul:6895 , aug:6247 , jun:5341 , nov:3970'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  duration:
+    Column_Name: duration
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 1573
+    Top: ' 124:188 , 90:184 , 89:177 , 104:175 , 114:175'
+    Min: 0.0e+00
+    Q1: 103.0
+    Mean: 258.0
+    Median: 180.0
+    Q3: 319.0
+    Max: 4918.0
+    Std: 258.0
+  campaign:
+    Column_Name: campaign
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 48
+    Top: ' 1:17544 , 2:12505 , 3:5521 , 4:3522 , 5:1764'
+    Min: 1.0
+    Q1: 1.0
+    Mean: 3.0
+    Median: 2.0
+    Q3: 3.0
+    Max: 63.0
+    Std: 3.0
+  pdays:
+    Column_Name: pdays
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 559
+    Top: ' -1:36954 , 182:167 , 92:147 , 91:126 , 183:126'
+    Min: -1.0
+    Q1: -1.0
+    Mean: 40.0
+    Median: -1.0
+    Q3: -1.0
+    Max: 871.0
+    Std: 100.0
+  previous:
+    Column_Name: previous
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 41
+    Top: ' 0:36954 , 1:2772 , 2:2106 , 3:1142 , 4:714'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 0.58
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 275.0
+    Std: 2.0
+  poutcome:
+    Column_Name: poutcome
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 4
+    Top: ' unknown:36959 , failure:4901 , other:1840 , success:1511'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  'y':
+    Column_Name: 'y'
+    Type: character
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 2
+    Top: ' no:39922 , yes:5289'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na

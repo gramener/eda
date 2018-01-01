@@ -1,0 +1,976 @@
+Description: ''
+Source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/barc-hair-care-brands.csv
+Row_description: ''
+Sampling_method: ''
+Prepared_by: ''
+Prepared_on: '2018-01-01'
+Format: csv
+File_name: barc-hair-care-brands.csv
+File_size: 28005 bytes
+Encoding: ASCII
+Row_count: 111
+Column_count: 60
+Modified_on: 2017-09-04 12:18:08
+columns:
+  Brand:
+    Column_Name: Brand
+    Type: character
+    Key: 'yes'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 111
+    Top: ' BAJAJ ALMOND DROPS:1 , BBLUNT SALON SECRET CREME HAIR COLOUR:1 , BIGEN
+      MENS SPEEDY COLOR:1 , BRYLCREEM:1 , CB-KESH KING OIL-BAJIRAO MASTANI:1'
+    Min: .na
+    Q1: .na
+    Mean: .na
+    Median: .na
+    Q3: .na
+    Max: .na
+    Std: .na
+  Count_ads:
+    Column_Name: Count_ads
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 109
+    Top: ' 1:2 , 591:2 , 8:1 , 10:1 , 24:1'
+    Min: 1.0
+    Q1: 647.0
+    Mean: 5350.0
+    Median: 3165.0
+    Q3: 7521.5
+    Max: 26273.0
+    Std: 6318.0
+  no_channels:
+    Column_Name: no_channels
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 32
+    Top: ' 2:12 , 1:9 , 9:7 , 11:7 , 12:6'
+    Min: 1.0
+    Q1: 6.0
+    Mean: 14.0
+    Median: 12.0
+    Q3: 21.5
+    Max: 33.0
+    Std: 9.0
+  length_avg:
+    Column_Name: length_avg
+    Type: continuous
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 84
+    Top: ' 20:13 , 10:7 , 15:6 , 30:4 , 25:2'
+    Min: 10.0
+    Q1: 15.0058824
+    Mean: 19.0
+    Median: 19.4840072
+    Q3: 22.0357921
+    Max: 34.23843
+    Std: 5.0
+  Impressions_avg:
+    Column_Name: Impressions_avg
+    Type: continuous
+    Key: 'yes'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 111
+    Top: ' 0:1 , 2.11242201834862:1 , 16.114:1 , 20.9175949367089:1 , 21.3751539179104:1'
+    Min: 0.0e+00
+    Q1: 97.7125341
+    Mean: 167.0
+    Median: 150.5296909
+    Q3: 202.8818684
+    Max: 723.82875
+    Std: 117.0
+  Adpos_avg:
+    Column_Name: Adpos_avg
+    Type: continuous
+    Key: 'yes'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 111
+    Top: ' 0.229161857111111:1 , 0.25:1 , 0.29481452302092:1 , 0.340726248117409:1
+      , 0.385472425475248:1'
+    Min: 0.2291619
+    Q1: 0.5256642
+    Mean: 0.55
+    Median: 0.5475094
+    Q3: 0.5645604
+    Max: 0.9655352
+    Std: 0.09
+  no_weeks:
+    Column_Name: no_weeks
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 39
+    Top: ' 4:8 , 5:8 , 1:6 , 27:6 , 3:5'
+    Min: 1.0
+    Q1: 5.5
+    Mean: 18.0
+    Median: 13.0
+    Q3: 27.0
+    Max: 52.0
+    Std: 14.0
+  Ad_during_PT:
+    Column_Name: Ad_during_PT
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 104
+    Top: ' 0:3 , 24:2 , 27:2 , 33:2 , 550:2'
+    Min: 0.0e+00
+    Q1: 194.5
+    Mean: 1575.0
+    Median: 945.0
+    Q3: 2228.5
+    Max: 7963.0
+    Std: 1856.0
+  Ad_during_NPT:
+    Column_Name: Ad_during_NPT
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 110
+    Top: ' 3327:2 , 0:1 , 1:1 , 5:1 , 7:1'
+    Min: 0.0e+00
+    Q1: 494.0
+    Mean: 3774.0
+    Median: 2221.0
+    Q3: 5320.5
+    Max: 18321.0
+    Std: 4482.0
+  Ad_during_weekend:
+    Column_Name: Ad_during_weekend
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 104
+    Top: ' 0:3 , 6:3 , 141:2 , 2192:2 , 2754:2'
+    Min: 0.0e+00
+    Q1: 221.0
+    Mean: 1364.0
+    Median: 864.0
+    Q3: 1895.0
+    Max: 6923.0
+    Std: 1619.0
+  Ad_during_weekday:
+    Column_Name: Ad_during_weekday
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 109
+    Top: ' 0:2 , 2016:2 , 1:1 , 2:1 , 10:1'
+    Min: 0.0e+00
+    Q1: 441.0
+    Mean: 3985.0
+    Median: 2458.0
+    Q3: 5637.5
+    Max: 19350.0
+    Std: 4724.0
+  Short_ad:
+    Column_Name: Short_ad
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 53
+    Top: ' 0:58 , 1:2 , 25:1 , 39:1 , 60:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 976.0
+    Median: 0.0e+00
+    Q3: 1220.0
+    Max: 10483.0
+    Std: 1929.0
+  Medium_length_ad:
+    Column_Name: Medium_length_ad
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 97
+    Top: ' 0:13 , 1:2 , 60:2 , 4:1 , 8:1'
+    Min: 0.0e+00
+    Q1: 170.5
+    Mean: 3034.0
+    Median: 1476.0
+    Q3: 4679.5
+    Max: 18433.0
+    Std: 3919.0
+  Long_ad:
+    Column_Name: Long_ad
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 66
+    Top: ' 0:46 , 10:1 , 37:1 , 48:1 , 79:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 1340.0
+    Median: 259.0
+    Q3: 1558.0
+    Max: 16970.0
+    Std: 2498.0
+  Early_position:
+    Column_Name: Early_position
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 105
+    Top: ' 3:2 , 7:2 , 11:2 , 19:2 , 559:2'
+    Min: 0.0e+00
+    Q1: 206.5
+    Mean: 1624.0
+    Median: 942.0
+    Q3: 2310.0
+    Max: 8277.0
+    Std: 1938.0
+  Middle_position:
+    Column_Name: Middle_position
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 104
+    Top: ' 0:2 , 1:2 , 8:2 , 66:2 , 189:2'
+    Min: 0.0e+00
+    Q1: 215.5
+    Mean: 1633.0
+    Median: 990.0
+    Q3: 2272.5
+    Max: 8021.0
+    Std: 1956.0
+  End_position:
+    Column_Name: End_position
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 109
+    Top: ' 0:2 , 44:2 , 3:1 , 4:1 , 5:1'
+    Min: 0.0e+00
+    Q1: 334.5
+    Mean: 2093.0
+    Median: 1237.0
+    Q3: 2891.5
+    Max: 10252.0
+    Std: 2469.0
+  Low_Impressions:
+    Column_Name: Low_Impressions
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 96
+    Top: ' 0:6 , 5:3 , 10:3 , 93:3 , 1:2'
+    Min: 0.0e+00
+    Q1: 49.5
+    Mean: 726.0
+    Median: 269.0
+    Q3: 1067.5
+    Max: 5344.0
+    Std: 1114.0
+  High_Impressions:
+    Column_Name: High_Impressions
+    Type: discrete
+    Key: 'yes'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 111
+    Top: ' 0:1 , 1:1 , 5:1 , 8:1 , 24:1'
+    Min: 0.0e+00
+    Q1: 592.0
+    Mean: 4624.0
+    Median: 2831.0
+    Q3: 6460.0
+    Max: 23732.0
+    Std: 5433.0
+  Brand_aired_Star:
+    Column_Name: Brand_aired_Star
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 86
+    Top: ' 0:22 , 6:3 , 950:2 , 2615:2 , 8:1'
+    Min: 0.0e+00
+    Q1: 44.5
+    Mean: 1098.0
+    Median: 575.0
+    Q3: 1582.0
+    Max: 7815.0
+    Std: 1392.0
+  Brand_aired_Sony:
+    Column_Name: Brand_aired_Sony
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 84
+    Top: ' 0:26 , 272:2 , 569:2 , 8:1 , 11:1'
+    Min: 0.0e+00
+    Q1: 18.5
+    Mean: 779.0
+    Median: 459.0
+    Q3: 1082.5
+    Max: 6958.0
+    Std: 1040.0
+  Brand_aired_Viacom18:
+    Column_Name: Brand_aired_Viacom18
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 74
+    Top: ' 0:35 , 29:2 , 213:2 , 420:2 , 8:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 503.0
+    Median: 183.0
+    Q3: 776.0
+    Max: 2663.0
+    Std: 697.0
+  Brand_aired_Zee:
+    Column_Name: Brand_aired_Zee
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 92
+    Top: ' 0:19 , 105:2 , 1:1 , 2:1 , 12:1'
+    Min: 0.0e+00
+    Q1: 52.0
+    Mean: 1080.0
+    Median: 561.0
+    Q3: 1334.0
+    Max: 8576.0
+    Std: 1582.0
+  Genre_Infotainment:
+    Column_Name: Genre_Infotainment
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 12
+    Top: ' 0:100 , 44:1 , 59:1 , 80:1 , 85:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 34.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 816.0
+    Std: 134.0
+  Genre_Kids:
+    Column_Name: Genre_Kids
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 12
+    Top: ' 0:100 , 91:1 , 159:1 , 268:1 , 336:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 54.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 922.0
+    Std: 190.0
+  Genre_Lifestyle:
+    Column_Name: Genre_Lifestyle
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 16
+    Top: ' 0:96 , 87:1 , 113:1 , 240:1 , 259:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 45.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 580.0
+    Std: 124.0
+  Genre_Movies:
+    Column_Name: Genre_Movies
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 89
+    Top: ' 0:21 , 1360:2 , 2328:2 , 1:1 , 2:1'
+    Min: 0.0e+00
+    Q1: 56.0
+    Mean: 1659.0
+    Median: 660.0
+    Q3: 2202.5
+    Max: 10149.0
+    Std: 2449.0
+  Genre_Music:
+    Column_Name: Genre_Music
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 56
+    Top: ' 0:53 , 145:2 , 207:2 , 279:2 , 23:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 612.0
+    Median: 30.0
+    Q3: 604.5
+    Max: 6072.0
+    Std: 1224.0
+  Genre_News:
+    Column_Name: Genre_News
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 59
+    Top: ' 0:48 , 37:2 , 39:2 , 63:2 , 120:2'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 354.0
+    Median: 63.0
+    Q3: 288.0
+    Max: 5092.0
+    Std: 819.0
+  Genre_Youth:
+    Column_Name: Genre_Youth
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 25
+    Top: ' 0:87 , 3:1 , 11:1 , 27:1 , 35:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 92.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 2045.0
+    Std: 290.0
+  Programme_Genre_Arts_and_Culture:
+    Column_Name: Programme_Genre_Arts_and_Culture
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 4
+    Top: ' 0:106 , 1:2 , 2:2 , 8:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 0.13
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 8.0
+    Std: 0.81
+  Programme_GenreBUSINESS PROGRAM:
+    Column_Name: Programme_GenreBUSINESS PROGRAM
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 5
+    Top: ' 0:107 , 2:1 , 3:1 , 5:1 , 12:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 0.2
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 12.0
+    Std: 1.0
+  Programme_GenreCAR / BIKE RACING:
+    Column_Name: Programme_GenreCAR / BIKE RACING
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 3
+    Top: ' 0:109 , 3:1 , 4:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 0.06
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 4.0
+    Std: 0.47
+  Programme_GenreCARTOONS/ANIMATION:
+    Column_Name: Programme_GenreCARTOONS/ANIMATION
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 41
+    Top: ' 0:63 , 1:3 , 7:2 , 9:2 , 11:2'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 35.0
+    Median: 0.0e+00
+    Q3: 22.0
+    Max: 376.0
+    Std: 77.0
+  Programme_GenreCHILDRENS PROGRAM:
+    Column_Name: Programme_GenreCHILDRENS PROGRAM
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 15
+    Top: ' 0:88 , 5:5 , 2:4 , 4:2 , 10:2'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 2.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 37.0
+    Std: 6.0
+  Programme_GenreCOMEDIES:
+    Column_Name: Programme_GenreCOMEDIES
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 56
+    Top: ' 0:31 , 5:5 , 15:4 , 2:3 , 20:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 44.0
+    Median: 15.0
+    Q3: 48.5
+    Max: 350.0
+    Std: 71.0
+  Programme_GenreCOOKERY:
+    Column_Name: Programme_GenreCOOKERY
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 16
+    Top: ' 0:96 , 9:1 , 13:1 , 14:1 , 16:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 13.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 310.0
+    Std: 51.0
+  Programme_GenreCRICKET:
+    Column_Name: Programme_GenreCRICKET
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 20
+    Top: ' 0:76 , 1:6 , 8:5 , 3:4 , 5:2'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 3.0
+    Median: 0.0e+00
+    Q3: 2.5
+    Max: 53.0
+    Std: 8.0
+  Programme_GenreDRAMA/SOAP:
+    Column_Name: Programme_GenreDRAMA/SOAP
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 92
+    Top: ' 0:19 , 1649:2 , 2:1 , 3:1 , 5:1'
+    Min: 0.0e+00
+    Q1: 31.0
+    Mean: 664.0
+    Median: 324.0
+    Q3: 984.5
+    Max: 3595.0
+    Std: 847.0
+  Programme_GenreEVENTS/CONCERTS/AWARDS/SHOWS:
+    Column_Name: Programme_GenreEVENTS/CONCERTS/AWARDS/SHOWS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 54
+    Top: ' 0:39 , 5:4 , 13:4 , 21:4 , 4:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 31.0
+    Median: 11.0
+    Q3: 43.0
+    Max: 276.0
+    Std: 47.0
+  Programme_GenreFEATURE FILMS:
+    Column_Name: Programme_GenreFEATURE FILMS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 90
+    Top: ' 0:14 , 2:3 , 6:2 , 35:2 , 37:2'
+    Min: 0.0e+00
+    Q1: 20.5
+    Mean: 530.0
+    Median: 138.0
+    Q3: 743.5
+    Max: 3837.0
+    Std: 836.0
+  Programme_GenreFILM BASED MAGAZINES:
+    Column_Name: Programme_GenreFILM BASED MAGAZINES
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 17
+    Top: ' 0:71 , 1:12 , 2:7 , 5:4 , 3:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 2.0
+    Median: 0.0e+00
+    Q3: 1.5
+    Max: 31.0
+    Std: 5.0
+  Programme_GenreFILM SONGS:
+    Column_Name: Programme_GenreFILM SONGS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 73
+    Top: ' 0:26 , 2:3 , 7:3 , 101:3 , 1:2'
+    Min: 0.0e+00
+    Q1: 1.5
+    Mean: 296.0
+    Median: 30.0
+    Q3: 246.5
+    Max: 3125.0
+    Std: 597.0
+  Programme_GenreFILM TRAILORS/ALBUM PROMOS:
+    Column_Name: Programme_GenreFILM TRAILORS/ALBUM PROMOS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 34
+    Top: ' 0:77 , 8:2 , 4:1 , 6:1 , 7:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 46.0
+    Median: 0.0e+00
+    Q3: 16.0
+    Max: 523.0
+    Std: 105.0
+  Programme_GenreGAME SHOW/QUIZ:
+    Column_Name: Programme_GenreGAME SHOW/QUIZ
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 6
+    Top: ' 0:104 , 2:2 , 3:2 , 5:1 , 9:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 0.32
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 11.0
+    Std: 1.0
+  Programme_GenreHEALTH/FITNESS:
+    Column_Name: Programme_GenreHEALTH/FITNESS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 16
+    Top: ' 0:80 , 2:5 , 1:4 , 3:4 , 9:4'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 2.0
+    Median: 0.0e+00
+    Q3: 1.0
+    Max: 55.0
+    Std: 7.0
+  Programme_GenreHORROR SERIAL:
+    Column_Name: Programme_GenreHORROR SERIAL
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 23
+    Top: ' 0:71 , 2:9 , 3:5 , 8:3 , 1:2'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 5.0
+    Median: 0.0e+00
+    Q3: 3.0
+    Max: 75.0
+    Std: 11.0
+  Programme_GenreINTERVIEWS/PORTRAITS/DISCUSSIO:
+    Column_Name: Programme_GenreINTERVIEWS/PORTRAITS/DISCUSSIO
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 23
+    Top: ' 0:65 , 1:6 , 4:6 , 10:6 , 2:5'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 6.0
+    Median: 0.0e+00
+    Q3: 4.0
+    Max: 104.0
+    Std: 15.0
+  Programme_GenreMYTHOLOGICAL/COSTUME DRAMAS:
+    Column_Name: Programme_GenreMYTHOLOGICAL/COSTUME DRAMAS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 33
+    Top: ' 0:47 , 1:7 , 3:4 , 4:4 , 7:4'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 13.0
+    Median: 2.0
+    Q3: 16.0
+    Max: 89.0
+    Std: 21.0
+  Programme_GenreNATURE/WILD LIFE/ENVIRONMENT:
+    Column_Name: Programme_GenreNATURE/WILD LIFE/ENVIRONMENT
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 11
+    Top: ' 0:101 , 3:1 , 4:1 , 10:1 , 18:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 7.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 247.0
+    Std: 31.0
+  Programme_GenreNEWS BULLETIN:
+    Column_Name: Programme_GenreNEWS BULLETIN
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 59
+    Top: ' 0:49 , 51:3 , 15:2 , 18:2 , 3:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 130.0
+    Median: 18.0
+    Q3: 91.0
+    Max: 2112.0
+    Std: 324.0
+  Programme_GenreREALITY SHOW:
+    Column_Name: Programme_GenreREALITY SHOW
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 23
+    Top: ' 0:75 , 1:4 , 2:4 , 6:3 , 16:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 6.0
+    Median: 0.0e+00
+    Q3: 2.5
+    Max: 110.0
+    Std: 16.0
+  Programme_GenreRELIGIOUS/DEVOTIONAL/ASTROLOGY:
+    Column_Name: Programme_GenreRELIGIOUS/DEVOTIONAL/ASTROLOGY
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 23
+    Top: ' 0:64 , 4:6 , 3:5 , 1:3 , 5:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 11.0
+    Median: 0.0e+00
+    Q3: 5.5
+    Max: 429.0
+    Std: 46.0
+  Programme_GenreREVIEWS/REPORTS:
+    Column_Name: Programme_GenreREVIEWS/REPORTS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 45
+    Top: ' 0:51 , 1:4 , 2:3 , 18:3 , 19:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 39.0
+    Median: 2.0
+    Q3: 32.0
+    Max: 402.0
+    Std: 82.0
+  Programme_GenreSCIENCE/EDUCATION:
+    Column_Name: Programme_GenreSCIENCE/EDUCATION
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 12
+    Top: ' 0:100 , 2:1 , 3:1 , 12:1 , 13:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 4.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 108.0
+    Std: 16.0
+  Programme_GenreTALENT SEARCH/FEATS:
+    Column_Name: Programme_GenreTALENT SEARCH/FEATS
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 22
+    Top: ' 0:71 , 3:4 , 6:4 , 1:3 , 5:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 4.0
+    Median: 0.0e+00
+    Q3: 5.0
+    Max: 49.0
+    Std: 9.0
+  Programme_GenreTALK SHOWS/CHAT SHOW:
+    Column_Name: Programme_GenreTALK SHOWS/CHAT SHOW
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 23
+    Top: ' 0:47 , 1:9 , 2:8 , 6:6 , 3:5'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 6.0
+    Median: 1.0
+    Q3: 8.0
+    Max: 56.0
+    Std: 10.0
+  Programme_GenreTELE SHOPPING:
+    Column_Name: Programme_GenreTELE SHOPPING
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 26
+    Top: ' 0:62 , 1:9 , 2:6 , 4:4 , 3:3'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 7.0
+    Median: 0.0e+00
+    Q3: 4.0
+    Max: 98.0
+    Std: 16.0
+  Programme_GenreTRAVEL PLACES:
+    Column_Name: Programme_GenreTRAVEL PLACES
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 9
+    Top: ' 0:101 , 11:2 , 31:2 , 1:1 , 2:1'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 2.0
+    Median: 0.0e+00
+    Q3: 0.0e+00
+    Max: 31.0
+    Std: 6.0
+  Programme_GenreWRESTLING:
+    Column_Name: Programme_GenreWRESTLING
+    Type: discrete
+    Key: 'no'
+    Description: ''
+    Missing: 0
+    Missing_percentage: 0 %
+    Uniques: 14
+    Top: ' 0:76 , 1:6 , 3:6 , 2:4 , 4:4'
+    Min: 0.0e+00
+    Q1: 0.0e+00
+    Mean: 2.0
+    Median: 0.0e+00
+    Q3: 2.0
+    Max: 24.0
+    Std: 4.0

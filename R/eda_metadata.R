@@ -189,8 +189,7 @@ eda_metadata <- R6Class(
             a13 <- NA
             a14 <- NA
           }
-          self$columns[[i]] <- rbind(self$columns[[i]],data.frame("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14, stringsAsFactors=FALSE))
-          row.names(self$columns[[i]]) <- NULL
+          self$columns[[i]] <- list("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14)
         }
       }
       else if(missing(path) & !missing(data)){
@@ -246,8 +245,7 @@ eda_metadata <- R6Class(
             a13 <- NA
             a14 <- NA
           }
-          self$columns[[i]] <- rbind(self$columns[[i]],data.frame("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14, stringsAsFactors=FALSE))
-          row.names(self$columns[[i]]) <- NULL
+          self$columns[[i]] <- list("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14)
         }
       }
     },

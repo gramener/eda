@@ -22,17 +22,23 @@
   15. Top 5 Values \cr
 }
 \usage{
-eda_metadata(data = NULL, file_info = NULL, columns = NULL)
+eda_metadata(path = NULL,data = NULL,header =T,sep = ",",skip = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
+    \item{path}{
+     Specify the path of the file to be read into R.If it does not contain an absolute path, the file name is relative to the current working directory.
+}
   \item{data}{
-       If the dataset was imported using functions other than the read_eda function, pass this dataset to the data argument without specifying the file_info argument.
+       If the dataset is imported using other import packages, pass the dataset in the data argument.
 }
-  \item{file_info}{
-     If data was imported using read_eda function,pass this to the file_info argument without specifying the data argument.
+\item{header}{
+       A logical value indicating whether the file contains the names of the variables as its first line.
 }
-  \item{columns}{
-     Specify the columns of interest as either column names or column index.
+  \item{sep}{
+       The field separator character. Values on each line of the file are separated by this character.By default the separator is ",".
+}
+  \item{skip}{
+      Integer: the number of lines of the data file to skip before beginning to read data.By default skip = 0.
 }
 }

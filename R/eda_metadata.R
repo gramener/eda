@@ -1,5 +1,5 @@
 library(R6)
-eda_metadata <- R6Class(
+metadata <- R6Class(
   "Metadata",
   portable = FALSE,
   cloneable = FALSE,

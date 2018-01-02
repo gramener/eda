@@ -1,5 +1,5 @@
 library(R6)
-eda_univariate <- R6Class(
+univariate <- R6Class(
   "Univariate Analysis",
   portable = FALSE,
   cloneable = FALSE,

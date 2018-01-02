@@ -206,6 +206,7 @@ eda_bivariate <- function(metadata){
   num_var <- varlist(data,"numeric")
   cat_var <- varlist(data,"character")
   my_cat_cat <- NULL
+  if(!identical(cat_var, character(0))){
   for(i in 1:(length(cat_var)-1)){
     for( j in 1+i:(length(cat_var)-1)){
     my_cat_cat <- c(my_cat_cat,paste(cat_var[i],cat_var[j],sep = "_VS_"))
@@ -227,6 +228,7 @@ bivar$cat_VS_num <- vector("list", length(my_cat_num))
 names(bivar$cat_VS_num) <- my_cat_num
 k <- 0
 l <- 0
+
 for(i in 1:(length(cat_var)-1)){
   for( j in 1+i:(length(cat_var)-1)){
     k <- k + 1
@@ -248,6 +250,7 @@ for(i in 1:(length(cat_var))){
     names(abc)[1] <- ""
     bivar$cat_VS_num[[l]] <- abc
     }
+}
 }
 return(bivar)
 }

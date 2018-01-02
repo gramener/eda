@@ -1,6 +1,6 @@
 library(R6)
 eda_metadata <- R6Class(
-  "Eda Metadata",
+  "Metadata",
   public = list(
     description = "",
     source = "",
@@ -248,7 +248,7 @@ eda_metadata <- R6Class(
         }
       }
     },
-    Save = function(path ,sheet= "Metadata"){
+    save = function(path ,sheet= "Metadata"){
       require(xlsx)
       metadata <- NULL
       for(i in 1:length(self$columns)){

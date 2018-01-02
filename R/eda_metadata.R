@@ -1,6 +1,8 @@
 library(R6)
 eda_metadata <- R6Class(
   "Metadata",
+  portable = FALSE,
+  cloneable = FALSE,
   public = list(
     description = "",
     source = "",

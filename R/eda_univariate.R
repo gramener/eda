@@ -1,6 +1,8 @@
 library(R6)
 eda_univariate <- R6Class(
   "Univariate Analysis",
+  portable = FALSE,
+  cloneable = FALSE,
   public = list(
     columns = list(),
     metadata = list(),

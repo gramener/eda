@@ -2,19 +2,19 @@ library(R6)
 eda_metadata <- R6Class(
   "Eda Metadata",
   public = list(
-    Description = "",
-    Source = "",
-    Row_description = "",
-    Sampling_method = "",
-    Prepared_by = "",
-    Prepared_on = "",
-    Format = "",
-    File_name = "",
-    File_size = "",
-    Encoding = "",
-    Row_count = 0,
-    Column_count = 0,
-    Modified_on = "",
+    description = "",
+    source = "",
+    row_description = "",
+    sampling_method = "",
+    prepared_by = "",
+    prepared_on = "",
+    format = "",
+    file_name = "",
+    file_size = "",
+    encoding = "",
+    row_count = 0,
+    column_count = 0,
+    modified_on = "",
     columns = list(),
     data = data.frame(),
     initialize = function(path = NULL,data = NULL,header =T,sep = ",",skip = 0) {
@@ -128,20 +128,20 @@ eda_metadata <- R6Class(
         row.names(data) <- NULL
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
-        mydataframe <- c("Column_Name","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
-        self$Description <- ""
-        self$Source <- path
-        self$Row_description <- ""
-        self$Sampling_method <- ""
-        self$Prepared_by <- ""
-        self$Prepared_on <- as.character(Sys.Date())
-        self$Format <- as.character(file_info$file_info$file.ext)
-        self$File_name <- as.character(file_info$file_info$file.name)
-        self$File_size <- as.character(file_info$file_info$file.size)
-        self$Encoding <- as.character(file_info$file_info$file.encoding)
-        self$Row_count <- file_info$file_info$number.of.rows
-        self$Column_count <- file_info$file_info$number.of.columns
-        self$Modified_on <- as.character(file_info$file_info$last.modified)
+        mydataframe <- c("column_name","type","key","description","missing","missing_percentage","uniques","top","min","q1","mean","median","q3","max","std")
+        self$description <- ""
+        self$source <- path
+        self$row_description <- ""
+        self$sampling_method <- ""
+        self$prepared_by <- ""
+        self$prepared_on <- as.character(Sys.Date())
+        self$format <- as.character(file_info$file_info$file.ext)
+        self$file_name <- as.character(file_info$file_info$file.name)
+        self$file_size <- as.character(file_info$file_info$file.size)
+        self$encoding <- as.character(file_info$file_info$file.encoding)
+        self$row_count <- file_info$file_info$number.of.rows
+        self$column_count <- file_info$file_info$number.of.columns
+        self$modified_on <- as.character(file_info$file_info$last.modified)
         self$data <- data
         for(i in 1:length(self$columns)){
           self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
@@ -189,15 +189,14 @@ eda_metadata <- R6Class(
             a13 <- NA
             a14 <- NA
           }
-          self$columns[[i]] <- list("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14)
+          self$columns[[i]] <- list("column_name"=a1,"type"= a2,"key"=a3,"description"=a4,"missing"=a5,"missing_percentage" = a16,"uniques"=a6,"top"=a7,"min"=a8,"q1"=a9,"mean"=a10,"median"=a11,"q3"=a12,"max"=a13,"std"=a14)
         }
       }
       else if(missing(path) & !missing(data)){
         row.names(data) <- NULL
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
-        mydataframe <- c("Column_Name","Type","Key","Description","Missing","Missing_percentage","Uniques","Top","Min","Q1","Mean","Median","Q3","Max","Std")
-        C
+        mydataframe <- c("column_name","type","key","description","missing","missing_percentage","uniques","top","min","q1","mean","median","q3","max","std")
         self$data <- data
         for(i in 1:length(self$columns)){
           self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
@@ -245,7 +244,7 @@ eda_metadata <- R6Class(
             a13 <- NA
             a14 <- NA
           }
-          self$columns[[i]] <- list("Column_Name"=a1,"Type"= a2,"Key"=a3,"Description"=a4,"Missing"=a5,"Missing_percentage" = a16,"Uniques"=a6,"Top"=a7,"Min"=a8,"Q1"=a9,"Mean"=a10,"Median"=a11,"Q3"=a12,"Max"=a13,"Std"=a14)
+          self$columns[[i]] <- list("column_name"=a1,"type"= a2,"key"=a3,"description"=a4,"missing"=a5,"missing_percentage" = a16,"uniques"=a6,"top"=a7,"min"=a8,"q1"=a9,"mean"=a10,"median"=a11,"q3"=a12,"max"=a13,"std"=a14)
         }
       }
     },
@@ -253,22 +252,22 @@ eda_metadata <- R6Class(
       require(xlsx)
       metadata <- NULL
       for(i in 1:length(self$columns)){
-        metadata <- rbind(metadata,self$columns[[i]])
+        metadata <- rbind(metadata,as.data.frame(self$columns[[i]]))
       }
       names(metadata) <- gsub("_"," ",names(metadata))
-      meta_data <- list(Description = self$Description,
-                        Source = self$Source,
-                        Row_description = self$Row_description,
-                        Sampling_method = self$Sampling_method,
-                        Prepared_by = self$Prepared_by,
-                        Prepared_on = self$Prepared_on,
-                        Format = self$Format,
-                        File_name = self$File_name,
-                        File_size = self$File_size,
-                        Encoding = self$Encoding,
-                        Row_count = self$Row_count,
-                        Column_count = self$Column_count,
-                        Modified_on = self$Modified_on)
+      meta_data <- list(Description = self$description,
+                        Source = self$source,
+                        Row_description = self$row_description,
+                        Sampling_method = self$sampling_method,
+                        Prepared_by = self$prepared_by,
+                        Prepared_on = self$prepared_on,
+                        Format = self$format,
+                        File_name = self$file_name,
+                        File_size = self$file_size,
+                        Encoding = self$encoding,
+                        Row_count = self$row_count,
+                        Column_count = self$column_count,
+                        Modified_on = self$modified_on)
       names(meta_data) <- gsub("_"," ",names(meta_data))
       if(!file.exists(path)){
         wb1 = createWorkbook()

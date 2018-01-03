@@ -1,0 +1,1050 @@
+description: ''
+source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/nas.csv
+row_description: ''
+sampling_method: ''
+prepared_by: ''
+prepared_on: '2018-01-03'
+format: csv
+file_name: nas.csv
+file_size: 4323978 bytes
+encoding: ASCII
+row_count: 8801
+column_count: 64
+modified_on: 2017-12-29 12:09:35
+columns:
+  STUID:
+    column_name: STUID
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 8785
+    top: ' 26031043015:2 , 26031043016:2 , 26041071017:2 , 26041072037:2 , 26041076013:2'
+    min: 2.6011001e+10
+    q1: 2.6042068e+10
+    mean: 2.6083894e+10
+    median: 2.6091145e+10
+    q3: 2.6121211e+10
+    max: 2.614127e+10
+    std: 4.0691885e+07
+  State:
+    column_name: State
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 1
+    top: ' Maharashtra:8801'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  District:
+    column_name: District
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 14
+    top: ' 12:1377 , 8:1119 , 13:893 , 9:865 , 4:722'
+    min: 1.0
+    q1: 4.0
+    mean: 8.0
+    median: 9.0
+    q3: 12.0
+    max: 14.0
+    std: 4.0
+  Gender:
+    column_name: Gender
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' Boy:4586 , Girl:4213 , :2'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Age:
+    column_name: Age
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 7
+    top: ' 14 years:4349 , 13 years:2798 , 15 years:844 , 12 years:298 , 16+ years:264'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Category:
+    column_name: Category
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 569
+    missing_percentage: 6.5 %
+    uniques: 5
+    top: ' 4:2915 , 3:2458 , 1:1807 , 2:1052'
+    min: 1.0
+    q1: 2.0
+    mean: 3.0
+    median: 3.0
+    q3: 4.0
+    max: 4.0
+    std: 1.0
+  Same language:
+    column_name: Same language
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 229
+    missing_percentage: 2.6 %
+    uniques: 3
+    top: ' 1:7691 , 2:881'
+    min: 1.0
+    q1: 1.0
+    mean: 1.0
+    median: 1.0
+    q3: 1.0
+    max: 2.0
+    std: 0.3
+  Siblings:
+    column_name: Siblings
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 2 siblings:2979 , 1 sibling:2726 , 3 siblings:1526 , 4+ siblings:1167 ,
+      Single child:403'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Handicap:
+    column_name: Handicap
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:8022 , :497 , Yes:282'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Father edu:
+    column_name: Father edu
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 6
+    top: ' Secondary:2549 , Primary:2434 , Illiterate:2034 , Sr secondary:792 , :654'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Mother edu:
+    column_name: Mother edu
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 6
+    top: ' Secondary:2591 , Illiterate:2545 , Primary:2220 , :851 , Sr secondary:433'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Father occupation:
+    column_name: Father occupation
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 9
+    top: ' Farmer:2944 , Labourer:1806 , :1040 , Skilled Worker:985 , Business:604'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Mother occupation:
+    column_name: Mother occupation
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 9
+    top: ' Farmer:2466 , :2175 , Unemployed:2151 , Labourer:1487 , Business:178'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Below poverty:
+    column_name: Below poverty
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:4671 , Yes:2676 , :1454'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Use calculator:
+    column_name: Use calculator
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:3327 , Yes:3319 , :2155'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Use computer:
+    column_name: Use computer
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:5227 , :2155 , Yes:1419'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Use Internet:
+    column_name: Use Internet
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:5813 , :2155 , Yes:833'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Use dictionary:
+    column_name: Use dictionary
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' Yes:4746 , :2155 , No:1900'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Read other books:
+    column_name: Read other books
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' Yes:6355 , :1805 , No:641'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  '# Books':
+    column_name: '# Books'
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-10 books:5303 , No books:1532 , :742 , 11-125 books:641 , 25+ books:583'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Distance:
+    column_name: Distance
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Up to 1 km:4692 , 1-3 km:1780 , More than 5 km:1024 , 3-5 km:971 , :334'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Computer use:
+    column_name: Computer use
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 6
+    top: ' Once in a week:5174 , Never use:1358 , Daily:1244 , No computer:556 , Once
+      in month:405'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Library use:
+    column_name: Library use
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 6
+    top: ' Once in a week:4054 , Once or twice in a month:1381 , Never use:1212 ,
+      More than once in a week:1204 , No library:753'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Like school:
+    column_name: Like school
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' Yes:8382 , :233 , No:186'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Subjects:
+    column_name: Subjects
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Language:3639 , Mathematics:2301 , Science:1955 , Social Science:797 ,
+      :109'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Give Lang HW:
+    column_name: Give Lang HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:3618 , Everyday:3197 , 3-4 times a week:1614 , Never:306
+      , :66'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Give Math HW:
+    column_name: Give Math HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Everyday:3721 , 1-2 times a week:3011 , 3-4 times a week:1425 , Never:578
+      , :66'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Give Scie HW:
+    column_name: Give Scie HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:3707 , Everyday:2595 , 3-4 times a week:1712 , Never:721
+      , :66'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Give SoSc HW:
+    column_name: Give SoSc HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:3755 , Everyday:2260 , 3-4 times a week:1681 , Never:1039
+      , :66'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Correct Lang HW:
+    column_name: Correct Lang HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:4588 , Everyday:1929 , 3-4 times a week:1837 , Never:340
+      , :107'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Correct Math HW:
+    column_name: Correct Math HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:4061 , Everyday:2220 , 3-4 times a week:1771 , Never:642
+      , :107'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Correct Scie HW:
+    column_name: Correct Scie HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:4373 , 3-4 times a week:1877 , Everyday:1702 , Never:742
+      , :107'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Correct SocS HW:
+    column_name: Correct SocS HW
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' 1-2 times a week:4454 , 3-4 times a week:1691 , Everyday:1465 , Never:1084
+      , :107'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Help in Study:
+    column_name: Help in Study
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' Yes:7346 , No:1365 , :90'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Private tuition:
+    column_name: Private tuition
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 3
+    top: ' No:6149 , Yes:2562 , :90'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  English is difficult:
+    column_name: English is difficult
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Disagree:5931 , Agree:1942 , Neither:888 , :40'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Read English:
+    column_name: Read English
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:7454 , Disagree:821 , Neither:486 , :40'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Dictionary to learn:
+    column_name: Dictionary to learn
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:4704 , Disagree:3072 , Neither:985 , :40'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Answer English WB:
+    column_name: Answer English WB
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:6989 , Disagree:1272 , Neither:500 , :40'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Answer English aloud:
+    column_name: Answer English aloud
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:7368 , Disagree:752 , Neither:641 , :40'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Maths is difficult:
+    column_name: Maths is difficult
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Disagree:4884 , Agree:2901 , Neither:955 , :61'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Solve Maths:
+    column_name: Solve Maths
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:4424 , Disagree:3182 , Neither:1134 , :61'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Solve Maths in groups:
+    column_name: Solve Maths in groups
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5777 , Disagree:2179 , Neither:784 , :61'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Draw geometry:
+    column_name: Draw geometry
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:6313 , Neither:1310 , Disagree:1117 , :61'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Explain answers:
+    column_name: Explain answers
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:6903 , Neither:979 , Disagree:858 , :61'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  SocSci is difficult:
+    column_name: SocSci is difficult
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Disagree:5524 , Agree:2480 , Neither:607 , :190'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Historical excursions:
+    column_name: Historical excursions
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:7632 , Disagree:638 , Neither:317 , :214'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Participate in SocSci:
+    column_name: Participate in SocSci
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:7455 , Disagree:749 , Neither:363 , :234'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Small groups in SocSci:
+    column_name: Small groups in SocSci
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5771 , Disagree:1943 , Neither:811 , :276'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Express SocSci views:
+    column_name: Express SocSci views
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5887 , Disagree:1544 , Neither:1057 , :313'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Science is difficult:
+    column_name: Science is difficult
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Disagree:5759 , Agree:2315 , Neither:525 , :202'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Observe experiments:
+    column_name: Observe experiments
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:7599 , Disagree:656 , Neither:307 , :239'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Conduct experiments:
+    column_name: Conduct experiments
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5979 , Disagree:2042 , Neither:534 , :246'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Solve science problems:
+    column_name: Solve science problems
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5977 , Disagree:1763 , Neither:749 , :312'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Express science views:
+    column_name: Express science views
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 4
+    top: ' Agree:5769 , Disagree:1741 , Neither:926 , :365'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Watch TV:
+    column_name: Watch TV
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Every day:6621 , Once a week:1479 , Never:348 , Once a month:309 , :44'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Read magazine:
+    column_name: Read magazine
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Every day:4622 , Once a week:2640 , Never:889 , Once a month:606 , :44'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Read a book:
+    column_name: Read a book
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Never:2756 , Once a week:2705 , Every day:2621 , Once a month:675 , :44'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Play games:
+    column_name: Play games
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Every day:6252 , Once a week:1826 , Once a month:350 , Never:329 , :44'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Help in household:
+    column_name: Help in household
+    type: character
+    key: 'no'
+    description: ''
+    missing: 0
+    missing_percentage: 0 %
+    uniques: 5
+    top: ' Every day:6883 , Never:1130 , Once a week:588 , Once a month:156 , :44'
+    min: .na
+    q1: .na
+    mean: .na
+    median: .na
+    q3: .na
+    max: .na
+    std: .na
+  Maths %:
+    column_name: Maths %
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 4611
+    missing_percentage: 52.4 %
+    uniques: 107
+    top: ' 26.32:186 , 22.81:170 , 23.73:169 , 21.05:162 , 24.56:162'
+    min: 0.0e+00
+    q1: 22.03
+    mean: 32.0
+    median: 28.07
+    q3: 36.84
+    max: 94.74
+    std: 15.0
+  Reading %:
+    column_name: Reading %
+    type: continuous
+    key: 'no'
+    description: ''
+    missing: 4574
+    missing_percentage: 52 %
+    uniques: 60
+    top: ' 72.41:132 , 60:119 , 62.07:117 , 75.86:116 , 70:111'
+    min: 0.0e+00
+    q1: 35.575
+    mean: 55.0
+    median: 56.67
+    q3: 73.33
+    max: 100.0
+    std: 23.0
+  Science %:
+    column_name: Science %
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 4657
+    missing_percentage: 52.9 %
+    uniques: 49
+    top: ' 34.55:286 , 30.91:278 , 32.73:269 , 29.09:268 , 27.27:257'
+    min: 0.0e+00
+    q1: 27.27
+    mean: 36.0
+    median: 34.55
+    q3: 43.64
+    max: 85.45
+    std: 13.0
+  Social %:
+    column_name: Social %
+    type: discrete
+    key: 'no'
+    description: ''
+    missing: 4682
+    missing_percentage: 53.2 %
+    uniques: 45
+    top: ' 30.61:236 , 34.69:236 , 28.57:214 , 40.82:213 , 38.78:211'
+    min: 0.0e+00
+    q1: 30.61
+    mean: 41.0
+    median: 38.78
+    q3: 51.02
+    max: 89.8
+    std: 14.0

@@ -21,13 +21,13 @@ columns:
     missing_percentage: 0 %
     uniques: 77
     top: ' 32:2085 , 31:1996 , 33:1972 , 34:1930 , 35:1894'
-    min: '18'
-    q1: '33'
-    mean: '41'
-    median: '39'
-    q3: '48'
-    max: '95'
-    std: '11'
+    min: 18
+    q1: 33
+    mean: 41
+    median: 39
+    q3: 48
+    max: 95
+    std: 11
   job:
     column_name: job
     type: character
@@ -101,13 +101,13 @@ columns:
     missing_percentage: 0 %
     uniques: 7168
     top: ' 0:3514 , 1:195 , 2:156 , 4:139 , 3:134'
-    min: '-8019'
-    q1: '72'
-    mean: '1362'
-    median: '448'
-    q3: '1428'
-    max: '102127'
-    std: '3045'
+    min: -8019
+    q1: 72
+    mean: 1362
+    median: 448
+    q3: 1428
+    max: 102127
+    std: 3045
   housing:
     column_name: housing
     type: character
@@ -165,13 +165,13 @@ columns:
     missing_percentage: 0 %
     uniques: 31
     top: ' 20:2752 , 18:2308 , 21:2026 , 17:1939 , 6:1932'
-    min: '1'
-    q1: '8'
-    mean: '16'
-    median: '16'
-    q3: '21'
-    max: '31'
-    std: '8'
+    min: 1
+    q1: 8
+    mean: 16
+    median: 16
+    q3: 21
+    max: 31
+    std: 8
   month:
     column_name: month
     type: character
@@ -197,13 +197,13 @@ columns:
     missing_percentage: 0 %
     uniques: 1573
     top: ' 124:188 , 90:184 , 89:177 , 104:175 , 114:175'
-    min: '0'
-    q1: '103'
-    mean: '258'
-    median: '180'
-    q3: '319'
-    max: '4918'
-    std: '258'
+    min: 0
+    q1: 103
+    mean: 258
+    median: 180
+    q3: 319
+    max: 4918
+    std: 258
   campaign:
     column_name: campaign
     type: discrete
@@ -213,13 +213,13 @@ columns:
     missing_percentage: 0 %
     uniques: 48
     top: ' 1:17544 , 2:12505 , 3:5521 , 4:3522 , 5:1764'
-    min: '1'
-    q1: '1'
-    mean: '3'
-    median: '2'
-    q3: '3'
-    max: '63'
-    std: '3'
+    min: 1
+    q1: 1
+    mean: 3
+    median: 2
+    q3: 3
+    max: 63
+    std: 3
   pdays:
     column_name: pdays
     type: discrete
@@ -229,13 +229,13 @@ columns:
     missing_percentage: 0 %
     uniques: 559
     top: ' -1:36954 , 182:167 , 92:147 , 91:126 , 183:126'
-    min: '-1'
-    q1: '-1'
-    mean: '40'
-    median: '-1'
-    q3: '-1'
-    max: '871'
-    std: '100'
+    min: -1
+    q1: -1
+    mean: 40
+    median: -1
+    q3: -1
+    max: 871
+    std: 100
   previous:
     column_name: previous
     type: discrete
@@ -245,13 +245,13 @@ columns:
     missing_percentage: 0 %
     uniques: 41
     top: ' 0:36954 , 1:2772 , 2:2106 , 3:1142 , 4:714'
-    min: '0'
-    q1: '0'
-    mean: '0.58'
-    median: '0'
-    q3: '0'
-    max: '275'
-    std: '2'
+    min: 0
+    q1: 0
+    mean: 0.58
+    median: 0
+    q3: 0
+    max: 275
+    std: 2
   poutcome:
     column_name: poutcome
     type: character

@@ -21,13 +21,13 @@ columns:
     missing_percentage: 0 %
     uniques: 3000
     top: ' 1:1 , 2:1 , 3:1 , 4:1 , 5:1'
-    min: '1'
-    q1: '750.75'
-    mean: '1500'
-    median: '1500.5'
-    q3: '2250.25'
-    max: '3000'
-    std: '866'
+    min: 1
+    q1: 750.75
+    mean: 1500
+    median: 1500.5
+    q3: 2250.25
+    max: 3000
+    std: 866
   State:
     column_name: State
     type: character
@@ -53,13 +53,13 @@ columns:
     missing_percentage: 0 %
     uniques: 2
     top: ' 1:2703 , 0:297'
-    min: '0'
-    q1: '1'
-    mean: '0.9'
-    median: '1'
-    q3: '1'
-    max: '1'
-    std: '0.3'
+    min: 0
+    q1: 1
+    mean: 0.9
+    median: 1
+    q3: 1
+    max: 1
+    std: 0.3
   International Plan:
     column_name: International Plan
     type: discrete
@@ -69,13 +69,13 @@ columns:
     missing_percentage: 0 %
     uniques: 2
     top: ' 1:2687 , 0:313'
-    min: '0'
-    q1: '1'
-    mean: '0.9'
-    median: '1'
-    q3: '1'
-    max: '1'
-    std: '0.31'
+    min: 0
+    q1: 1
+    mean: 0.9
+    median: 1
+    q3: 1
+    max: 1
+    std: 0.31
   Day_Minutes:
     column_name: Day_Minutes
     type: discrete
@@ -85,13 +85,13 @@ columns:
     missing_percentage: 9 %
     uniques: 2644
     top: ' 165.73:3 , 14.21:2 , 18.62:2 , 21.12:2 , 25.73:2'
-    min: '0.37'
-    q1: '86'
-    mean: '182'
-    median: '159.35'
-    q3: '249.17'
-    max: '862.92'
-    std: '125'
+    min: 0.37
+    q1: 86
+    mean: 182
+    median: 159.35
+    q3: 249.17
+    max: 862.92
+    std: 125
   Day_Calls:
     column_name: Day_Calls
     type: discrete
@@ -101,13 +101,13 @@ columns:
     missing_percentage: 9 %
     uniques: 74
     top: ' 13:109 , 9:106 , 11:104 , 7:103 , 12:102'
-    min: '1'
-    q1: '9'
-    mean: '19'
-    median: '17'
-    q3: '27'
-    max: '88'
-    std: '13'
+    min: 1
+    q1: 9
+    mean: 19
+    median: 17
+    q3: 27
+    max: 88
+    std: 13
   Day_Charge:
     column_name: Day_Charge
     type: discrete
@@ -117,13 +117,13 @@ columns:
     missing_percentage: 9 %
     uniques: 2644
     top: ' 9.9438:3 , 0.8526:2 , 1.1172:2 , 1.2672:2 , 1.5438:2'
-    min: '0.0222'
-    q1: '5.16'
-    mean: '11'
-    median: '9.561'
-    q3: '14.9502'
-    max: '51.7752'
-    std: '7'
+    min: 0.0222
+    q1: 5.16
+    mean: 11
+    median: 9.561
+    q3: 14.9502
+    max: 51.7752
+    std: 7
   Evening_Minutes:
     column_name: Evening_Minutes
     type: discrete
@@ -133,13 +133,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 2651
     top: ' 52.69:3 , 10.61:2 , 26.69:2 , 30.37:2 , 40.53:2'
-    min: '1.42'
-    q1: '87.495'
-    mean: '183'
-    median: '161.88'
-    q3: '254.89'
-    max: '940'
-    std: '124'
+    min: 1.42
+    q1: 87.495
+    mean: 183
+    median: 161.88
+    q3: 254.89
+    max: 940
+    std: 124
   Evening_Calls:
     column_name: Evening_Calls
     type: discrete
@@ -149,13 +149,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 73
     top: ' 7:108 , 12:107 , 8:101 , 13:98 , 21:96'
-    min: '1'
-    q1: '9'
-    mean: '19'
-    median: '17'
-    q3: '27'
-    max: '96'
-    std: '13'
+    min: 1
+    q1: 9
+    mean: 19
+    median: 17
+    q3: 27
+    max: 96
+    std: 13
   Evening_Charge:
     column_name: Evening_Charge
     type: discrete
@@ -165,13 +165,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 2651
     top: ' 1.5807:3 , 0.3183:2 , 0.8007:2 , 0.9111:2 , 1.2159:2'
-    min: '0.0426'
-    q1: '2.62485'
-    mean: '5'
-    median: '4.8564'
-    q3: '7.6467'
-    max: '28.2'
-    std: '4'
+    min: 0.0426
+    q1: 2.62485
+    mean: 5
+    median: 4.8564
+    q3: 7.6467
+    max: 28.2
+    std: 4
   Night_Minutes:
     column_name: Night_Minutes
     type: discrete
@@ -181,13 +181,13 @@ columns:
     missing_percentage: 8.8 %
     uniques: 2647
     top: ' 36.8:3 , 186.45:3 , 14.72:2 , 25.57:2 , 27.92:2'
-    min: '0'
-    q1: '86.38'
-    mean: '183'
-    median: '157.62'
-    q3: '252.59'
-    max: '932.64'
-    std: '125'
+    min: 0
+    q1: 86.38
+    mean: 183
+    median: 157.62
+    q3: 252.59
+    max: 932.64
+    std: 125
   Night_Calls:
     column_name: Night_Calls
     type: discrete
@@ -197,13 +197,13 @@ columns:
     missing_percentage: 8.8 %
     uniques: 75
     top: ' 17:103 , 8:100 , 12:99 , 11:98 , 9:97'
-    min: '1'
-    q1: '9'
-    mean: '19'
-    median: '17'
-    q3: '27'
-    max: '94'
-    std: '13'
+    min: 1
+    q1: 9
+    mean: 19
+    median: 17
+    q3: 27
+    max: 94
+    std: 13
   Night_Charge:
     column_name: Night_Charge
     type: discrete
@@ -213,13 +213,13 @@ columns:
     missing_percentage: 8.8 %
     uniques: 2647
     top: ' 0.736:3 , 3.729:3 , 0.2944:2 , 0.5114:2 , 0.5584:2'
-    min: '0'
-    q1: '1.7276'
-    mean: '4'
-    median: '3.1524'
-    q3: '5.0518'
-    max: '18.6528'
-    std: '3'
+    min: 0
+    q1: 1.7276
+    mean: 4
+    median: 3.1524
+    q3: 5.0518
+    max: 18.6528
+    std: 3
   International_Minutes:
     column_name: International_Minutes
     type: discrete
@@ -229,13 +229,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 2651
     top: ' 153.41:3 , 219.45:3 , 20.25:2 , 23.04:2 , 24.67:2'
-    min: '0.63'
-    q1: '88.88'
-    mean: '182'
-    median: '155.33'
-    q3: '252.115'
-    max: '972.73'
-    std: '125'
+    min: 0.63
+    q1: 88.88
+    mean: 182
+    median: 155.33
+    q3: 252.115
+    max: 972.73
+    std: 125
   International_Calls:
     column_name: International_Calls
     type: discrete
@@ -245,13 +245,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 75
     top: ' 12:111 , 13:110 , 6:103 , 9:99 , 11:97'
-    min: '1'
-    q1: '9'
-    mean: '19'
-    median: '17'
-    q3: '27'
-    max: '93'
-    std: '13'
+    min: 1
+    q1: 9
+    mean: 19
+    median: 17
+    q3: 27
+    max: 93
+    std: 13
   International_Charge:
     column_name: International_Charge
     type: discrete
@@ -261,13 +261,13 @@ columns:
     missing_percentage: 8.7 %
     uniques: 2651
     top: ' 46.023:3 , 65.835:3 , 6.075:2 , 6.912:2 , 7.401:2'
-    min: '0.189'
-    q1: '26.664'
-    mean: '55'
-    median: '46.599'
-    q3: '75.6345'
-    max: '291.819'
-    std: '38'
+    min: 0.189
+    q1: 26.664
+    mean: 55
+    median: 46.599
+    q3: 75.6345
+    max: 291.819
+    std: 38
   Customer_Service_Calls:
     column_name: Customer_Service_Calls
     type: discrete
@@ -277,13 +277,13 @@ columns:
     missing_percentage: 9.8 %
     uniques: 48
     top: ' 7:163 , 5:157 , 6:157 , 3:155 , 4:141'
-    min: '1'
-    q1: '6'
-    mean: '12'
-    median: '10'
-    q3: '16'
-    max: '51'
-    std: '8'
+    min: 1
+    q1: 6
+    mean: 12
+    median: 10
+    q3: 16
+    max: 51
+    std: 8
   VMail_Messages:
     column_name: VMail_Messages
     type: discrete
@@ -293,13 +293,13 @@ columns:
     missing_percentage: 8.6 %
     uniques: 85
     top: ' 9:88 , 16:86 , 17:82 , 19:81 , 14:80'
-    min: '1'
-    q1: '11'
-    mean: '23'
-    median: '20'
-    q3: '32'
-    max: '103'
-    std: '15'
+    min: 1
+    q1: 11
+    mean: 23
+    median: 20
+    q3: 32
+    max: 103
+    std: 15
   Churn:
     column_name: Churn
     type: discrete
@@ -309,10 +309,10 @@ columns:
     missing_percentage: 0 %
     uniques: 2
     top: ' 0:2680 , 1:320'
-    min: '0'
-    q1: '0'
-    mean: '0.11'
-    median: '0'
-    q3: '0'
-    max: '1'
-    std: '0.31'
+    min: 0
+    q1: 0
+    mean: 0.11
+    median: 0
+    q3: 0
+    max: 1
+    std: 0.31

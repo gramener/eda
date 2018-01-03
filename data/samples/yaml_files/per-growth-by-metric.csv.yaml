@@ -37,13 +37,13 @@ columns:
     missing_percentage: 0 %
     uniques: 104
     top: ' -0.015:4 , -0.073:3 , -0.068:3 , -0.001:3 , -0.153:2'
-    min: '-0.267'
-    q1: '-0.073'
-    mean: '-0.04'
-    median: '-0.036'
-    q3: '0.0045'
-    max: '0.152'
-    std: '0.07'
+    min: -0.267
+    q1: -0.073
+    mean: -0.04
+    median: -0.036
+    q3: 0.0045
+    max: 0.152
+    std: 0.07
   Per Mob Phone Growth:
     column_name: Per Mob Phone Growth
     type: continuous
@@ -53,13 +53,13 @@ columns:
     missing_percentage: 0 %
     uniques: 119
     top: ' 0.043:3 , -0.12:2 , -0.055:2 , -0.001:2 , 0.006:2'
-    min: '-0.277'
-    q1: '0.0085'
-    mean: '0.26'
-    median: '0.158'
-    q3: '0.366'
-    max: '2.824'
-    std: '0.43'
+    min: -0.277
+    q1: 0.0085
+    mean: 0.26
+    median: 0.158
+    q3: 0.366
+    max: 2.824
+    std: 0.43
   Per Growth in Int Usage:
     column_name: Per Growth in Int Usage
     type: continuous
@@ -69,13 +69,13 @@ columns:
     missing_percentage: 0 %
     uniques: 102
     top: ' 0.083:4 , 0.022:3 , 0.025:3 , 0.043:3 , 0.059:3'
-    min: '-0.061'
-    q1: '0.051'
-    mean: '0.1'
-    median: '0.09'
-    q3: '0.138'
-    max: '0.437'
-    std: '0.08'
+    min: -0.061
+    q1: 0.051
+    mean: 0.1
+    median: 0.09
+    q3: 0.138
+    max: 0.437
+    std: 0.08
   Per Growth in Infra:
     column_name: Per Growth in Infra
     type: continuous
@@ -85,10 +85,10 @@ columns:
     missing_percentage: 0 %
     uniques: 113
     top: ' -0.041:4 , -0.036:2 , -0.008:2 , 0.014:2 , 0.015:2'
-    min: '-0.519'
-    q1: '-0.043'
-    mean: '0.02'
-    median: '0.024'
-    q3: '0.1065'
-    max: '0.402'
-    std: '0.15'
+    min: -0.519
+    q1: -0.043
+    mean: 0.02
+    median: 0.024
+    q3: 0.1065
+    max: 0.402
+    std: 0.15

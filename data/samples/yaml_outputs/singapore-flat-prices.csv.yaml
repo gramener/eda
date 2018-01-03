@@ -1,5 +1,5 @@
 description: ''
-source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/singapore-flat-prices.csv
+source: C:/Users/Nolan/Desktop/eda/data/samples/csv_files/singapore-flat-prices.csv
 row_description: ''
 sampling_method: ''
 prepared_by: ''
@@ -21,13 +21,13 @@ columns:
     missing_percentage: 0 %
     uniques: 21694
     top: ' 1:1 , 2:1 , 3:1 , 4:1 , 5:1'
-    min: 1.0
-    q1: 5424.25
-    mean: 10848.0
-    median: 10847.5
-    q3: 16270.75
-    max: 21694.0
-    std: 6263.0
+    min: '1'
+    q1: '5424.25'
+    mean: '10848'
+    median: '10847.5'
+    q3: '16270.75'
+    max: '21694'
+    std: '6263'
   month_no:
     column_name: month_no
     type: discrete
@@ -37,13 +37,13 @@ columns:
     missing_percentage: 0 %
     uniques: 14
     top: ' 24200:1887 , 24197:1829 , 24198:1827 , 24196:1824 , 24202:1682'
-    min: 24193.0
-    q1: 24196.0
-    mean: 24199.0
-    median: 24199.0
-    q3: 24202.0
-    max: 24206.0
-    std: 4.0
+    min: '24193'
+    q1: '24196'
+    mean: '24199'
+    median: '24199'
+    q3: '24202'
+    max: '24206'
+    std: '4'
   flat_type:
     column_name: flat_type
     type: discrete
@@ -53,13 +53,13 @@ columns:
     missing_percentage: 0 %
     uniques: 7
     top: ' 4:8985 , 3:5660 , 5:5128 , 6:1676 , 2:236'
-    min: 1.0
-    q1: 3.0
-    mean: 4.0
-    median: 4.0
-    q3: 5.0
-    max: 7.0
-    std: 0.92
+    min: '1'
+    q1: '3'
+    mean: '4'
+    median: '4'
+    q3: '5'
+    max: '7'
+    std: '0.92'
   storey_range:
     column_name: storey_range
     type: discrete
@@ -69,13 +69,13 @@ columns:
     missing_percentage: 0 %
     uniques: 17
     top: ' 4:5251 , 7:4863 , 10:4070 , 1:3982 , 13:1908'
-    min: 1.0
-    q1: 4.0
-    mean: 7.0
-    median: 7.0
-    q3: 10.0
-    max: 49.0
-    std: 5.0
+    min: '1'
+    q1: '4'
+    mean: '7'
+    median: '7'
+    q3: '10'
+    max: '49'
+    std: '5'
   floor_area_sqm:
     column_name: floor_area_sqm
     type: discrete
@@ -85,13 +85,13 @@ columns:
     missing_percentage: 0 %
     uniques: 151
     top: ' 67:1367 , 110:1219 , 104:988 , 90:790 , 92:736'
-    min: 31.0
-    q1: 75.0
-    mean: 97.0
-    median: 96.0
-    q3: 111.0
-    max: 259.0
-    std: 24.0
+    min: '31'
+    q1: '75'
+    mean: '97'
+    median: '96'
+    q3: '111'
+    max: '259'
+    std: '24'
   lease_commence_date:
     column_name: lease_commence_date
     type: discrete
@@ -101,13 +101,13 @@ columns:
     missing_percentage: 0 %
     uniques: 48
     top: ' 1985:1525 , 1984:1165 , 1988:974 , 2001:938 , 2012:857'
-    min: 1966.0
-    q1: 1984.0
-    mean: 1991.0
-    median: 1989.0
-    q3: 2000.0
-    max: 2013.0
-    std: 11.0
+    min: '1966'
+    q1: '1984'
+    mean: '1991'
+    median: '1989'
+    q3: '2000'
+    max: '2013'
+    std: '11'
   resale_price:
     column_name: resale_price
     type: discrete
@@ -117,10 +117,10 @@ columns:
     missing_percentage: 0 %
     uniques: 1403
     top: ' 380000:337 , 400000:337 , 430000:320 , 350000:305 , 420000:304'
-    min: 190000.0
-    q1: 340000.0
-    mean: 438509.0
-    median: 410000.0
-    q3: 500000.0
-    max: 1180000.0
-    std: 139012.0
+    min: '190000'
+    q1: '340000'
+    mean: '438509'
+    median: '410000'
+    q3: '500000'
+    max: '1180000'
+    std: '139012'

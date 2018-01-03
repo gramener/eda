@@ -1,5 +1,5 @@
 description: ''
-source: C:/Users/Nolan/Desktop/eda/data/samples/csv files/nas.csv
+source: C:/Users/Nolan/Desktop/eda/data/samples/csv_files/nas.csv
 row_description: ''
 sampling_method: ''
 prepared_by: ''
@@ -21,13 +21,13 @@ columns:
     missing_percentage: 0 %
     uniques: 8785
     top: ' 26031043015:2 , 26031043016:2 , 26041071017:2 , 26041072037:2 , 26041076013:2'
-    min: 2.6011001e+10
-    q1: 2.6042068e+10
-    mean: 2.6083894e+10
-    median: 2.6091145e+10
-    q3: 2.6121211e+10
-    max: 2.614127e+10
-    std: 4.0691885e+07
+    min: '26011001001'
+    q1: '26042068036'
+    mean: '26083894190'
+    median: '26091145001'
+    q3: '26121211029'
+    max: '26141270040'
+    std: '40691885'
   State:
     column_name: State
     type: character
@@ -53,13 +53,13 @@ columns:
     missing_percentage: 0 %
     uniques: 14
     top: ' 12:1377 , 8:1119 , 13:893 , 9:865 , 4:722'
-    min: 1.0
-    q1: 4.0
-    mean: 8.0
-    median: 9.0
-    q3: 12.0
-    max: 14.0
-    std: 4.0
+    min: '1'
+    q1: '4'
+    mean: '8'
+    median: '9'
+    q3: '12'
+    max: '14'
+    std: '4'
   Gender:
     column_name: Gender
     type: character
@@ -101,13 +101,13 @@ columns:
     missing_percentage: 6.5 %
     uniques: 5
     top: ' 4:2915 , 3:2458 , 1:1807 , 2:1052'
-    min: 1.0
-    q1: 2.0
-    mean: 3.0
-    median: 3.0
-    q3: 4.0
-    max: 4.0
-    std: 1.0
+    min: '1'
+    q1: '2'
+    mean: '3'
+    median: '3'
+    q3: '4'
+    max: '4'
+    std: '1'
   Same language:
     column_name: Same language
     type: discrete
@@ -117,13 +117,13 @@ columns:
     missing_percentage: 2.6 %
     uniques: 3
     top: ' 1:7691 , 2:881'
-    min: 1.0
-    q1: 1.0
-    mean: 1.0
-    median: 1.0
-    q3: 1.0
-    max: 2.0
-    std: 0.3
+    min: '1'
+    q1: '1'
+    mean: '1'
+    median: '1'
+    q3: '1'
+    max: '2'
+    std: '0.3'
   Siblings:
     column_name: Siblings
     type: character
@@ -993,13 +993,13 @@ columns:
     missing_percentage: 52.4 %
     uniques: 107
     top: ' 26.32:186 , 22.81:170 , 23.73:169 , 21.05:162 , 24.56:162'
-    min: 0.0e+00
-    q1: 22.03
-    mean: 32.0
-    median: 28.07
-    q3: 36.84
-    max: 94.74
-    std: 15.0
+    min: '0'
+    q1: '22.03'
+    mean: '32'
+    median: '28.07'
+    q3: '36.84'
+    max: '94.74'
+    std: '15'
   Reading %:
     column_name: Reading %
     type: continuous
@@ -1009,13 +1009,13 @@ columns:
     missing_percentage: 52 %
     uniques: 60
     top: ' 72.41:132 , 60:119 , 62.07:117 , 75.86:116 , 70:111'
-    min: 0.0e+00
-    q1: 35.575
-    mean: 55.0
-    median: 56.67
-    q3: 73.33
-    max: 100.0
-    std: 23.0
+    min: '0'
+    q1: '35.575'
+    mean: '55'
+    median: '56.67'
+    q3: '73.33'
+    max: '100'
+    std: '23'
   Science %:
     column_name: Science %
     type: discrete
@@ -1025,13 +1025,13 @@ columns:
     missing_percentage: 52.9 %
     uniques: 49
     top: ' 34.55:286 , 30.91:278 , 32.73:269 , 29.09:268 , 27.27:257'
-    min: 0.0e+00
-    q1: 27.27
-    mean: 36.0
-    median: 34.55
-    q3: 43.64
-    max: 85.45
-    std: 13.0
+    min: '0'
+    q1: '27.27'
+    mean: '36'
+    median: '34.55'
+    q3: '43.64'
+    max: '85.45'
+    std: '13'
   Social %:
     column_name: Social %
     type: discrete
@@ -1041,10 +1041,10 @@ columns:
     missing_percentage: 53.2 %
     uniques: 45
     top: ' 30.61:236 , 34.69:236 , 28.57:214 , 40.82:213 , 38.78:211'
-    min: 0.0e+00
-    q1: 30.61
-    mean: 41.0
-    median: 38.78
-    q3: 51.02
-    max: 89.8
-    std: 14.0
+    min: '0'
+    q1: '30.61'
+    mean: '41'
+    median: '38.78'
+    q3: '51.02'
+    max: '89.8'
+    std: '14'

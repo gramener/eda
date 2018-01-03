@@ -174,13 +174,13 @@ metadata <- R6Class(
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])
           if(a2 %in% c("continuous","discrete")){
-            a8 <- as.double(min(data[,i],na.rm = T))
-            a9 <- as.double(quantile(data[,i],0.25,na.rm=T))
-            a10 <- ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T))))
-            a11 <- as.double(median(data[,i],na.rm=T))
-            a12 <- as.double(quantile(data[,i],0.75,na.rm=T))
-            a13 <- as.double(max(data[,i],na.rm = T))
-            a14 <- ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T))))
+            a8 <- format(as.double(min(data[,i],na.rm = T)),scientific = F)
+            a9 <- format(as.double(quantile(data[,i],0.25,na.rm=T)),scientific = F)
+            a10 <- format(ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T)))),scientific = F)
+            a11 <- format(as.double(median(data[,i],na.rm=T)),scientific = F)
+            a12 <- format(as.double(quantile(data[,i],0.75,na.rm=T)),scientific = F)
+            a13 <- format(as.double(max(data[,i],na.rm = T)),scientific = F)
+            a14 <- format(ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T)))),scientific = F)
           }
           else{
             a8 <- NA
@@ -229,13 +229,13 @@ metadata <- R6Class(
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])
           if(a2 %in% c("continuous","discrete")){
-            a8 <- as.double(min(data[,i],na.rm = T))
-            a9 <- as.double(quantile(data[,i],0.25,na.rm=T))
-            a10 <- ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T))))
-            a11 <- as.double(median(data[,i],na.rm=T))
-            a12 <- as.double(quantile(data[,i],0.75,na.rm=T))
-            a13 <- as.double(max(data[,i],na.rm = T))
-            a14 <- ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T))))
+            a8 <- format(as.double(min(data[,i],na.rm = T)),scientific = F)
+            a9 <- format(as.double(quantile(data[,i],0.25,na.rm=T)),scientific = F)
+            a10 <- format(ifelse(as.double(mean(data[,i],na.rm=T)) < 1,as.double(round(mean(data[,i],na.rm=T),2)),as.double(round(mean(data[,i],na.rm=T)))),scientific = F)
+            a11 <- format(as.double(median(data[,i],na.rm=T)),scientific = F)
+            a12 <- format(as.double(quantile(data[,i],0.75,na.rm=T)),scientific = F)
+            a13 <- format(as.double(max(data[,i],na.rm = T)),scientific = F)
+            a14 <- format(ifelse(as.double(sd(data[,i],na.rm=T)) < 1,as.double(round(sd(data[,i],na.rm=T),2)),as.double(round(sd(data[,i],na.rm=T)))),scientific = F)
           }
           else{
             a8 <- NA

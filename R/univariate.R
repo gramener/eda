@@ -133,7 +133,7 @@ univariate <- R6Class(
         df$Colour[df$Rank <= 10] <- "blue"
         df$Colour[df$Rank > 10] <- "black"
         plot(df$Rank,df$Freq,log='xy',type='b',col = df$Colour,xlab = "Rank",ylab = "Frequency",xaxt = 'n',cex.lab=0.75)
-        axis(1, at=1:length(levels(df$column)),labels=levels(df$column))
+        axis(1, at=1:length(levels(df$column)),labels=levels(df$column),las = 2)
       }
       k <- 1
       l <- 1
@@ -161,8 +161,14 @@ univariate <- R6Class(
         }
         for(i in 1:ncol(data)){
           if(names(data)[i] %in% num_var){
+            q1 <-quantile(data[,i],0.25,na.rm = T)
+            q3 <- quantile(data[,i],0.75,na.rm =T )
+            iqr <- q3 - q1
+            a2 <- q3 + 1.5*iqr
+            a3 <- q1 - 1.5*iqr
             png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
-            boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
+            boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i],yaxt = 'n')
+            axis(side= 2, at= c(min(data[,i]),a3,q1,median(data[,i]),q3,a2,max(data[,i])), labels= c(min(data[,i]),a3,q1,median(data[,i]),q3,a2,max(data[,i])),las = 2)
             dev.off()
             addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
             res<-file.remove("boxplot.png")
@@ -211,8 +217,14 @@ univariate <- R6Class(
         }
         for(i in 1:ncol(data)){
           if(names(data)[i] %in% num_var){
+            q1 <-quantile(data[,i],0.25,na.rm = T)
+            q3 <- quantile(data[,i],0.75,na.rm =T )
+            iqr <- q3 - q1
+            a2 <- q3 + 1.5*iqr
+            a3 <- q1 - 1.5*iqr
             png("boxplot.png", height=1200, width=2000, res=250, pointsize=8)
-            boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i])
+            boxplot(data[,i],col = "blue",main = paste("Boxplot of ",names(data)[i]),xlab = names(data)[i],yaxt = 'n')
+            axis(side= 2, at= c(min(data[,i]),a3,q1,median(data[,i]),q3,a2,max(data[,i])), labels= c(min(data[,i]),a3,q1,median(data[,i]),q3,a2,max(data[,i])),las = 2)
             dev.off()
             addPicture("boxplot.png", sheet_box, scale = 1, startRow = q,startColumn = 5)
             res<-file.remove("boxplot.png")

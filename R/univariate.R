@@ -34,7 +34,7 @@ univariate <- R6Class(
         data <- data[,num_var]
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
-        mydataframe <- c("column_name","iqr_upper_outliers","iqr_lower_outliers",paste("`","m+",k,"sd_outliers","`",sep = ""),paste("`","m-",k,"sd_outliers","`",sep = ""),"concentration","priority","performance","notes")
+        mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
         for(i in 1:length(self$columns)){
           if(is.numeric(data[,i])){
             self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
@@ -65,7 +65,7 @@ univariate <- R6Class(
         data <- data[,num_var]
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
-        mydataframe <- c("column_name","iqr_upper_outliers","iqr_lower_outliers",paste("`","m+",k,"sd_outliers","`",sep = ""),paste("`","m-",k,"sd_outliers","`",sep = ""),"concentration","priority","performance","notes")
+        mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
         for(i in 1:length(self$columns)){
           if(is.numeric(data[,i])){
             self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)

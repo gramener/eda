@@ -1,77 +1,147 @@
-eda_bivariate <- function(metadata){
-  require(dplyr)
-  require(data.table)
-  varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
-    vars <- character(0)
-    if (any(type %in% "numeric")) {
-      vars <- c(vars,names(df)[sapply(df,is.numeric)])
-    }
-    if (any(type %in% "character")) {
-      vars <- c(vars,names(df)[sapply(df,is.character)])
-    }
-    vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
-  }
-  data <- metadata$data
-  mylist.names <- c("cat_VS_cat","cat_VS_num","save","saveplot")
-  bivar <- vector("list", length(mylist.names))
-  names(bivar) <- mylist.names
-  bivar$save <- function(path){
-    require(xlsx)
-    bivar_data <- bivar
-    if(!file.exists(path)){
-      wb1 = createWorkbook()
-      sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
-      sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
-      csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
-      q <- 2
-      for(i in 1:length(bivar_data$cat_VS_cat$count)){
-        name1 <- as.data.frame(paste("count of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
-        name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
-        addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
-        q <- q + 10 + nrow(bivar_data$cat_VS_cat$count[[i]])
+library(R6)
+bivariate <- R6Class(
+  "Univariate Analysis",
+  portable = FALSE,
+  cloneable = FALSE,
+  public = list(
+    cat_VS_cat = list(),
+    cat_VS_num = list(),
+    data = data.frame(),
+    initialize = function(metadata) {
+      require(dplyr)
+      self$data <- metadata$data
+      options(scipen = 999)
+      varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+        vars <- character(0)
+        if (any(type %in% "numeric")) {
+          vars <- c(vars,names(df)[sapply(df,is.numeric)])
+        }
+        if (any(type %in% "character")) {
+          vars <- c(vars,names(df)[sapply(df,is.character)])
+        }
+        vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
       }
-      v <- 2
-      for(j in 1:length(bivar_data$cat_VS_num)){
-        name <- as.data.frame(names(bivar_data$cat_VS_num)[[j]])
-        addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        v <- v + 10 + nrow(bivar_data$cat_VS_num[[j]])
-      }
-      saveWorkbook(wb1, path)
+      if(!missing(metadata))
+      {
+        data <- metadata$data
+        num_var <- varlist(data,"numeric")
+        cat_var <- varlist(data,"character")
+        my_cat_cat <- NULL
+        if(!identical(cat_var, character(0))){
+          for(i in 1:(length(cat_var)-1)){
+            for( j in 1+i:(length(cat_var)-1)){
+              my_cat_cat <- c(my_cat_cat,paste(cat_var[i],cat_var[j],sep = "_VS_"))
+            }
+          }
+          my_cat_num <- NULL
+          for(i in 1:(length(cat_var))){
+            for( j in 1:(length(num_var))){
+              my_cat_num <- c(my_cat_num,paste(cat_var[i],num_var[j],sep = "_VS_"))
+            }
+          }
+          self$cat_VS_cat <- vector("list", 2)
+          names(self$cat_VS_cat) <- c("count","proportion")
+          self$cat_VS_cat$count <- vector("list", length(my_cat_cat))
+          names(self$cat_VS_cat$count) <- my_cat_cat
+          self$cat_VS_cat$proportion <- vector("list", length(my_cat_cat))
+          names(self$cat_VS_cat$proportion) <- my_cat_cat
+          self$cat_VS_num <- vector("list", length(my_cat_num))
+          names(self$cat_VS_num) <- my_cat_num
+          k <- 0
+          l <- 0
+
+          for(i in 1:(length(cat_var)-1)){
+            for( j in 1+i:(length(cat_var)-1)){
+              k <- k + 1
+              abc <- as.data.frame.matrix(table(data[,cat_var[i]],data[,cat_var[j]]))
+              abc <- setDT(abc, keep.rownames = TRUE)[]
+              names(abc)[1] <- ""
+              self$cat_VS_cat$count[[k]] <- abc
+              abc <- as.data.frame.matrix(round(prop.table(table(data[,cat_var[i]],data[,cat_var[j]])),4))*100
+              abc <- setDT(abc, keep.rownames = TRUE)[]
+              names(abc)[1] <- ""
+              self$cat_VS_cat$proportion[[k]] <- abc
+            }
+          }
+          for(i in 1:(length(cat_var))){
+            for( j in 1:(length(num_var))){
+              l <- l + 1
+              abc <- data %>% group_by(data[,cat_var[i]]) %>% summarize("Mean" = round(mean(eval(parse(text =num_var[j])),na.rm =T),2),"Sum" = sum(eval(parse(text =num_var[j])),na.rm =T),"Min" = min(eval(parse(text =num_var[j]))),"Max" = max(eval(parse(text =num_var[j]))))
+              abc <- as.data.frame(abc)
+              names(abc)[1] <- ""
+              self$cat_VS_num[[l]] <- abc
+            }
+          }
+        }
     }
-    else{
-      wb1<-loadWorkbook(path)
-      sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
-      sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
-      csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
-      q <- 2
-      for(i in 1:length(bivar_data$cat_VS_cat$count)){
-        name1 <- as.data.frame(paste("count of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
-        name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(bivar_data$cat_VS_cat$count)[[i]])))
-        addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(bivar_data$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
-        q <- q + 10 + nrow(bivar_data$cat_VS_cat$count[[i]])
+      },
+    save = function(path){
+      require(xlsx)
+      if(!file.exists(path)){
+        wb1 = createWorkbook()
+        sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
+        sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
+        csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+        q <- 2
+        for(i in 1:length(self$cat_VS_cat$count)){
+          name1 <- as.data.frame(paste("count of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
+          name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
+          addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
+          q <- q + 10 + nrow(self$cat_VS_cat$count[[i]])
+        }
+        v <- 2
+        for(j in 1:length(self$cat_VS_num)){
+          name <- as.data.frame(names(self$cat_VS_num)[[j]])
+          addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+          v <- v + 10 + nrow(self$cat_VS_num[[j]])
+        }
+        saveWorkbook(wb1, path)
       }
-      v <- 2
-      for(j in 1:length(bivar_data$cat_VS_num)){
-        name <- as.data.frame(names(bivar_data$cat_VS_num)[[j]])
-        addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
-        addDataFrame(bivar_data$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
-        v <- v + 10 + nrow(bivar_data$cat_VS_num[[j]])
+      else{
+        wb1<-loadWorkbook(path)
+        sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
+        sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
+        csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
+        q <- 2
+        for(i in 1:length(self$cat_VS_cat$count)){
+          name1 <- as.data.frame(paste("count of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
+          name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
+          addDataFrame(name1, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_cat$count[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(name2, sheet=sheet_cat_cat,startRow= q-1 ,startColumn=(ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
+          q <- q + 10 + nrow(self$cat_VS_cat$count[[i]])
+        }
+        v <- 2
+        for(j in 1:length(self$cat_VS_num)){
+          name <- as.data.frame(names(self$cat_VS_num)[[j]])
+          addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
+          addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
+          v <- v + 10 + nrow(self$cat_VS_num[[j]])
+        }
+        saveWorkbook(wb1, path)
       }
-      saveWorkbook(wb1, path)
-    }
-  }
-  bivar$saveplot <-  function(path,method= c("pearson","spearman")){
-    require(xlsx)
-    require(dplyr)
-    require(ggplot2)
-    require(corrplot)
+    },
+    saveplot =  function(path,method= c("pearson","spearman")){
+      require(xlsx)
+      require(dplyr)
+      require(ggplot2)
+      require(corrplot)
+      varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
+        vars <- character(0)
+        if (any(type %in% "numeric")) {
+          vars <- c(vars,names(df)[sapply(df,is.numeric)])
+        }
+        if (any(type %in% "character")) {
+          vars <- c(vars,names(df)[sapply(df,is.character)])
+        }
+        vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
+      }
+      data <- self$data
       x = 1
       y = 1
       z = 1
@@ -202,58 +272,6 @@ eda_bivariate <- function(metadata){
         }
       }
       saveWorkbook(wb1, path)
-  }
-  num_var <- varlist(data,"numeric")
-  cat_var <- varlist(data,"character")
-  my_cat_cat <- NULL
-  if(!identical(cat_var, character(0))){
-  for(i in 1:(length(cat_var)-1)){
-    for( j in 1+i:(length(cat_var)-1)){
-    my_cat_cat <- c(my_cat_cat,paste(cat_var[i],cat_var[j],sep = "_VS_"))
     }
-  }
-  my_cat_num <- NULL
-for(i in 1:(length(cat_var))){
-  for( j in 1:(length(num_var))){
-    my_cat_num <- c(my_cat_num,paste(cat_var[i],num_var[j],sep = "_VS_"))
-  }
-}
-bivar$cat_VS_cat <- vector("list", 2)
-names(bivar$cat_VS_cat) <- c("count","proportion")
-bivar$cat_VS_cat$count <- vector("list", length(my_cat_cat))
-names(bivar$cat_VS_cat$count) <- my_cat_cat
-bivar$cat_VS_cat$proportion <- vector("list", length(my_cat_cat))
-names(bivar$cat_VS_cat$proportion) <- my_cat_cat
-bivar$cat_VS_num <- vector("list", length(my_cat_num))
-names(bivar$cat_VS_num) <- my_cat_num
-k <- 0
-l <- 0
-
-for(i in 1:(length(cat_var)-1)){
-  for( j in 1+i:(length(cat_var)-1)){
-    k <- k + 1
-    abc <- as.data.frame.matrix(table(data[,cat_var[i]],data[,cat_var[j]]))
-    abc <- setDT(abc, keep.rownames = TRUE)[]
-    names(abc)[1] <- ""
-    bivar$cat_VS_cat$count[[k]] <- abc
-    abc <- as.data.frame.matrix(round(prop.table(table(data[,cat_var[i]],data[,cat_var[j]])),4))*100
-    abc <- setDT(abc, keep.rownames = TRUE)[]
-    names(abc)[1] <- ""
-    bivar$cat_VS_cat$proportion[[k]] <- abc
-  }
-}
-for(i in 1:(length(cat_var))){
-  for( j in 1:(length(num_var))){
-    l <- l + 1
-    abc <- data %>% group_by(data[,cat_var[i]]) %>% summarize("Mean" = round(mean(eval(parse(text =num_var[j])),na.rm =T),2),"Sum" = sum(eval(parse(text =num_var[j])),na.rm =T),"Min" = min(eval(parse(text =num_var[j]))),"Max" = max(eval(parse(text =num_var[j]))))
-    abc <- as.data.frame(abc)
-    names(abc)[1] <- ""
-    bivar$cat_VS_num[[l]] <- abc
-    }
-}
-}
-return(bivar)
-}
-
-
-
+  )
+)

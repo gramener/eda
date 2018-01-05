@@ -25,6 +25,7 @@ metadata <- R6Class(
       require(readr)
       require(data.table)
       require(openxlsx)
+      require(readxl)
       varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
         vars <- character(0)
         if (any(type %in% "numeric")) {
@@ -112,7 +113,7 @@ metadata <- R6Class(
           cols <- ncol(data)
         }
         else if(ext == "xlsx"){
-          data <- as.data.frame(read.xlsx(path,1))
+          data <- as.data.frame(read_excel(path,1))
           row.names(data) <- NULL
           rows<-nrow(data)
           cols <- ncol(data)

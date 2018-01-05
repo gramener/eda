@@ -16,5 +16,6 @@ Imports: tools,
           dplyr,
           ggplot2,
           openxlsx,
-          R6
+          R6,
+          readxl
 Suggests: testthat

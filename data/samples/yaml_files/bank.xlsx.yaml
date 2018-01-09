@@ -1,16 +1,16 @@
 description: ''
-source: C:/Users/Nolan/Desktop/eda/data/samples/csv_files/bank.csv
+source: C:/Users/Nolan/Desktop/eda/data/samples/xlsx_files/bank.xlsx
 row_description: ''
 sampling_method: ''
 prepared_by: ''
 prepared_on: '2018-01-09'
-format: csv
-file_name: bank.csv
-file_size: 3751306 bytes
-encoding: ASCII
+format: xlsx
+file_name: bank.xlsx
+file_size: 3411544 bytes
+encoding: ''
 row_count: 45211
 column_count: 17
-modified_on: 2018-01-05 12:47:50
+modified_on: 2018-01-05 12:50:27
 columns:
   age:
     column_name: age

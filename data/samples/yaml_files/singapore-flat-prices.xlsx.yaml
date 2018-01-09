@@ -1,16 +1,16 @@
 description: ''
-source: C:/Users/Nolan/Desktop/eda/data/samples/csv_files/singapore-flat-prices.csv
+source: C:/Users/Nolan/Desktop/eda/data/samples/xlsx_files/singapore-flat-prices.xlsx
 row_description: ''
 sampling_method: ''
 prepared_by: ''
 prepared_on: '2018-01-09'
-format: csv
-file_name: singapore-flat-prices.csv
-file_size: 701305 bytes
-encoding: ASCII
+format: xlsx
+file_name: singapore-flat-prices.xlsx
+file_size: 771815 bytes
+encoding: ''
 row_count: 21694
 column_count: 7
-modified_on: 2017-12-28 11:24:31
+modified_on: 2018-01-05 12:51:04
 columns:
   ID:
     column_name: ID

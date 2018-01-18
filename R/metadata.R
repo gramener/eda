@@ -170,7 +170,7 @@ metadata <- R6Class(
           }
           a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
           a4 <- ""
-          a5 <- sum(is.na(data[,i]))
+          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A"),na.rm =T)
           a16 <- paste(round((a5*100/nrow(data)),1),"%")
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])
@@ -225,7 +225,7 @@ metadata <- R6Class(
           }
           a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
           a4 <- ""
-          a5 <- sum(is.na(data[,i]))
+          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A"),na.rm =T)
           a16 <- paste(round((a5*100/nrow(data)),1),"%")
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])

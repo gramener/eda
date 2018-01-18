@@ -196,6 +196,9 @@ metadata <- R6Class(
         }
       }
       else if(missing(path) & !missing(data)){
+        self$row_count <- nrow(data)
+        self$column_count <- ncol(data)
+
         row.names(data) <- NULL
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)

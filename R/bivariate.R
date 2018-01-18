@@ -75,9 +75,9 @@ bivariate <- R6Class(
         }
     }
       },
-    save = function(path){
+    save = function(savepath){
       require(xlsx)
-      if(!file.exists(path)){
+      if(!file.exists(savepath)){
         wb1 = createWorkbook()
         sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
         sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
@@ -99,10 +99,10 @@ bivariate <- R6Class(
           addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
           v <- v + 10 + nrow(self$cat_VS_num[[j]])
         }
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
       else{
-        wb1<-loadWorkbook(path)
+        wb1<-loadWorkbook(savepath)
         sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
         sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
@@ -123,10 +123,10 @@ bivariate <- R6Class(
           addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
           v <- v + 10 + nrow(self$cat_VS_num[[j]])
         }
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
     },
-    saveplot =  function(path,method= c("pearson","spearman")){
+    saveplot =  function(savepath,method= c("pearson","spearman")){
       require(xlsx)
       require(dplyr)
       require(ggplot2)
@@ -147,7 +147,7 @@ bivariate <- R6Class(
       z = 1
       num_var <- varlist(data,"numeric")
       cat_var <- varlist(data,"character")
-      if(!file.exists(path)){
+      if(!file.exists(savepath)){
         wb1<-createWorkbook()
         sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
         sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
@@ -210,7 +210,7 @@ bivariate <- R6Class(
         }
       }
       else{
-        wb1<-loadWorkbook(path)
+        wb1<-loadWorkbook(savepath)
         sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
         sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
         for(i in 1:(length(num_var)-1)){
@@ -271,7 +271,7 @@ bivariate <- R6Class(
           }
         }
       }
-      saveWorkbook(wb1, path)
+      saveWorkbook(wb1, savepath)
     }
   )
 )

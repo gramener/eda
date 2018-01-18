@@ -251,7 +251,7 @@ metadata <- R6Class(
         }
       }
     },
-    save = function(path ,sheet= "Metadata"){
+    save = function(savepath ,sheet= "Metadata"){
       require(xlsx)
       metadata <- NULL
       for(i in 1:length(self$columns)){
@@ -272,23 +272,23 @@ metadata <- R6Class(
                         Column_count = self$column_count,
                         Modified_on = self$modified_on)
       names(meta_data) <- gsub("_"," ",names(meta_data))
-      if(!file.exists(path)){
+      if(!file.exists(savepath)){
         wb1 = createWorkbook()
         sheet = createSheet(wb1,sheet)
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(metadata, sheet=sheet,startRow=(length(metadata)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         addDataFrame(data.frame(names(meta_data),as.character(meta_data)), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
         setColumnWidth(sheet, colIndex=1:ncol(metadata), colWidth=20)
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
       else{
-        wb1<-loadWorkbook(path)
+        wb1<-loadWorkbook(savepath)
         sheet = createSheet(wb1,sheet)
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(metadata, sheet=sheet,startRow=(length(metadata)+4),startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         addDataFrame(data.frame(names(meta_data),as.character(meta_data)), sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,col.names = FALSE)
         setColumnWidth(sheet, colIndex=1:ncol(metadata), colWidth=20)
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
     }
   )

@@ -1,5 +1,5 @@
-\name{eda_univariate}
-\alias{eda_univariate}
+\name{univariate}
+\alias{univariate}
 \title{
   Univariate analysis
 }
@@ -14,13 +14,24 @@
   g.  Notes - [Column to be left blank - to be filled by User on any quick observations/annotations] \cr
 }
 \usage{
-eda_univariate(metadata, k = 3)
+uni <- univariate$new(metadata, k = 3)
+uni$save(savepath,sheet= "Univariate")
+uni$saveplot(savepath ,breaks = NULL)
 }
 \arguments{
   \item{metadata}{
-       Specify the metadata generated using the eda_metadata function.
+       Specify the metadata generated using the metadata function.
 }
   \item{k}{
        The "k" in the outlier detection technique(mean +/- k* stardard deviation). By default k = 3.
+}
+  \item{savepath}{
+       The path of the xlsx file you want to save the analysis in. If the file does not exist it will create a new file of the specified name.
+}
+  \item{sheet}{
+       The name of the worksheet in which the analysis will be outputted.By default the sheet name is "Univariate"
+}
+  \item{breaks}{
+       The number of breaks in the histogram.
 }
 }

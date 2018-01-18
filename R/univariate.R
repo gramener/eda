@@ -92,31 +92,31 @@ univariate <- R6Class(
         }
       }
     },
-    save = function(path,sheet= "Univariate"){
+    save = function(savepath,sheet= "Univariate"){
       require(xlsx)
       unidata <- NULL
       for(i in 1:length(self$columns)){
         unidata <- rbind(unidata,as.data.frame(self$columns[[i]]))
       }
       names(unidata) <- gsub("_"," ",names(unidata))
-      if(!file.exists(path)){
+      if(!file.exists(savepath)){
         wb1 = createWorkbook()
         sheet = createSheet(wb1,sheet)
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
       else{
-        wb1<-loadWorkbook(path)
+        wb1<-loadWorkbook(savepath)
         sheet = createSheet(wb1,sheet)
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
-        saveWorkbook(wb1,path)
+        saveWorkbook(wb1,savepath)
       }
     },
-    saveplot = function(path ,breaks = NULL){
+    saveplot = function(savepath ,breaks = NULL){
       require(xlsx)
       bar_one <- function(column){
         df1 <- as.data.frame(table(column))
@@ -147,8 +147,8 @@ univariate <- R6Class(
       num_var <- as.character(metadata1[which(metadata1$type %in% c("discrete","continuous")),"column_name"])
       ord_var <- as.character(metadata1[which(tolower(metadata1$type) == "ordered"),"column_name"])
       cat_var <- as.character(metadata1[which(tolower(metadata1$type) == "character"),"column_name"])
-      if(file.exists(path)){
-        wb1<-loadWorkbook(path)
+      if(file.exists(savepath)){
+        wb1<-loadWorkbook(savepath)
         if(!identical(num_var, character(0))){
           sheet_hist = createSheet(wb1,"Univariate-Histogram")
           sheet_box = createSheet(wb1,"Univariate-Box Plots")
@@ -160,7 +160,7 @@ univariate <- R6Class(
           sheet_bar = createSheet(wb1,"Univariate-Bar Plot")
         }
         for(i in 1:ncol(data)){
-          if(names(data)[i] %in% num_var){
+          if(names(data)[i] %in% num_var & all(!is.na(data[,i])) ){
             q1 <-quantile(data[,i],0.25,na.rm = T)
             q3 <- quantile(data[,i],0.75,na.rm =T )
             iqr <- q3 - q1
@@ -182,7 +182,7 @@ univariate <- R6Class(
             res<-file.remove("histogram.png")
             q <- q + 27
           }
-          else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
+          else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1 & all(!is.na(data[,i]))){
             png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
             rankfreq(data[,i])
             title(paste("Rank Frequency plot of",names(data)[i]))
@@ -191,7 +191,7 @@ univariate <- R6Class(
             res<-file.remove("rankfreq.png")
             k <- k + 27
           }
-          else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
+          else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1 & all(!is.na(data[,i]))){
             png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
             df <- bar_one(data[,i])
             barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
@@ -201,7 +201,7 @@ univariate <- R6Class(
             l <- l + 27
           }
         }
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
       else{
         wb1<-createWorkbook(type="xlsx")
@@ -216,7 +216,7 @@ univariate <- R6Class(
           sheet_bar = createSheet(wb1,"Univariate-Bar")
         }
         for(i in 1:ncol(data)){
-          if(names(data)[i] %in% num_var){
+          if(names(data)[i] %in% num_var & all(!is.na(data[,i]))){
             q1 <-quantile(data[,i],0.25,na.rm = T)
             q3 <- quantile(data[,i],0.75,na.rm =T )
             iqr <- q3 - q1
@@ -238,7 +238,7 @@ univariate <- R6Class(
             res<-file.remove("histogram.png")
             q <- q + 27
           }
-          else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1){
+          else if(names(data)[i] %in% cat_var & length(unique(data[,i])) != 1 & all(!is.na(data[,i]))){
             png("rankfreq.png", height=1200, width=2000, res=250, pointsize=8)
             rankfreq(data[,i])
             title(paste("Rank Frequency plot of",names(data)[i]))
@@ -247,7 +247,7 @@ univariate <- R6Class(
             res<-file.remove("rankfreq.png")
             k <- k + 27
           }
-          else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1){
+          else if(names(data)[i] %in% ord_var & length(unique(data[,i])) != 1 & all(!is.na(data[,i]))){
             png("barplot.png", height=1200, width=2000, res=250, pointsize=8)
             df <- bar_one(data[,i])
             barplot(table(data[,i]),col=df$Colour,main = paste("Barplot of ",names(data)[i]),xlab = names(data)[i])
@@ -257,7 +257,7 @@ univariate <- R6Class(
             l <- l + 27
           }
         }
-        saveWorkbook(wb1, path)
+        saveWorkbook(wb1, savepath)
       }
     }
   )

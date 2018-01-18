@@ -1,24 +1,26 @@
-\name{eda_bivariate}
-\alias{eda_bivariate}
+\name{bivariate}
+\alias{bivariate}
 \title{
 Provides Bivariate Analysis in a Tabular format
 }
 \description{
  Bivariate Tables for \cr
-    1. Categorical - Categorical Variable : Cross Tab of Count of Records \cr
+    1. Categorical - Categorical Variable : Cross Tab of Count and Proportions of Records \cr
     2. Numeric - Categorical Variable : Sum, Average, Min, Max of Records \cr
 }
 \usage{
-eda_bivariate(data = NULL, file_info = NULL, columns = NULL)
+bivariate$new(metadata)
+bivariate$save(savepath)
+bivariate$saveplot(savepath,method= c("pearson","spearman"))
 }
 \arguments{
-  \item{data}{
-       If the dataset was imported using functions other than the read_eda function, pass this dataset to the data argument without specifying the file_info argument.
+  \item{metadata}{
+       Specify the metadata generated using the metadata function.
 }
-  \item{file_info}{
-     If data was imported using read_eda function,pass tis to the file_info argument without specifying the data argument.
+  \item{savepath}{
+       The path of the xlsx file you want to save the analysis in. If the file does not exist it will create a new file of the specified name.
 }
-  \item{columns}{
-     Specify the columns of interest as either column names or column index.
+  \item{method}{
+       The correlation computation method. Can be either pearson or spearman
 }
 }

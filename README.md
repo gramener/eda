@@ -139,13 +139,13 @@ bi <- bivariate$new(metadata = meta)
 ##### To output the Bivariate tables in a structured format into excel do the following.
 
 ``` r
-bi$save(path = "C:/Users/Nolan/Documents/eda outputs/bank_output.xlsx")
+bi$save(path = "path to the existing excel file or a new excel file to be created")
 ```
 
 ##### To output the Bivariate Plots in a structured format into excel do the following.The method argument is the correlation computation method that can either be pearson or spearman
 
 ``` r
-bi$saveplot(path = "path to file",method = "pearson")
+bi$saveplot(path = "path to the existing excel file or a new excel file to be created",method = "pearson")
 ```
 
 Example

@@ -170,3 +170,44 @@ Example
 -------
 
 This is a basic example which shows you how to solve a common problem:
+
+``` r
+##Install the eda package
+install_github("gramener/eda")
+
+##Load the eda package
+library(eda)
+
+##To compute the metadata for the iris dataset do:
+meta <- metadata$new(data = iris)
+
+##To view the metadata output onto the console:
+meta$output()
+
+##To save the metadata output into a xlsx file:
+meta$save(savepath = "C:/Users/Admin/Desktop/Output.xlsx")
+
+##To compute the univariate analysis do:
+uni <- univariate$new(metadata = meta)
+
+##To view the univariate analysis onto the console:
+uni$output()
+
+##To save the univariate analysis into a xlsx file do:
+uni$save(savepath = "C:/Users/Admin/Desktop/Output.xlsx")
+
+##To save the univariate plots into a xlsx file do:
+uni$saveplot(savepath = "C:/Users/Admin/Desktop/Output.xlsx")
+
+##To compute the bivariate analysis do:
+bi <- bivariate$new(metadata = meta)
+
+##To view the bivariate analysis onto the console:
+bi$output()
+
+##To save the bivariate analysis into a xlsx file do:
+bi$save(savepath = "C:/Users/Admin/Desktop/Output.xlsx")
+
+##To save the bivariate plots into a xlsx file do:
+bi$saveplot(savepath = "C:/Users/Admin/Desktop/Output.xlsx",method = "pearson")
+```

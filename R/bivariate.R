@@ -93,10 +93,10 @@ bivariate <- R6Class(
       require(xlsx)
       if(!file.exists(savepath)){
         wb1 = createWorkbook()
-        sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
-        sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         q <- 2
+        if(!is.null(self$cat_VS_cat)){
+          sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
         for(i in 1:length(self$cat_VS_cat$count)){
           name1 <- as.data.frame(paste("count of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
           name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
@@ -106,21 +106,25 @@ bivariate <- R6Class(
           addDataFrame(self$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
           q <- q + 10 + nrow(self$cat_VS_cat$count[[i]])
         }
+        }
         v <- 2
+        if(!is.null(self$cat_VS_num)){
+          sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
         for(j in 1:length(self$cat_VS_num)){
           name <- as.data.frame(names(self$cat_VS_num)[[j]])
           addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
           v <- v + 10 + nrow(self$cat_VS_num[[j]])
+        }
         }
         saveWorkbook(wb1, savepath)
       }
       else{
         wb1<-loadWorkbook(savepath)
-        sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
-        sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         q <- 2
+        if(!is.null(self$cat_VS_cat)){
+          sheet_cat_cat = createSheet(wb1,"Bivariate Tables-cat vs cat")
         for(i in 1:length(self$cat_VS_cat$count)){
           name1 <- as.data.frame(paste("count of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
           name2 <- as.data.frame(paste("proportion of",gsub("_"," ",names(self$cat_VS_cat$count)[[i]])))
@@ -130,12 +134,16 @@ bivariate <- R6Class(
           addDataFrame(self$cat_VS_cat$proportion[[i]], sheet=sheet_cat_cat,startRow= q ,startColumn = (ncol(self$cat_VS_cat$count[[i]])+5), row.names=FALSE,colnamesStyle=csTableColNames)
           q <- q + 10 + nrow(self$cat_VS_cat$count[[i]])
         }
+        }
         v <- 2
+        if(!is.null(self$cat_VS_num)){
+          sheet_cat_num = createSheet(wb1,"Bivariate Tables-cat vs num")
         for(j in 1:length(self$cat_VS_num)){
           name <- as.data.frame(names(self$cat_VS_num)[[j]])
           addDataFrame(name, sheet=sheet_cat_num,startRow= v-1 ,startColumn=1, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$cat_VS_num[[j]], sheet=sheet_cat_num,startRow= v ,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
           v <- v + 10 + nrow(self$cat_VS_num[[j]])
+        }
         }
         saveWorkbook(wb1, savepath)
       }
@@ -153,6 +161,9 @@ bivariate <- R6Class(
         if (any(type %in% "character")) {
           vars <- c(vars,names(df)[sapply(df,is.character)])
         }
+        if (any(type %in% "factor")) {
+          vars <- c(vars,names(df)[sapply(df,is.factor)])
+        }
         vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
       }
       data <- self$data
@@ -160,11 +171,11 @@ bivariate <- R6Class(
       y = 1
       z = 1
       num_var <- varlist(data,"numeric")
-      cat_var <- varlist(data,"character")
+      cat_var <- c(varlist(data,"character"),varlist(data,"factor"))
       if(!file.exists(savepath)){
         wb1<-createWorkbook()
-        sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
-        sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
+        if(length(num_var) > 1){
+          sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
         for(i in 1:(length(num_var)-1)){
           for( j in 1+i:(length(num_var)-1)){
             corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
@@ -181,6 +192,9 @@ bivariate <- R6Class(
             x <- x + 15
           }
         }
+        }
+        if(!is.null(self$cat_VS_num)){
+          sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
         for(i in 1:(length(cat_var))){
           for( j in 1:(length(num_var))){
             abc <- data %>% group_by(data[,cat_var[i]]) %>% summarize("Mean" = round(mean(eval(parse(text =num_var[j])),na.rm =T),2))
@@ -221,12 +235,13 @@ bivariate <- R6Class(
             y <- y +25
             z <- 1
           }
+        }
         }
       }
       else{
         wb1<-loadWorkbook(savepath)
-        sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
-        sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
+        if(length(num_var) > 1){
+          sheet_num_num = createSheet(wb1,"Bivariate Plots-num vs num")
         for(i in 1:(length(num_var)-1)){
           for( j in 1+i:(length(num_var)-1)){
             corr_mat <- cor(data[,c(num_var[i],num_var[j])],method = method)
@@ -243,6 +258,9 @@ bivariate <- R6Class(
             x <- x + 15
           }
         }
+        }
+        if(!is.null(self$cat_VS_num)){
+          sheet_cat_num = createSheet(wb1,"Bivariate Plots-cat vs num")
         for(i in 1:(length(cat_var))){
           for( j in 1:(length(num_var))){
             abc <- data %>% group_by(data[,cat_var[i]]) %>% summarize("Mean" = round(mean(eval(parse(text =num_var[j])),na.rm =T),2))
@@ -283,6 +301,7 @@ bivariate <- R6Class(
             y <- y +25
             z <- 1
           }
+        }
         }
       }
       saveWorkbook(wb1, savepath)

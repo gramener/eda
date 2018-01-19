@@ -16,6 +16,9 @@ univariate <- R6Class(
         if (any(type %in% "character")) {
           vars <- c(vars,names(df)[sapply(df,is.character)])
         }
+        if (any(type %in% "factor")) {
+          vars <- c(vars,names(df)[sapply(df,is.character)])
+        }
         vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
       }
       dist <- function(var){

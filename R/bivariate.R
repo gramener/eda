@@ -19,26 +19,32 @@ bivariate <- R6Class(
         if (any(type %in% "character")) {
           vars <- c(vars,names(df)[sapply(df,is.character)])
         }
+        if (any(type %in% "factor")) {
+          vars <- c(vars,names(df)[sapply(df,is.factor)])
+        }
         vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
       }
       if(!missing(metadata))
       {
         data <- metadata$data
         num_var <- varlist(data,"numeric")
-        cat_var <- varlist(data,"character")
+        cat_var <- c(varlist(data,"character"),varlist(data,"factor"))
         my_cat_cat <- NULL
-        if(!identical(cat_var, character(0))){
+        if(!identical(cat_var, character(0)) & length(cat_var) >= 2){
           for(i in 1:(length(cat_var)-1)){
             for( j in 1+i:(length(cat_var)-1)){
               my_cat_cat <- c(my_cat_cat,paste(cat_var[i],cat_var[j],sep = "_VS_"))
             }
           }
+        }
+        if(!identical(num_var, numeric(0)) & length(num_var) >= 1 & !identical(cat_var, character(0)) & length(cat_var) >= 1){
           my_cat_num <- NULL
           for(i in 1:(length(cat_var))){
             for( j in 1:(length(num_var))){
               my_cat_num <- c(my_cat_num,paste(cat_var[i],num_var[j],sep = "_VS_"))
             }
           }
+        }
           self$cat_VS_cat <- vector("list", 2)
           names(self$cat_VS_cat) <- c("count","proportion")
           self$cat_VS_cat$count <- vector("list", length(my_cat_cat))
@@ -49,7 +55,7 @@ bivariate <- R6Class(
           names(self$cat_VS_num) <- my_cat_num
           k <- 0
           l <- 0
-
+          if(!identical(cat_var, character(0)) & length(cat_var) >= 2){
           for(i in 1:(length(cat_var)-1)){
             for( j in 1+i:(length(cat_var)-1)){
               k <- k + 1
@@ -63,6 +69,11 @@ bivariate <- R6Class(
               self$cat_VS_cat$proportion[[k]] <- abc
             }
           }
+          }
+          else{
+            self$cat_VS_cat <- NULL
+          }
+          if(!identical(num_var, numeric(0)) & length(num_var) >= 1 & !identical(cat_var, character(0)) & length(cat_var) >= 1){
           for(i in 1:(length(cat_var))){
             for( j in 1:(length(num_var))){
               l <- l + 1
@@ -72,7 +83,10 @@ bivariate <- R6Class(
               self$cat_VS_num[[l]] <- abc
             }
           }
-        }
+          }
+          else{
+            self$cat_VS_num <- NULL
+          }
     }
       },
     save = function(savepath){
@@ -272,6 +286,18 @@ bivariate <- R6Class(
         }
       }
       saveWorkbook(wb1, savepath)
+    },
+    output = function(){
+      if(is.null(self$cat_VS_cat) & !is.null(self$cat_VS_num)){
+        bivar <- self$cat_VS_num
+      }
+      else if(is.null(self$cat_VS_num) & !is.null(self$cat_VS_cat)){
+        bivar <- self$cat_VS_cat
+      }
+      else{
+        bivar <- list(self$cat_VS_cat,self$cat_VS_num)
+      }
+      return(bivar)
     }
   )
 )

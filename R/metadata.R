@@ -198,7 +198,6 @@ metadata <- R6Class(
       else if(missing(path) & !missing(data)){
         self$row_count <- nrow(data)
         self$column_count <- ncol(data)
-
         row.names(data) <- NULL
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
@@ -293,6 +292,27 @@ metadata <- R6Class(
         setColumnWidth(sheet, colIndex=1:ncol(metadata), colWidth=20)
         saveWorkbook(wb1, savepath)
       }
+    },
+    output = function(){
+      output <- NULL
+      for(i in 1:length(self$columns)){
+        output <- rbind(output,as.data.frame(self$columns[[i]]))
+      }
+      meta_data <- list(Description = self$description,
+                        Source = self$source,
+                        Row_description = self$row_description,
+                        Sampling_method = self$sampling_method,
+                        Prepared_by = self$prepared_by,
+                        Prepared_on = self$prepared_on,
+                        Format = self$format,
+                        File_name = self$file_name,
+                        File_size = self$file_size,
+                        Encoding = self$encoding,
+                        Row_count = self$row_count,
+                        Column_count = self$column_count,
+                        Modified_on = self$modified_on,
+                        metadata = output)
+      return(meta_data)
     }
   )
 )

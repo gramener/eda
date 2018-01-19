@@ -88,7 +88,7 @@ meta$save(savepath = "path to the existing excel file or a new excel file to be 
 -   Performance Metric [Column to be left blank - to be filled by User]
 -   Notes - [Column to be left blank - to be filled by User on any quick observations/annotations]
 
-##### provide a chart containing :
+##### Provide a chart containing :
 
 -   Column Name - Rank Freq Chart for Categorical Variables - (Unordered)
 -   Column Name - Bar Chart for Categorical Variables - (Ordered)

@@ -74,7 +74,10 @@ help(bivariate)
 meta <- metadata$new(path = "Specify path to the file you want to conduct EDA on")
 ```
 
-
+#####To view the metadata output in the console do:
+```{r , eval = FALSE}
+meta$output()
+```
 
 #####You can make changes to the contents of the metadata, for example:change the type of the age column from continuous to discrete.
 ```{r , eval = FALSE}
@@ -120,6 +123,11 @@ uni <- univariate$new(metadata = meta,k = 3)
 ```
 
 
+#####To view the univariate analysis in the console do:
+```{r , eval = FALSE}
+uni$output()
+```
+
 
 #####To output the univariate analysis in a structured format into excel do the following. If sheet name is not specified by default it will be named "Univariate".
 ```{r , eval = FALSE}
@@ -151,6 +159,12 @@ uni$saveplot(path = "path to the existing excel file or a new excel file to be c
 #####To conduct univariate analysis do the following.
 ```{r , eval = FALSE}
 bi <- bivariate$new(metadata = meta)
+```
+
+
+#####To view the bivarate analysis in the console do:
+```{r , eval = FALSE}
+bi$output()
 ```
 
 

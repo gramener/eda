@@ -64,6 +64,12 @@ help(bivariate)
 meta <- metadata$new(path = "Specify path to the file you want to conduct EDA on")
 ```
 
+##### To view the metadata output in the console do:
+
+``` r
+meta$output()
+```
+
 ##### You can make changes to the contents of the metadata, for example:change the type of the age column from continuous to discrete.
 
 ``` r
@@ -103,10 +109,17 @@ Binning: <https://en.wikipedia.org/wiki/Freedman%E2%80%93Diaconis_rule>
 uni <- univariate$new(metadata = meta,k = 3)
 ```
 
+##### To view the univariate analysis in the console do:
+
+``` r
+uni$output()
+```
+
 ##### To output the univariate analysis in a structured format into excel do the following. If sheet name is not specified by default it will be named "Univariate".
 
 ``` r
 uni$save(path = "path to the existing excel file or a new excel file to be created",sheet = "Univariate Analysis")
+uni$saveplot(path = "path to the existing excel file or a new excel file to be created")
 ```
 
 ##### To output the univariate plots in a structured format into excel do the following. By default the Histogram uses Diaconis Rule to determine the number of breaks. If you want to set breaks manually set the breaks argument.
@@ -133,6 +146,12 @@ uni$saveplot(path = "path to the existing excel file or a new excel file to be c
 
 ``` r
 bi <- bivariate$new(metadata = meta)
+```
+
+##### To view the bivarate analysis in the console do:
+
+``` r
+bi$output()
 ```
 
 ##### To output the Bivariate tables in a structured format into excel do the following.

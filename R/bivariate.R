@@ -36,6 +36,12 @@ bivariate <- R6Class(
               my_cat_cat <- c(my_cat_cat,paste(cat_var[i],cat_var[j],sep = "_VS_"))
             }
           }
+          self$cat_VS_cat <- vector("list", 2)
+          names(self$cat_VS_cat) <- c("count","proportion")
+          self$cat_VS_cat$count <- vector("list", length(my_cat_cat))
+          names(self$cat_VS_cat$count) <- my_cat_cat
+          self$cat_VS_cat$proportion <- vector("list", length(my_cat_cat))
+          names(self$cat_VS_cat$proportion) <- my_cat_cat
         }
         if(!identical(num_var, numeric(0)) & length(num_var) >= 1 & !identical(cat_var, character(0)) & length(cat_var) >= 1){
           my_cat_num <- NULL
@@ -44,15 +50,10 @@ bivariate <- R6Class(
               my_cat_num <- c(my_cat_num,paste(cat_var[i],num_var[j],sep = "_VS_"))
             }
           }
-        }
-          self$cat_VS_cat <- vector("list", 2)
-          names(self$cat_VS_cat) <- c("count","proportion")
-          self$cat_VS_cat$count <- vector("list", length(my_cat_cat))
-          names(self$cat_VS_cat$count) <- my_cat_cat
-          self$cat_VS_cat$proportion <- vector("list", length(my_cat_cat))
-          names(self$cat_VS_cat$proportion) <- my_cat_cat
           self$cat_VS_num <- vector("list", length(my_cat_num))
           names(self$cat_VS_num) <- my_cat_num
+        }
+
           k <- 0
           l <- 0
           if(!identical(cat_var, character(0)) & length(cat_var) >= 2){

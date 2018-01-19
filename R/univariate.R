@@ -260,7 +260,7 @@ univariate <- R6Class(
         saveWorkbook(wb1, savepath)
       }
     },
-    output <- function(){
+    output = function(){
       unidata <- NULL
       for(i in 1:length(self$columns)){
         unidata <- rbind(unidata,as.data.frame(self$columns[[i]]))

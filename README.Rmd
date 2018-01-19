@@ -169,6 +169,5 @@ bi$saveplot(path = "path to the existing excel file or a new excel file to be cr
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
-
+```{r}
 ```

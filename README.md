@@ -45,8 +45,8 @@ help(bivariate)
 -   Column Name
 -   Column Type - Numeric(Discrete/Continuous), Date ,Categorical(Normal/Ordered)
 -   Unique Key
--   Description - \[Column to be left blank - to be filled by User\]
--   Notes - \[Column to be left blank - to be filled by User on any quick observations/annotations\]
+-   Description - [Column to be left blank - to be filled by User]
+-   Notes - [Column to be left blank - to be filled by User on any quick observations/annotations]
 -   Missing Value %
 -   No. of Unique Values
 -   Min Value
@@ -84,9 +84,9 @@ meta$save(savepath = "path to the existing excel file or a new excel file to be 
 -   % Values above/below the IQR Limit
 -   % Values above/below the Mean Limit
 -   Concentration - (80% of data is covered by x % of the Values) - Provide X
--   Priority Metric \[Column to be left blank - to be filled by User\]
--   Performance Metric \[Column to be left blank - to be filled by User\]
--   Notes - \[Column to be left blank - to be filled by User on any quick observations/annotations\]
+-   Priority Metric [Column to be left blank - to be filled by User]
+-   Performance Metric [Column to be left blank - to be filled by User]
+-   Notes - [Column to be left blank - to be filled by User on any quick observations/annotations]
 
 ##### provide a chart containing :
 
@@ -120,15 +120,15 @@ uni$saveplot(path = "path to the existing excel file or a new excel file to be c
 
 #### Functional capability to read any file format and provide a tabular exportable format containing :
 
-##### Bivariate Tables for
+##### Bivariate Tables for:
 
-    - Categorical - Categorical Variable : Cross Tab of Count and Proportion of Records 
-    - Numeric - Categorical Variable : Sum, Average, Min, Max of Records
+- Categorical - Categorical Variable : Cross Tab of Count and Proportion of Records 
+- Numeric - Categorical Variable : Sum, Average, Min, Max of Records
 
-##### Bivariate Plots
+##### Bivariate Plots:
 
-    - Numeric - Categorical Variable : Bar Plot for Sum, Average, Min, Max Records
-    - Numeric - Numeric : Scatter Plot and Correlation Plot
+- Numeric - Categorical Variable : Bar Plot for Sum, Average, Min, Max Records
+- Numeric - Numeric : Scatter Plot and Correlation Plot
 
 ##### To conduct univariate analysis do the following.
 

@@ -17,5 +17,9 @@ Imports: tools,
           ggplot2,
           openxlsx,
           R6,
-          readxl
+          readxl,
+          tm,
+          SnowballC,
+          wordcloud,
+          RColorBrewer
 Suggests: testthat

@@ -8,19 +8,6 @@ univariate <- R6Class(
     metadata = list(),
     initialize = function(metadata,k = 3) {
       options(scipen = 999)
-      varlist <- function (df=NULL,type=c("numeric","factor","character"), pattern="", exclude=NULL) {
-        vars <- character(0)
-        if (any(type %in% "numeric")) {
-          vars <- c(vars,names(df)[sapply(df,is.numeric)])
-        }
-        if (any(type %in% "character")) {
-          vars <- c(vars,names(df)[sapply(df,is.character)])
-        }
-        if (any(type %in% "factor")) {
-          vars <- c(vars,names(df)[sapply(df,is.character)])
-        }
-        vars[(!vars %in% exclude) & grepl(vars,pattern=pattern)]
-      }
       dist <- function(var){
         a<-cumsum(as.numeric(var))
         b<- a/sum(as.numeric(var))
@@ -33,13 +20,21 @@ univariate <- R6Class(
         self$metadata <- as.list.environment(metadata)
         metadata <- as.list.environment(metadata)
         data <- metadata$data
-        num_var <- varlist(data,"numeric")
-        data <- data[,num_var]
+        metadata1 <- NULL
+        for(i in 1:length(metadata$columns)){
+          metadata1 <- rbind(metadata1,as.data.frame(metadata$columns[[i]]))
+        }
+        num_var <- as.character(metadata1[which(metadata1$type %in% c("discrete","continuous")),"column_name"])
+        if(!is.null(num_var)){
+        cat_var <- as.character(metadata1[which(metadata1$type %in% c("character","ordered")),"column_name"])
+        text_var <- as.character(metadata1[which(metadata1$type %in% c("text")),"column_name"])
+        data <- as.data.frame(data[,num_var])
+        names(data) <- num_var
         self$columns <- vector("list", length(names(data)))
         names(self$columns) <- names(data)
         mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
         for(i in 1:length(self$columns)){
-          if(is.numeric(data[,i])){
+          if(names(data)[i] %in% num_var){
             self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
             a1 <- names(data)[i]
             q1 <-quantile(data[,i],0.25,na.rm = T)
@@ -62,36 +57,6 @@ univariate <- R6Class(
           names(self$columns[[i]]) <- mydataframe
           rm(a1); rm(a2); rm(a3); rm(a4); rm(a5); rm(a6); rm(a7); rm(a8); rm(a9); rm(a10); rm(a11); rm(a12); rm(a13);
         }
-      }
-      else{
-        num_var <- varlist(data,"numeric")
-        data <- data[,num_var]
-        self$columns <- vector("list", length(names(data)))
-        names(self$columns) <- names(data)
-        mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
-        for(i in 1:length(self$columns)){
-          if(is.numeric(data[,i])){
-            self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
-            a1 <- names(data)[i]
-            q1 <-quantile(data[,i],0.25,na.rm = T)
-            q3 <- quantile(data[,i],0.75,na.rm =T )
-            iqr <- q3 - q1
-            a2 <- q3 + 1.5*iqr
-            a3 <- q1 - 1.5*iqr
-            a4 <- paste(round(((length(which(data[,i] > a2))*100)/(nrow(data))),1),"%")
-            a5 <- paste(round(((length(which(data[,i] < a3))*100)/(nrow(data))),1),"%")
-            a6 <- mean(data[,i],na.rm = T) + k*sd(data[,i],na.rm = T)
-            a7 <- mean(data[,i],na.rm = T) - k*sd(data[,i],na.rm = T)
-            a8 <- paste(round(((length(which(data[,i] > a6))*100)/(nrow(data))),1),"%")
-            a9 <- paste(round(((length(which(data[,i] < a7))*100)/(nrow(data))),1),"%")
-            a13 <- paste(round((dist(data[,i]) *100)),"%")
-            a10 <- NA
-            a11 <- NA
-            a12 <- NA
-          }
-          self$columns[[i]] <- list("a1" = a1,"a4"=a4,"a5"=a5,"a8"=a8,"a9"=a9,"a10" = a13,"a11"= a10,"a12" = a11,"a13" = a12)
-          names(self$columns[[i]]) <- mydataframe
-          rm(a1); rm(a2); rm(a3); rm(a4); rm(a5); rm(a6); rm(a7); rm(a8); rm(a9); rm(a10); rm(a11); rm(a12); rm(a13);
         }
       }
     },
@@ -121,6 +86,10 @@ univariate <- R6Class(
     },
     saveplot = function(savepath ,breaks = NULL){
       require(xlsx)
+      require(tm)
+      require(SnowballC)
+      require(wordcloud)
+      require(RColorBrewer)
       bar_one <- function(column){
         df1 <- as.data.frame(table(column))
         df <- as.data.frame(sort(table(column),decreasing = T))
@@ -150,6 +119,7 @@ univariate <- R6Class(
       num_var <- as.character(metadata1[which(metadata1$type %in% c("discrete","continuous")),"column_name"])
       ord_var <- as.character(metadata1[which(tolower(metadata1$type) == "ordered"),"column_name"])
       cat_var <- as.character(metadata1[which(tolower(metadata1$type) == "character"),"column_name"])
+      text_var <- as.character(metadata1[which(metadata1$type %in% c("text")),"column_name"])
       if(file.exists(savepath)){
         wb1<-loadWorkbook(savepath)
         if(!identical(num_var, character(0))){
@@ -161,6 +131,9 @@ univariate <- R6Class(
         }
         if(!identical(ord_var, character(0))){
           sheet_bar = createSheet(wb1,"Univariate-Bar Plot")
+        }
+        if(!identical(text_var, character(0))){
+          sheet_wc = createSheet(wb1,"Word cloud")
         }
         for(i in 1:ncol(data)){
           if(names(data)[i] %in% num_var & all(!is.na(data[,i])) ){
@@ -203,6 +176,25 @@ univariate <- R6Class(
             res<-file.remove("barplot.png")
             l <- l + 27
           }
+          else if(names(data)[i] %in% text_var & all(!is.na(data[,i]))){
+            png("wordcloud.png", height=1200, width=2000, res=250, pointsize=8)
+            corpus <- Corpus(VectorSource(as.character(data[,i])))
+            corpus_data<-tm_map(corpus,stripWhitespace)
+            corpus_data<-tm_map(corpus_data,tolower)
+            corpus_data<-tm_map(corpus_data,removeNumbers)
+            corpus_data<-tm_map(corpus_data,removePunctuation)
+            corpus_data<-tm_map(corpus_data,removeWords, stopwords("english"))
+            corpus_data<-tm_map(corpus_data,removeWords, c("and","the","our","that","for","are","also","more","has","must","have","should","this","with"))
+            layout(matrix(c(1, 2), nrow=2), heights=c(1, 4))
+            par(mar=rep(0, 4))
+            plot.new()
+            text(x=0.5, y=0.5, paste("Word cloud of",names(data)[i]))
+            wordcloud(corpus_data, scale=c(4,0.5), min.freq= 5,max.words = 50, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+            dev.off()
+            addPicture("wordcloud.png", sheet_wc, scale = 1, startRow = l,startColumn = 5)
+            res<-file.remove("wordcloud.png")
+            l <- l + 27
+          }
         }
         saveWorkbook(wb1, savepath)
       }
@@ -217,6 +209,9 @@ univariate <- R6Class(
         }
         if(!identical(ord_var, character(0))){
           sheet_bar = createSheet(wb1,"Univariate-Bar")
+        }
+        if(!identical(text_var, character(0))){
+          sheet_wc = createSheet(wb1,"Word cloud")
         }
         for(i in 1:ncol(data)){
           if(names(data)[i] %in% num_var & all(!is.na(data[,i]))){
@@ -257,6 +252,25 @@ univariate <- R6Class(
             dev.off()
             addPicture("barplot.png", sheet_bar, scale = 1, startRow = l,startColumn = 5)
             res<-file.remove("barplot.png")
+            l <- l + 27
+          }
+          else if(names(data)[i] %in% text_var & all(!is.na(data[,i]))){
+            png("wordcloud.png", height=1200, width=2000, res=250, pointsize=8)
+            corpus <- Corpus(VectorSource(as.character(data[,i])))
+            corpus_data<-tm_map(corpus,stripWhitespace)
+            corpus_data<-tm_map(corpus_data,tolower)
+            corpus_data<-tm_map(corpus_data,removeNumbers)
+            corpus_data<-tm_map(corpus_data,removePunctuation)
+            corpus_data<-tm_map(corpus_data,removeWords, stopwords("english"))
+            corpus_data<-tm_map(corpus_data,removeWords, c("and","the","our","that","for","are","also","more","has","must","have","should","this","with"))
+            layout(matrix(c(1, 2), nrow=2), heights=c(1, 4))
+            par(mar=rep(0, 4))
+            plot.new()
+            text(x=0.5, y=0.5, paste("Word cloud of",names(data)[i]))
+            wordcloud(corpus_data, scale=c(4,0.5), min.freq= 5,max.words = 50, random.order=FALSE, rot.per=0.35, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+            dev.off()
+            addPicture("wordcloud.png", sheet_wc, scale = 1, startRow = l,startColumn = 5)
+            res<-file.remove("wordcloud.png")
             l <- l + 27
           }
         }

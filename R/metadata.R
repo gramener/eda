@@ -153,24 +153,35 @@ metadata <- R6Class(
             a2 <- "date"
           }
           else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){
-            a2 <- "character"
+            x <- rep(0,100)
+            for(k in 1:100){
+              x[k] <- length(strsplit(as.character(data[k,i]), " ")[[1]]) > 2
+            }
+              if(sum(x) > 0){
+                a2 <- "text"
+              }
+              else{
+                a2 <- "character"
+              }
           }
           else if(names(data)[i] %in% varlist(data,"numeric")){
+            y <- rep(0,100)
             for(j in 1:100){
-              if(grepl("\\.",data[j,i])){
+              y[j] <- grepl("\\.",data[j,i])
+            }
+              if(sum(y) > 0 ){
                 a2 <- "continuous"
               }
               else{
                 a2<- "discrete"
               }
-            }
           }
           else if(is.logical(data[,i])){
             a2 <- "boolean"
           }
           a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
           a4 <- ""
-          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A"),na.rm =T)
+          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A","N/A"),na.rm =T)
           a16 <- paste(round((a5*100/nrow(data)),1),"%")
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])
@@ -210,24 +221,35 @@ metadata <- R6Class(
             a2 <- "date"
           }
           else if(names(data)[i] %in% varlist(data,"factor") | names(data)[i] %in% varlist(data,"character")){
-            a2 <- "character"
+            x <- rep(0,100)
+            for(k in 1:100){
+              x[k] <- length(strsplit(as.character(data[k,i]), " ")[[1]]) > 2
+            }
+              if(sum(x) > 0){
+                a2 <- "text"
+              }
+              else{
+                a2 <- "character"
+              }
           }
           else if(names(data)[i] %in% varlist(data,"numeric")){
+            y <- rep(0,100)
             for(j in 1:100){
-              if(grepl("\\.",data[j,i])){
+              y[j] <- grepl("\\.",data[j,i])
+            }
+              if(sum(y) > 0 ){
                 a2 <- "continuous"
               }
               else{
                 a2<- "discrete"
               }
-            }
           }
           else if(is.logical(data[,i])){
             a2 <- "boolean"
           }
           a3 <- ifelse((length(unique(data[,i]))/nrow(data)) == 1,"yes","no")
           a4 <- ""
-          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A"),na.rm =T)
+          a5 <- sum(is.na(data[,i])) + sum(data[,i] %in% c("","Na","NA","N A","N/A"),na.rm =T)
           a16 <- paste(round((a5*100/nrow(data)),1),"%")
           a6 <- length(unique(data[,i]))
           a7 <- top_levels(data[,i])

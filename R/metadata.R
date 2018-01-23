@@ -19,7 +19,7 @@ metadata <- R6Class(
     modified_on = "",
     columns = list(),
     data = data.frame(),
-    initialize = function(path = NULL,data = NULL,header =T,sep = ",",skip = 0) {
+    initialize = function(path = NULL,data = NULL,header =T,sep = ",",skip = 0,sheet = 1) {
       options(scipen = 999)
       require(tools)
       require(readr)
@@ -113,7 +113,7 @@ metadata <- R6Class(
           cols <- ncol(data)
         }
         else if(ext == "xlsx"){
-          data <- as.data.frame(read_excel(path,1))
+          data <- as.data.frame(read_excel(path,sheet = sheet))
           row.names(data) <- NULL
           rows<-nrow(data)
           cols <- ncol(data)

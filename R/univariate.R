@@ -94,6 +94,8 @@ univariate <- R6Class(
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
         a <- 1
         for(e in 1:length(self$ngrams)){
+          name1 <- as.data.frame(paste("Ngrams of",names(self$ngrams)[[e]]))
+          addDataFrame(name1, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)
@@ -111,6 +113,8 @@ univariate <- R6Class(
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
         a <- 1
         for(e in 1:length(self$ngrams)){
+          name1 <- as.data.frame(paste("Ngrams of",names(self$ngrams)[[e]]))
+          addDataFrame(name1, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)

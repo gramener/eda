@@ -6,6 +6,7 @@ univariate <- R6Class(
   public = list(
     columns = list(),
     metadata = list(),
+    ngrams = list(),
     initialize = function(metadata,k = 3) {
       options(scipen = 999)
       dist <- function(var){
@@ -14,6 +15,13 @@ univariate <- R6Class(
         c<- length(which(b<=0.8))
         d<- c/length(var)
         return(d)
+      }
+      findNGrams <- function(df, n) {
+        ngram <- NGramTokenizer(df, Weka_control(min = n, max = n, delimiters = " \\r\\n\\t.,;:\"()?!"))
+        ngram2 <- data.frame(table(ngram))
+        ngram3 <- ngram2[order(ngram2$Freq, decreasing = TRUE),]
+        colnames(ngram3) <- c("Text","Count")
+        head(ngram3,10)
       }
       if(!missing(metadata))
       {
@@ -25,15 +33,18 @@ univariate <- R6Class(
           metadata1 <- rbind(metadata1,as.data.frame(metadata$columns[[i]]))
         }
         num_var <- as.character(metadata1[which(metadata1$type %in% c("discrete","continuous")),"column_name"])
-        if(!is.null(num_var)){
         cat_var <- as.character(metadata1[which(metadata1$type %in% c("character","ordered")),"column_name"])
         text_var <- as.character(metadata1[which(metadata1$type %in% c("text")),"column_name"])
-        data <- as.data.frame(data[,num_var])
-        names(data) <- num_var
-        self$columns <- vector("list", length(names(data)))
-        names(self$columns) <- names(data)
+        self$ngrams <- vector("list", length(text_var))
+        names(self$ngrams) <- text_var
+        self$columns <- vector("list", length(num_var))
+        names(self$columns) <- num_var
+        for(q in 1:length(text_var)){
+          self$ngrams[[q]] <- vector("list",4)
+          names(self$ngrams[[q]]) <- c("TwoGram","ThreeGram","FourGram","FiveGram")
+        }
         mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
-        for(i in 1:length(self$columns)){
+        for(i in 1:ncol(data)){
           if(names(data)[i] %in% num_var){
             self$columns[[i]] <- setNames(data.frame(matrix(ncol = length(mydataframe), nrow = 0)), mydataframe)
             a1 <- names(data)[i]
@@ -52,14 +63,21 @@ univariate <- R6Class(
             a10 <- NA
             a11 <- NA
             a12 <- NA
+            self$columns[[i]] <- list("a1" = a1,"a4"=a4,"a5"=a5,"a8"=a8,"a9"=a9,"a10" = a13,"a11"= a10,"a12" = a11,"a13" = a12)
+            names(self$columns[[i]]) <- mydataframe
+            rm(a1); rm(a2); rm(a3); rm(a4); rm(a5); rm(a6); rm(a7); rm(a8); rm(a9); rm(a10); rm(a11); rm(a12); rm(a13);
           }
-          self$columns[[i]] <- list("a1" = a1,"a4"=a4,"a5"=a5,"a8"=a8,"a9"=a9,"a10" = a13,"a11"= a10,"a12" = a11,"a13" = a12)
-          names(self$columns[[i]]) <- mydataframe
-          rm(a1); rm(a2); rm(a3); rm(a4); rm(a5); rm(a6); rm(a7); rm(a8); rm(a9); rm(a10); rm(a11); rm(a12); rm(a13);
-        }
+          else if(names(data)[i] %in% text_var){
+            for(w in 1:length(text_var)){
+            self$ngrams[[w]]$TwoGram <- findNGrams(data[,i], 2)
+            self$ngrams[[w]]$ThreeGram <- findNGrams(data[,i], 3)
+            self$ngrams[[w]]$FourGram <- findNGrams(data[,i], 4)
+            self$ngrams[[w]]$FiveGram <- findNGrams(data[,i], 5)
+            }
+          }
         }
       }
-    },
+      },
     save = function(savepath,sheet= "Univariate"){
       require(xlsx)
       unidata <- NULL

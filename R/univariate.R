@@ -105,6 +105,7 @@ univariate <- R6Class(
       else{
         wb1<-loadWorkbook(savepath)
         sheet = createSheet(wb1,sheet)
+        ngramsheet = createSheet(wb1,"Ngrams")
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)

@@ -22,7 +22,7 @@
   15. Top 5 Factor levels \cr
 }
 \usage{
-meta <- metadata$new(path = NULL,data = NULL,header =T,sep = ",",skip = 0)
+meta <- metadata$new(path = NULL,data = NULL,header =T,sep = ",",skip = 0,sheet = 1)
 meta$save(savepath ,sheet= "Metadata")
 }
 
@@ -47,5 +47,8 @@ meta$save(savepath ,sheet= "Metadata")
 }
   \item{skip}{
       Integer: the number of lines of the data file to skip before beginning to read data.By default skip = 0.
+}
+  \item{sheet}{
+      Specify the sheet name of the excel file that you want to read in.By default it reads in the first sheet
 }
 }

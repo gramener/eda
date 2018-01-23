@@ -49,6 +49,6 @@ meta$save(savepath ,sheet= "Metadata")
       Integer: the number of lines of the data file to skip before beginning to read data.By default skip = 0.
 }
   \item{sheet}{
-      Specify the sheet name of the excel file that you want to read in.By default it reads in the first sheet
+      Specify the sheet name of the excel file that you want to read in.
 }
 }

@@ -19,7 +19,7 @@ metadata <- R6Class(
     modified_on = "",
     columns = list(),
     data = data.frame(),
-    initialize = function(path = NULL,data = NULL,header =T,sep = ",",skip = 0,sheet = 1) {
+    initialize = function(path = NULL,data = NULL,header =T,sep = ",",skip = 0,sheet = NULL) {
       options(scipen = 999)
       require(tools)
       require(readr)

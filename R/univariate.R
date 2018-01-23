@@ -88,9 +88,18 @@ univariate <- R6Class(
       if(!file.exists(savepath)){
         wb1 = createWorkbook()
         sheet = createSheet(wb1,sheet)
+        ngramsheet = createSheet(wb1,"Ngrams")
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
+        a <- 1
+        for(e in 1:length(self$ngrams)){
+          addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$FiveGram, sheet=ngramsheet,startRow= a+4,startColumn=14, row.names=FALSE,colnamesStyle=csTableColNames)
+        a <- a + 4
+        }
         saveWorkbook(wb1, savepath)
       }
       else{
@@ -99,6 +108,14 @@ univariate <- R6Class(
         csTableColNames <- CellStyle(wb1) + Font(wb1, isBold=TRUE) + Alignment(wrapText=TRUE, h="ALIGN_CENTER") + Border(color="black", position=c("TOP", "BOTTOM"), pen=c("BORDER_THIN", "BORDER_THICK"))
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
+        a <- 1
+        for(e in 1:length(self$ngrams)){
+          addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)
+          addDataFrame(self$ngrams[[e]]$FiveGram, sheet=ngramsheet,startRow= a+4,startColumn=14, row.names=FALSE,colnamesStyle=csTableColNames)
+          a <- a + 4
+        }
         saveWorkbook(wb1,savepath)
       }
     },
@@ -300,7 +317,8 @@ univariate <- R6Class(
       for(i in 1:length(self$columns)){
         unidata <- rbind(unidata,as.data.frame(self$columns[[i]]))
       }
-      return(unidata)
+      xyz <- list("univariate"=unidata,"ngrams"=self$ngrams)
+      return(xyz)
     }
   )
 )

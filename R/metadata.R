@@ -140,7 +140,7 @@ metadata <- R6Class(
         self$prepared_on <- as.character(Sys.Date())
         self$format <- as.character(file_info$file_info$file.ext)
         self$file_name <- as.character(file_info$file_info$file.name)
-        self$file_size <- as.character(file_info$file_info$file.size)
+        self$file_size <-  utils:::format.object_size(file_info$file_info$file.size, "auto")
         self$encoding <- as.character(file_info$file_info$file.encoding)
         self$row_count <- file_info$file_info$number.of.rows
         self$column_count <- file_info$file_info$number.of.columns

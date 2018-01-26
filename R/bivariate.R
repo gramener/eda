@@ -1,6 +1,6 @@
 library(R6)
 bivariate <- R6Class(
-  "Univariate Analysis",
+  "Bivariate Analysis",
   portable = FALSE,
   cloneable = FALSE,
   public = list(

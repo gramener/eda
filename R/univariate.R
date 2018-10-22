@@ -39,9 +39,11 @@ univariate <- R6Class(
         names(self$ngrams) <- text_var
         self$columns <- vector("list", length(num_var))
         names(self$columns) <- num_var
-        for(q in 1:length(text_var)){
-          self$ngrams[[q]] <- vector("list",4)
-          names(self$ngrams[[q]]) <- c("TwoGram","ThreeGram","FourGram","FiveGram")
+        if(!identical(text_var,character(0))){
+          for(q in 1:length(text_var)){
+            self$ngrams[[q]] <- vector("list",3)
+            names(self$ngrams[[q]]) <- c("TwoGram","ThreeGram","FourGram")
+          }
         }
         mydataframe <- c("column_name","upper_outliers_IQR","lower_outliers_IQR",paste("upper_outliers_",k,"sigma",sep = ""),paste("lower_outliers_",k,"sigma",sep = ""),"concentration","priority","performance","notes")
         for(i in 1:ncol(data)){
@@ -69,15 +71,14 @@ univariate <- R6Class(
           }
           else if(names(data)[i] %in% text_var){
             for(w in 1:length(text_var)){
-            self$ngrams[[w]]$TwoGram <- findNGrams(data[,i], 2)
-            self$ngrams[[w]]$ThreeGram <- findNGrams(data[,i], 3)
-            self$ngrams[[w]]$FourGram <- findNGrams(data[,i], 4)
-            self$ngrams[[w]]$FiveGram <- findNGrams(data[,i], 5)
+              self$ngrams[[w]]$TwoGram <- findNGrams(data[,i], 2)
+              self$ngrams[[w]]$ThreeGram <- findNGrams(data[,i], 3)
+              self$ngrams[[w]]$FourGram <- findNGrams(data[,i], 4)
             }
           }
         }
       }
-      },
+    },
     save = function(savepath,sheet= "Univariate"){
       require(xlsx)
       unidata <- NULL
@@ -93,15 +94,21 @@ univariate <- R6Class(
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
         a <- 1
+        if(length(self$ngrams) > 0){
         for(e in 1:length(self$ngrams)){
           name1 <- as.data.frame(paste("Ngrams of",names(self$ngrams)[[e]]))
-          addDataFrame(name1, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          bigram <- as.data.frame("Bi-gram")
+          trigram <- as.data.frame("Tri-gram")
+          fourgram <- as.data.frame("Four-gram")
+          addDataFrame(name1, sheet=ngramsheet,startRow= a+2 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          addDataFrame(bigram, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          addDataFrame(trigram, sheet=ngramsheet,startRow= a+3 ,startColumn=6, row.names=FALSE,col.names = FALSE)
+          addDataFrame(fourgram, sheet=ngramsheet,startRow= a+3 ,startColumn=10, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)
-          addDataFrame(self$ngrams[[e]]$FiveGram, sheet=ngramsheet,startRow= a+4,startColumn=14, row.names=FALSE,colnamesStyle=csTableColNames)
-        a <- a + 4
-        }
+          a <- a + 15
+        }}
         saveWorkbook(wb1, savepath)
       }
       else{
@@ -112,15 +119,21 @@ univariate <- R6Class(
         addDataFrame(unidata, sheet=sheet,startRow=2,startColumn=1, row.names=FALSE,colnamesStyle=csTableColNames)
         setColumnWidth(sheet, colIndex=1:ncol(unidata), colWidth=20)
         a <- 1
+        if(length(self$ngrams) > 0){
         for(e in 1:length(self$ngrams)){
           name1 <- as.data.frame(paste("Ngrams of",names(self$ngrams)[[e]]))
-          addDataFrame(name1, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          bigram <- as.data.frame("Bi-gram")
+          trigram <- as.data.frame("Tri-gram")
+          fourgram <- as.data.frame("Four-gram")
+          addDataFrame(name1, sheet=ngramsheet,startRow= a+2 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          addDataFrame(bigram, sheet=ngramsheet,startRow= a+3 ,startColumn=2, row.names=FALSE,col.names = FALSE)
+          addDataFrame(trigram, sheet=ngramsheet,startRow= a+3 ,startColumn=6, row.names=FALSE,col.names = FALSE)
+          addDataFrame(fourgram, sheet=ngramsheet,startRow= a+3 ,startColumn=10, row.names=FALSE,col.names = FALSE)
           addDataFrame(self$ngrams[[e]]$TwoGram, sheet=ngramsheet,startRow= a+4,startColumn= 2, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$ThreeGram, sheet=ngramsheet,startRow= a+4,startColumn=6, row.names=FALSE,colnamesStyle=csTableColNames)
           addDataFrame(self$ngrams[[e]]$FourGram, sheet=ngramsheet,startRow= a+4,startColumn=10, row.names=FALSE,colnamesStyle=csTableColNames)
-          addDataFrame(self$ngrams[[e]]$FiveGram, sheet=ngramsheet,startRow= a+4,startColumn=14, row.names=FALSE,colnamesStyle=csTableColNames)
-          a <- a + 4
-        }
+          a <- a + 15
+        }}
         saveWorkbook(wb1,savepath)
       }
     },
@@ -319,9 +332,10 @@ univariate <- R6Class(
     },
     output = function(){
       unidata <- NULL
+      if(length(self$columns)>0){
       for(i in 1:length(self$columns)){
         unidata <- rbind(unidata,as.data.frame(self$columns[[i]]))
-      }
+      }}
       xyz <- list("univariate"=unidata,"ngrams"=self$ngrams)
       return(xyz)
     }
